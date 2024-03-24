@@ -1,6 +1,8 @@
 # Revolutionizing Medical Diagnosis with AI and Prompt Engineering
 
-#### Document URL: https://docs.google.com/document/d/1a5DN8nwZb65hghlm54DG3givDTTN4vaVUqt39UQz6K0/edit
+#### Case Study Document URL: https://docs.google.com/document/d/1a5DN8nwZb65hghlm54DG3givDTTN4vaVUqt39UQz6K0/edit
+
+#### Insights on Case Study Slides URL: https://docs.google.com/presentation/d/1IYriHzxP78aqYd3I5Jwif7fu6gzgWGeqotuvr_8TOHE/edit#slide=id.g2c579e6fbc8_0_3214
 
 #### Project Dashboard: https://github.com/users/parthasarathydNU/projects/2/views/1?pane=info
 
