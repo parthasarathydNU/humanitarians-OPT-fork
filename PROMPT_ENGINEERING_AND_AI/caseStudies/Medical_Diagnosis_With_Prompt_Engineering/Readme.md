@@ -3,6 +3,7 @@
 #### Document URL: https://docs.google.com/document/d/1a5DN8nwZb65hghlm54DG3givDTTN4vaVUqt39UQz6K0/edit
 
 #### Project Dashboard: https://github.com/users/parthasarathydNU/projects/2/views/1?pane=info
+The Project dashboard gives an overview of the sub-tasks associated with writing this case study. It provides an organized way to track the progress of the case study. 
 
 ## Project Scope
 This case study explores the transformative potential of artificial intelligence (AI) and prompt engineering in medical diagnostics, aiming to enhance accuracy and efficiency in interpreting patient data.

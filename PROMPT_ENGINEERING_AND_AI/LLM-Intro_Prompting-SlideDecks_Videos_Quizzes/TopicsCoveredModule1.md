@@ -77,4 +77,5 @@ A hands-on initiation into the world of AI-powered content generation.
   
 # [LinkToViewPPt](https://docs.google.com/presentation/d/1aIFUSefNdRyMK_i3EkXkH4qNDRn_laGtggvohQ0812I/edit#slide=id.p3)
 # [LinkToViewProjectPlanning](https://github.com/users/parthasarathydNU/projects/1)
+# [LinkToViewDifferentPromtPatterns with ChatGPt Interaction](https://docs.google.com/document/d/16pKaAONgvsCgLn1GQo1D5ZBB5tCjA9_2ctoJ4Nhqze4/edit)
 
