@@ -19,14 +19,8 @@ This case study explores the transformative potential of artificial intelligence
   - [Introduction](#introduction-1)
   - [Literature Review](#literature-review)
   - [Methodology](#methodology)
-  - [Analysis](#analysis)
   - [Conclusion](#conclusion)
-- [Models Evaluated](#models-evaluated)
 - [Reference Paper Publications and Articles](#reference-paper-publications-and-articles)
-- [Ethical Considerations](#ethical-considerations)
-- [Future Directions](#future-directions)
-- [Conclusion](#conclusion-1)
-- [Acknowledgments](#acknowledgments)
 - [Contact Information](#contact-information)
 
 ## Introduction
