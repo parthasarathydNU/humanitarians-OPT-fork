@@ -1,3 +1,0 @@
-Objective : Leveraging semantic search and LLM to build an application where students can ask questions about a particular subject and get answers.
-Goals : Flexible solution for Streamlining Course Information Retrieval and Student Query Resolution with Precision.
-Approach : Leveraging Pinecone and LLM, which provides a vector database engine and enhance search functionality with question-answering capabilities, making the app versatile and intelligent.
