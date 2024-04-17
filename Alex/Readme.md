@@ -139,4 +139,46 @@ https://www.acpjournals.org/doi/full/10.7326/M16-2367
 Began testing GPT prior to its launch, focusing on its ability to answer questions about disorders affecting the lower extremities, based on the articles uploaded for this purpose
 After functionality testing next step is the performance evaluation ( speed and efficiency) 
 
+**Research Update 10Apr2024 ()**
+
+  The documents contain a wealth of information on musculoskeletal disorders (MSDs) across various contexts, including studies on dental students, coaching institute students, and a broader view of MSDs related to posture and laptop use. The prevalence and factors contributing to MSDs in these documents highlight a significant concern regarding posture, duration of specific activities (like laptop use), and environmental factors that contribute to these disorders.
+  From the documents, it's evident that musculoskeletal disorders are a widespread issue among populations that engage in prolonged periods of static posture, such as students and professionals. Factors contributing to MSDs include poor ergonomic practices, extended periods of sitting, and inadequate physical activity. The studies suggest various interventions, including ergonomic adjustments to work and study environments, breaks to reduce static postures, and physical exercises, to mitigate the risks of developing MSDs.
+
+Specifically, the documents reveal:
+
+A high prevalence of musculoskeletal symptoms among dental students, attributed to poor posture and long durations of static positions required in their field of study​​.
+Coaching institute students also report a high incidence of MSDs due to prolonged sitting and poor study postures, highlighting the need for ergonomic interventions in educational settings​​.
+The use of laptops for extended periods can lead to MSDs, with posture during laptop use being a critical factor. Adjustments to the working environment, including the use of ergonomic furniture and regular breaks, are recommended to reduce the risk​​.
+  Overall, the documents underscore the importance of awareness and proactive measures to prevent musculoskeletal disorders, especially among students and professionals who are at a higher risk due to the nature of their activities. Implementing ergonomic solutions, promoting physical activity, and encouraging healthy posture habits are essential strategies to address the issue.
+
+**References: **
+https://www.jstage.jst.go.jp/article/jhes/7/1/7_1_1/_article/-char/ja/
+
+https://link.springer.com/article/10.1186/1471-2474-14-118
+
+https://www.mdpi.com/1660-4601/17/23/8740
+
+https://link.springer.com/article/10.1186/s12891-023-06630-4
+
+https://www.mdpi.com/1660-4601/20/2/1465
+
+https://www.cell.com/heliyon/pdf/S2405-8440(23)05669-4.pdf
+
+https://jurnal.maeh4u.org.my/index.php/home/article/view/1/1
+
+https://www.scielo.br/j/ape/a/p8gfHvVLQffPy4j5b4N6dfH/?lang=en&format=pdf
+
+https://sciendo.com/article/10.2478/sjph-2022-0023
+
+https://www.researchgate.net/profile/Asma-Abdullah/publication/342349894_Musculoskeletal_Disorders_Among_Dental_Students/links/60a1c17c299bf14769a2b120/Musculoskeletal-Disorders-Among-Dental-Students.pdf
+
+https://www.mdpi.com/1660-4601/19/18/11704
+
+https://link.springer.com/article/10.1186/s12891-020-03887-x
+
+https://link.springer.com/article/10.1186/s12891-022-04998-3
+
+https://ir.uitm.edu.my/id/eprint/65020/1/65020.pdf
+
+
 
