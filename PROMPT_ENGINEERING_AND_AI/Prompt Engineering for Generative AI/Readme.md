@@ -24,6 +24,25 @@ This project is dedicated to developing an educational suite focusing on the fun
 -  Detailed explanations and visual walkthroughs complement
 
 ## [Link To Learn About LLMs](https://docs.google.com/presentation/d/1cF-00-_psdNJseEraGWCCUKvXON-ce7k5T7mTK5fZSQ/edit#slide=id.g2c121413019_0_56)
+## [Link To View Quiz Questions On LLMs](https://docs.google.com/document/d/1ltEEbp1IeCAC1Qaeo7pquf3wR1RqAiBq0UYKYoMcyWQ/edit)
+
+### **Introduction to Understanding Gen AI**
+#### Slide Decks
+#### Topics topics covered 
+
+- Generative AI: Foundations and Use Cases
+- Before Transformers: Evolution of Text Generation
+- Deep Dive into Transformer Architecture
+- Generating Text with Transformers
+- Lifecycle of a Generative AI Project
+- Quiz questions
+- References
+## [Link To Learn about Gen AI](https://docs.google.com/document/d/1FZ3jLeNEbSGRlNr41X-SYt_TS6v1QFg8pK6zSGnbDak/edit)
+
+## [Educational Video to learn about Gen AI](https://www.youtube.com/watch?v=G2fqAlgmoPo&ab_channel=GoogleCloudTech)
+
+## [Link To View References to Learn About GenAI](https://docs.google.com/presentation/d/1YGPO3b1hZG3sgqb82bhxQampwfQP3vOi4rL0Ss7R_Rw/edit#slide=id.p)
+
 
 ### **Introduction to Prompting**
 #### Slide Decks
@@ -39,33 +58,18 @@ This project is dedicated to developing an educational suite focusing on the fun
 - Introducing New Information to the Large Language Model Prompt Size Limitations
 - Detailed explanations and visual walkthroughs complementing the slide deck topics
 ## [Link To Learn Different Prompt Patterns](https://docs.google.com/presentation/d/1pueZ3P25Oqwlm69-C7HP5qQjXKKqfNRMfwEEWWzhBZk/edit#slide=id.g2c124c4ef92_0_175)
+## [Link To View Quiz Questions On Prompt Patterns](https://docs.google.com/document/d/1HCO7drLEdqPYRIHxgS4dpXQyjVNIRq2weoU2EUIbSlQ/edit)
 
 ### **Use Cases and Real-World Applications**
 - Highlights practical application of  Different Promt Patterns with ChatGPt Interaction, enhancing theoretical knowledge with industry insights.
   
 ## [Link To View Different Promt Patterns with ChatGPt Interaction](https://docs.google.com/document/d/16pKaAONgvsCgLn1GQo1D5ZBB5tCjA9_2ctoJ4Nhqze4/edit)
 
+
 ### **References and Further Reading**
 - A compilation of resources for deep dives into LLM technologies and prompt engineering practices.
   
 ## [Link To View References](https://docs.google.com/presentation/d/1YGPO3b1hZG3sgqb82bhxQampwfQP3vOi4rL0Ss7R_Rw/edit#slide=id.p)
 
-### **Introduction to Understanding Gen AI**
-#### Slide Decks
-#### Topics topics covered 
 
-- Generative AI: Foundations and Use Cases
-- Before Transformers: Evolution of Text Generation
-- Deep Dive into Transformer Architecture
-- Generating Text with Transformers
-- Lifecycle of a Generative AI Project
-- Quiz questions
-- References
-## [Link To Learn about Gen AI](https://docs.google.com/document/d/1FZ3jLeNEbSGRlNr41X-SYt_TS6v1QFg8pK6zSGnbDak/edit)
-
-
-## [Educational Video to learn about Gen AI](https://www.youtube.com/watch?v=G2fqAlgmoPo&ab_channel=GoogleCloudTech)
-
-
-## [Link To View References to Learn About GenAI](https://docs.google.com/presentation/d/1YGPO3b1hZG3sgqb82bhxQampwfQP3vOi4rL0Ss7R_Rw/edit#slide=id.p)
 
