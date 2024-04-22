@@ -2,8 +2,8 @@
 
 import os
 import streamlit as st
-import openai
 import pinecone
+from openai import OpenAI 
 from langchain_community.document_loaders import DirectoryLoader
 from langchain.text_splitter import Language, RecursiveCharacterTextSplitter
 from langchain.embeddings.openai import OpenAIEmbeddings
