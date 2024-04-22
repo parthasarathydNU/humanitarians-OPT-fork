@@ -1,5 +1,5 @@
 streamlit==1.33.0
 openai== 1.17.0
-pinecone==0.1.5
+pinecone
 langchain
 langchain-openai
