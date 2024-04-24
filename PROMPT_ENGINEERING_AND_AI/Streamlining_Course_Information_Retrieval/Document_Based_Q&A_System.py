@@ -37,7 +37,7 @@ uploaded_file = st.file_uploader("Upload your file")
 if uploaded_file is not None:
     # Process the uploaded file
     file_contents = uploaded_file.read()
-    st.write("File contents:", file)
+    st.write("File contents:", file_contents)
 else:
     st.write("Please upload a file.")
 # Split the documents into smaller chunks for processing
