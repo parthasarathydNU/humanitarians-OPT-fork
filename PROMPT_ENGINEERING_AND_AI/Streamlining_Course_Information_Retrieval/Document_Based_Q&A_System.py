@@ -19,6 +19,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains import ConversationalRetrievalChain, RetrievalQA
 from langchain.prompts import PromptTemplate
+from docx import Document
 
 # Set up the environment
 
@@ -32,21 +33,28 @@ openai_api_key = secrets["openai"]["api_key"]
 pinecone_api_key = secrets["pinecone"]["api_key"]
 
 # Add a file uploader widget
-uploaded_file = st.file_uploader("Upload your file")
+uploaded_file = st.file_uploader("Upload your .docx file", type=["docx"])
 
 if uploaded_file is not None:
-    # Process the uploaded file
-    file_contents = uploaded_file.read()
-else:
-    st.write("Please upload a file.")
+    # Read the uploaded .docx file
+    docx_file = Document(uploaded_file)
+    
+    # Extract text from the document
+    doc_text = ""
+    for paragraph in docx_file.paragraphs:
+        doc_text += paragraph.text + "\n"
+
+    # Display the text
+    st.write("Text extracted from the .docx file:")
+    st.write(doc_text)
 
 # Split the documents into smaller chunks for processing
-def split_docs(file_contents, chunk_size=1000, chunk_overlap=200):
+def split_docs(doc_text, chunk_size=1000, chunk_overlap=200):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
-    docs = text_splitter.split_documents(file_contents)
+    docs = text_splitter.split_documents(doc_text)
     return docs
 
-docs = split_docs(file_contents)
+docs = split_docs(doc_text)
 
 # Embed the documents
 
