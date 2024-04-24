@@ -37,17 +37,18 @@ uploaded_file = st.file_uploader("Upload your file")
 if uploaded_file is not None:
     # Process the uploaded file
     file_contents = uploaded_file.read()
-    st.write("File contents:", file_contents)
+    file = file_contents
+    st.write("File contents:", file)
 else:
     st.write("Please upload a file.")
 # Split the documents into smaller chunks for processing
 
-def split_docs(file_contents, chunk_size=1000, chunk_overlap=200):
+def split_docs(file, chunk_size=1000, chunk_overlap=200):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
-    docs = text_splitter.split_documents(file_contents)
+    docs = text_splitter.split_documents(file)
     return docs
 
-docs = split_docs(file_contents)
+docs = split_docs(file)
 
 # Embed the documents
 
