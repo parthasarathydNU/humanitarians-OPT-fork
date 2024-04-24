@@ -49,12 +49,9 @@ if uploaded_file is not None:
     st.write(doc_text)
 
 # Split the documents into smaller chunks for processing
-def split_docs(doc_text, chunk_size=1000, chunk_overlap=200):
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
-    docs = text_splitter.split_documents(doc_text)
-    return docs
-
-docs = split_docs(doc_text)
+chunk_size=1000, chunk_overlap=200
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+docs = text_splitter.split_documents(doc_text)
 
 # Embed the documents
 
