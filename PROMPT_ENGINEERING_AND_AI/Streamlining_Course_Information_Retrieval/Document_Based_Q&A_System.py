@@ -29,12 +29,12 @@ secrets = st.secrets
 # Access OpenAI API key
 openai_api_key = secrets["openai"]["api_key"]
 
-os.environ["OPENAI_API_KEY"] = "openai_api_key"
+os.environ["OPENAI_API_KEY"] = openai_api_key
 
 # Access Pinecone API key
 pinecone_api_key = secrets["pinecone"]["api_key"]
 
-os.environ["PINECONE_API_KEY"] = "pinecone_api_key"
+os.environ["PINECONE_API_KEY"] = pinecone_api_key
 
 # Add a file uploader widget
 uploaded_file = st.file_uploader("Upload your .docx file", type=["docx"])
