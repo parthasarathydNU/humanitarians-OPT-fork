@@ -32,7 +32,7 @@ openai_api_key = secrets["openai"]["api_key"]
 pinecone_api_key = secrets["pinecone"]["api_key"]
 
 # Load the directory
-loader = DirectoryLoader('/Users/anshaya/Downloads/QA_System')
+loader = DirectoryLoader('/Users/anshaya/Downloads/QA_System/Test_Case')
 pages = loader.load_and_split()
 
 # Split the documents into smaller chunks for processing
