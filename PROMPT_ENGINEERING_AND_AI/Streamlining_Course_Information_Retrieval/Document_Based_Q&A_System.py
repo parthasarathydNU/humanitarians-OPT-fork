@@ -47,12 +47,14 @@ if uploaded_file is not None:
     # Display the text
     st.write("Text extracted from the .docx file:")
     st.write(doc_text)
+    
+    # Split the documents into smaller chunks for processing
+    chunk_size=1000 
+    chunk_overlap=200
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+    docs = text_splitter.split_documents(doc_text)
 
-# Split the documents into smaller chunks for processing
-chunk_size=1000 
-chunk_overlap=200
-text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
-docs = text_splitter.split_documents(doc_text)
+
 
 # Embed the documents
 
