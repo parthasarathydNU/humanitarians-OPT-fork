@@ -39,11 +39,11 @@ if uploaded_file is not None:
     file_contents = uploaded_file.read()
 else:
     st.write("Please upload a file.")
-# Split the documents into smaller chunks for processing
 
+# Split the documents into smaller chunks for processing
 def split_docs(file_contents, chunk_size=1000, chunk_overlap=200):
-text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
-docs = text_splitter.split_documents(file_contents)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+    docs = text_splitter.split_documents(file_contents)
 return docs
 
 docs = split_docs(file_contents)
