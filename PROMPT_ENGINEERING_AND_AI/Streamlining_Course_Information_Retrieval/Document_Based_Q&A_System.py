@@ -44,7 +44,7 @@ else:
 def split_docs(file_contents, chunk_size=1000, chunk_overlap=200):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
     docs = text_splitter.split_documents(file_contents)
-return docs
+    return docs
 
 docs = split_docs(file_contents)
 
