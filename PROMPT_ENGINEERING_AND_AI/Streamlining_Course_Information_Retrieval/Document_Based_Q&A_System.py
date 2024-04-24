@@ -39,8 +39,7 @@ if uploaded_file is not None:
     # You can perform any necessary operations here
     file_contents = uploaded_file.read()
     loader = st.write("File contents:", file_contents)
-
-pages = loader.load_and_split()
+    pages = loader.load()
 
 # Split the documents into smaller chunks for processing
 
