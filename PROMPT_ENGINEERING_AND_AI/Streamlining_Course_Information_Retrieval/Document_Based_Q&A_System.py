@@ -31,20 +31,23 @@ openai_api_key = secrets["openai"]["api_key"]
 # Access Pinecone API key
 pinecone_api_key = secrets["pinecone"]["api_key"]
 
+# Add a file uploader widget
 uploaded_file = st.file_uploader("Upload your file")
-# Process the uploaded file
-# You can perform any necessary operations here
-file_contents = uploaded_file.read()
-loader = st.write("File contents:", file_contents)
 
+if uploaded_file is not None:
+    # Process the uploaded file
+    file_contents = uploaded_file.read()
+    st.write("File contents:", file_contents)
+else:
+    st.write("Please upload a file.")
 # Split the documents into smaller chunks for processing
 
-def split_docs(loader, chunk_size=1000, chunk_overlap=200):
+def split_docs(file_contents, chunk_size=1000, chunk_overlap=200):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
-    docs = text_splitter.split_documents(loader)
+    docs = text_splitter.split_documents(file_contents)
     return docs
 
-docs = split_docs(loader)
+docs = split_docs(file_contents)
 
 # Embed the documents
 
