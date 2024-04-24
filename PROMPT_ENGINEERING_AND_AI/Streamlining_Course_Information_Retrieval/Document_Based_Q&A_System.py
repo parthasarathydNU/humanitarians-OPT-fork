@@ -59,15 +59,14 @@ if uploaded_file is not None:
     docs = text_splitter.split_documents(doc_text)
 
 
+# Embed the documents
 
-    # Embed the documents
+embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
 
-    embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
-
-    # Create a new Pinecone Index and setup the vector database and search engine
+# Create a new Pinecone Index and setup the vector database and search engine
     
-    index_name = "langchain-demo"
-    index = PineconeVectorStore.from_documents(docs, embeddings_model, index_name=index_name)
+index_name = "langchain-demo"
+index = PineconeVectorStore.from_documents(docs, embeddings_model, index_name=index_name)
 
 # Define a function to find similar documents based on a given query
 
