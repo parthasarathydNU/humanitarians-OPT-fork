@@ -31,16 +31,10 @@ openai_api_key = secrets["openai"]["api_key"]
 # Access Pinecone API key
 pinecone_api_key = secrets["pinecone"]["api_key"]
 
-uploaded_file = None
-
-while uploaded_file is None:
-    # Add a file uploader widget
-    uploaded_file = st.file_uploader("Upload your file")
-    # Process the uploaded file
-    # You can perform any necessary operations here
-    file_contents = uploaded_file.read()
-    break
-
+uploaded_file = st.file_uploader("Upload your file")
+# Process the uploaded file
+# You can perform any necessary operations here
+file_contents = uploaded_file.read()
 loader = st.write("File contents:", file_contents)
 
 # Split the documents into smaller chunks for processing
