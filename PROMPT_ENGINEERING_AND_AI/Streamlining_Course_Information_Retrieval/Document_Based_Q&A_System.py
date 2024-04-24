@@ -39,16 +39,15 @@ if uploaded_file is not None:
     # You can perform any necessary operations here
     file_contents = uploaded_file.read()
     loader = st.write("File contents:", file_contents)
-    pages = loader.load()
 
 # Split the documents into smaller chunks for processing
 
-def split_docs(pages, chunk_size=1000, chunk_overlap=200):
+def split_docs(loader, chunk_size=1000, chunk_overlap=200):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
-    docs = text_splitter.split_documents(pages)
+    docs = text_splitter.split_documents(loader)
     return docs
 
-docs = split_docs(pages)
+docs = split_docs(loader)
 
 # Embed the documents
 
