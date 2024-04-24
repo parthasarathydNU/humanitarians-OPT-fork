@@ -22,15 +22,17 @@ from langchain.prompts import PromptTemplate
 
 # Set up the environment
 
-st.write(
-    "Has environment variables been set:",
-    os.environ["DB_USERNAME_1"] == st.secrets["DB_TOKEN_1"],
-    os.environ["DB_USERNAME_2"] == st.secrets["DB_TOKEN_2"],
-)
+# Load secret keys
+secrets = st.secrets
+
+# Access OpenAI API key
+openai_api_key = secrets["openai"]["api_key"]
+
+# Access Pinecone API key
+pinecone_api_key = secrets["pinecone"]["api_key"]
 
 # Load the directory
-
-loader = DirectoryLoader('/Users/anshaya/Downloads/Test_Case')
+loader = DirectoryLoader('/Users/anshaya/Downloads/Q&A_System')
 pages = loader.load_and_split()
 
 # Split the documents into smaller chunks for processing
