@@ -3,3 +3,4 @@ openai
 langchain
 langchain-openai
 langchain-pinecone
+python-docx
