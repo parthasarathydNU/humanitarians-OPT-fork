@@ -31,8 +31,15 @@ openai_api_key = secrets["openai"]["api_key"]
 # Access Pinecone API key
 pinecone_api_key = secrets["pinecone"]["api_key"]
 
-# Load the directory
-loader = DirectoryLoader('/Users/anshaya/Downloads/QA_System/Test_Case')
+# Add a file uploader widget
+uploaded_file = st.file_uploader("Upload your file")
+
+if uploaded_file is not None:
+    # Process the uploaded file
+    # You can perform any necessary operations here
+    file_contents = uploaded_file.read()
+    loader = st.write("File contents:", file_contents)
+
 pages = loader.load_and_split()
 
 # Split the documents into smaller chunks for processing
@@ -46,7 +53,7 @@ docs = split_docs(pages)
 
 # Embed the documents
 
-embeddings_model = OpenAIEmbeddings(openai_api_key="DB_TOKEN_1")
+embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
 
 # Create a new Pinecone Index and setup the vector database and search engine
 
