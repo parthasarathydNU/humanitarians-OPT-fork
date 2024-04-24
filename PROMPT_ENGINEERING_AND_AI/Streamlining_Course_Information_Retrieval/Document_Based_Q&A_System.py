@@ -31,6 +31,7 @@ openai_api_key = secrets["openai"]["api_key"]
 # Access Pinecone API key
 pinecone_api_key = secrets["pinecone"]["api_key"]
 
+uploaded_file = None
 
 while uploaded_file is None:
     # Add a file uploader widget
