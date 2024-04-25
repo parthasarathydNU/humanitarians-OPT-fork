@@ -36,16 +36,16 @@ pinecone_api_key = secrets["pinecone"]["api_key"]
 
 os.environ["PINECONE_API_KEY"] = pinecone_api_key
 
-# Add a file uploader widget
-uploaded_file = st.file_uploader("Upload your file")
+# File upload
+uploaded_file = st.file_uploader("Upload a .docx file", type=["docx"])
 
 if uploaded_file is not None:
-    # Process the uploaded file
-    file_contents = uploaded_file.read()
+    # Read the uploaded file
+    document = Document(uploaded_file)
 
      # Extract text from the document
     doc_text = ""
-    for paragraph in file_contents.paragraphs:
+    for paragraph in document.paragraphs:
         doc_text += paragraph.text + "\n"
 
     # Convert the text content into document objects
