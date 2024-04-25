@@ -41,8 +41,7 @@ os.environ["PINECONE_API_KEY"] = pinecone_api_key
 uploaded_files = st.file_uploader("Upload your files here", accept_multiple_files=True)
 
 for uploaded_file in uploaded_files:
-    bytes_data = uploaded_file.read()
-    st.write("filename:", uploaded_file.name)
+    bytes_data = uploaded_file.getvalue()
     st.write(bytes_data)
 
     # To convert to a string based IO:
