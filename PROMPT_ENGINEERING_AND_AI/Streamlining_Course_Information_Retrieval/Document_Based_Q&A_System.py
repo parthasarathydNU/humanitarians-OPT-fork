@@ -48,16 +48,15 @@ if uploaded_file is not None:
     for paragraph in docx_file.paragraphs:
         doc_text += paragraph.text + "\n"
 
-    # Display the text
-    st.write("Text extracted from the .docx file:")
-    st.write(doc_text)
+    # # Display the text
+    # st.write("Text extracted from the .docx file:")
+    # st.write(doc_text)
     
     # Split the documents into smaller chunks for processing
     chunk_size=1000 
     chunk_overlap=200
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
-    docs = [doc_text]
-    split_docs = text_splitter.split_documents(docs)
+    split_docs = text_splitter.split_documents(doc_text)
 
 
     # Embed the documents
