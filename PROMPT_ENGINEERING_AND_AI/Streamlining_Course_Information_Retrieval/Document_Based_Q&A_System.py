@@ -57,7 +57,7 @@ if uploaded_file is not None:
     chunk_overlap=200
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
     docs = [doc_text]
-    docs = text_splitter.split_documents(doc_text)
+    docs = text_splitter.split_documents(docs)
 
 
 # Embed the documents
