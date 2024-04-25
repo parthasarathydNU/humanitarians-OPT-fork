@@ -43,14 +43,19 @@ if uploaded_file is not None:
     # Process the uploaded file
     file_contents = uploaded_file.read()
 
-    # Now you can use file_contents wherever you need it
-    docs = split_docs(file_contents)
+     # Extract text from the document
+    doc_text = ""
+    for paragraph in file_contents.paragraphs:
+        doc_text += paragraph.text + "\n"
+
+    # Convert the text content into document objects
+    documents = [{"page_content": doc_text}]     
     
     # Split the documents into smaller chunks for processing
     chunk_size=1000 
     chunk_overlap=200
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
-    split_docs = text_splitter.split_documents(docs)
+    split_docs = text_splitter.split_documents(documents)
 
 
     # Embed the documents
