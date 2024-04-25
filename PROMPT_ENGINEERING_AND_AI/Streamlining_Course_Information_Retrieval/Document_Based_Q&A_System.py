@@ -20,6 +20,7 @@ from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains import ConversationalRetrievalChain, RetrievalQA
 from langchain.prompts import PromptTemplate
 from docx import Document
+from io import StringIO
 
 # Set up the environment
 
