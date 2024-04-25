@@ -48,13 +48,13 @@ if uploaded_file is not None:
     for paragraph in document.paragraphs:
         doc_text += paragraph.text + "\n" 
 
-    document = [{"page_content": doc_text}]
+    text = doc_text["page_content"]
     
     #Split the documents into smaller chunks for processing
     chunk_size=1000 
     chunk_overlap=200
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
-    split_docs = text_splitter.split_documents(document)
+    split_docs = text_splitter.split_documents([text])
 
 
     # Embed the documents
