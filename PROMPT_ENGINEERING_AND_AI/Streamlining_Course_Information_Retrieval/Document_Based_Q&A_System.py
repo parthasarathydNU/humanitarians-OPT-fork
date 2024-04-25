@@ -57,7 +57,7 @@ if uploaded_file is not None:
     chunk_overlap=200
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
     docs = [doc_text]
-    docs = text_splitter.split_documents(docs)
+    split_docs = text_splitter.split_documents(docs)
 
 
     # Embed the documents
@@ -68,7 +68,7 @@ if uploaded_file is not None:
     
     index_name = "langchain-demo"
     global index
-    index = PineconeVectorStore.from_documents(docs, embeddings_model, index_name=index_name)
+    index = PineconeVectorStore.from_documents(split_docs, embeddings_model, index_name=index_name)
 
     # Define a function to find similar documents based on a given query
 
