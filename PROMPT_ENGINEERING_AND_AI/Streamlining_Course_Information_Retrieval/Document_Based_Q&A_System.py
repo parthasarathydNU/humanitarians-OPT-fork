@@ -37,26 +37,20 @@ pinecone_api_key = secrets["pinecone"]["api_key"]
 os.environ["PINECONE_API_KEY"] = pinecone_api_key
 
 # Add a file uploader widget
-uploaded_file = st.file_uploader("Upload your .docx file", type=["docx"])
+uploaded_file = st.file_uploader("Upload your file")
 
 if uploaded_file is not None:
-    # Read the uploaded .docx file
-    docx_file = Document(uploaded_file)
-    
-    # Extract text from the document
-    doc_text = ""
-    for paragraph in docx_file.paragraphs:
-        doc_text += paragraph.text + "\n"
+    # Process the uploaded file
+    file_contents = uploaded_file.read()
 
-    # # Display the text
-    # st.write("Text extracted from the .docx file:")
-    # st.write(doc_text)
+    # Now you can use file_contents wherever you need it
+    docs = split_docs(file_contents)
     
-    # # Split the documents into smaller chunks for processing
-    # chunk_size=1000 
-    # chunk_overlap=200
-    # text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
-    # split_docs = text_splitter.split_documents(doc_text)
+    # Split the documents into smaller chunks for processing
+    chunk_size=1000 
+    chunk_overlap=200
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+    split_docs = text_splitter.split_documents(docs)
 
 
     # Embed the documents
@@ -67,7 +61,7 @@ if uploaded_file is not None:
     
     index_name = "langchain-demo"
     global index
-    index = PineconeVectorStore.from_documents(doc_text, embeddings_model, index_name=index_name)
+    index = PineconeVectorStore.from_documents(split_docs, embeddings_model, index_name=index_name)
 
     # Define a function to find similar documents based on a given query
 
