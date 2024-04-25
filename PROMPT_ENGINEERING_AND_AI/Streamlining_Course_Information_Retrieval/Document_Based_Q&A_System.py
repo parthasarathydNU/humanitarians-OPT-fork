@@ -40,23 +40,17 @@ os.environ["PINECONE_API_KEY"] = pinecone_api_key
 # File upload
 uploaded_files = st.file_uploader("Upload your files here", accept_multiple_files=True)
 
-for uploaded_file in uploaded_files:
-    bytes_data = uploaded_file.getvalue()
-    st.write(bytes_data)
-
-    # To convert to a string based IO:
-    stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
-    st.write(stringio)
-
-    # To read file as string:
-    string_data = stringio.read()
-    st.write(string_data)
+if uploaded_files is not None:
+    # Read the uploaded file
+    document = Document(uploaded_file)
+    pages = document.load_and_split()
+    len(pages)
     
     #Split the documents into smaller chunks for processing
     chunk_size=1000 
     chunk_overlap=200
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
-    split_docs = text_splitter.split_documents(string_data)
+    split_docs = text_splitter.split_documents(pages)
 
     
     # Embed the documents
