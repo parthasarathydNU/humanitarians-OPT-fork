@@ -46,8 +46,7 @@ if uploaded_file is not None:
      # Extract text from the document
     doc_text = ""
     for paragraph in document.paragraphs:
-        doc_text += paragraph.text + "\n"
-        return doc_text    
+        doc_text += paragraph.text + "\n" 
     
     #Split the documents into smaller chunks for processing
     chunk_size=1000 
