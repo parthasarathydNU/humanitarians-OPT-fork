@@ -43,12 +43,20 @@ for uploaded_file in uploaded_files:
     bytes_data = uploaded_file.read()
     st.write("filename:", uploaded_file.name)
     st.write(bytes_data)
+
+    # To convert to a string based IO:
+    stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
+    st.write(stringio)
+
+    # To read file as string:
+    string_data = stringio.read()
+    st.write(string_data)
     
     #Split the documents into smaller chunks for processing
     chunk_size=1000 
     chunk_overlap=200
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
-    split_docs = text_splitter.split_documents(bytes_data)
+    split_docs = text_splitter.split_documents(string_data)
 
     
     # Embed the documents
