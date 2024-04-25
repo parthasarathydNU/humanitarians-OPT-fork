@@ -60,56 +60,56 @@ if uploaded_file is not None:
     docs = text_splitter.split_documents(docs)
 
 
-# Embed the documents
+    # Embed the documents
 
-embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
+    embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
 
-# Create a new Pinecone Index and setup the vector database and search engine
+    # Create a new Pinecone Index and setup the vector database and search engine
     
-index_name = "langchain-demo"
-global index
-index = PineconeVectorStore.from_documents(docs, embeddings_model, index_name=index_name)
+    index_name = "langchain-demo"
+    global index
+    index = PineconeVectorStore.from_documents(docs, embeddings_model, index_name=index_name)
 
-# Define a function to find similar documents based on a given query
+    # Define a function to find similar documents based on a given query
 
-def get_similiar_docs(query, k=1, score=False):
-    if score:
-        similar_docs = index.similarity_search_with_score(query, k=k)
-    else:
-        similar_docs = index.similarity_search(query, k=k)
-    return similar_docs
+    def get_similiar_docs(query, k=1, score=False):
+        if score:
+            similar_docs = index.similarity_search_with_score(query, k=k)
+        else:
+            similar_docs = index.similarity_search(query, k=k)
+        return similar_docs
 
-# Creating the Prompt
-question = st.text_input("Ask your question here")
+    # Creating the Prompt
+    question = st.text_input("Ask your question here")
 
-if st.button("Get Answer"):
-        # Creating the Prompt
-        template = """
-        Answer the question in your own words from the context given to you.
-        If questions are asked where there is no relevant context available, please answer from what you know.
+    if st.button("Get Answer"):
+            # Creating the Prompt
+            template = """
+            Answer the question in your own words from the context given to you.
+            If questions are asked where there is no relevant context available, please answer from what you know.
 
-        Context: {context}
+            Context: {context}
 
-        Human: {question}
-        Assistant:
+            Human: {question}
+            Assistant:
 
-        """
-        prompt = PromptTemplate(input_variables=["context", "question"], template=template)
+            """
+            prompt = PromptTemplate(input_variables=["context", "question"], template=template)
 
-        # Assigning the OPENAI model and Retrieval chain
-        model_name = "gpt-4"
-        llm = ChatOpenAI(model_name=model_name)
+            # Assigning the OPENAI model and Retrieval chain
+            model_name = "gpt-4"
+            llm = ChatOpenAI(model_name=model_name)
 
-        # Define the Retrieval chain
-        chain = RetrievalQA.from_chain_type(llm, retriever=index.as_retriever(), chain_type_kwargs={'prompt': prompt})
+            # Define the Retrieval chain
+            chain = RetrievalQA.from_chain_type(llm, retriever=index.as_retriever(), chain_type_kwargs={'prompt': prompt})
 
-        # Get similar documents
-        similar_docs = get_similar_docs(question)
+            # Get similar documents
+            similar_docs = get_similar_docs(question)
 
-        # Display similar documents
-        st.write("Similar Documents:")
-        for doc in similar_docs:
-            st.write(doc)
+            # Display similar documents
+            st.write("Similar Documents:")
+            for doc in similar_docs:
+                st.write(doc)
             
 # template = """
 # Answer the question in your own words from the context given to you.
