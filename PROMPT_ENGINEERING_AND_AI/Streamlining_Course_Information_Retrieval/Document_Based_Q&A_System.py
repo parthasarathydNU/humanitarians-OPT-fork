@@ -52,11 +52,11 @@ if uploaded_file is not None:
     # st.write("Text extracted from the .docx file:")
     # st.write(doc_text)
     
-    # Split the documents into smaller chunks for processing
-    chunk_size=1000 
-    chunk_overlap=200
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
-    split_docs = text_splitter.split_documents(doc_text)
+    # # Split the documents into smaller chunks for processing
+    # chunk_size=1000 
+    # chunk_overlap=200
+    # text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+    # split_docs = text_splitter.split_documents(doc_text)
 
 
     # Embed the documents
@@ -67,7 +67,7 @@ if uploaded_file is not None:
     
     index_name = "langchain-demo"
     global index
-    index = PineconeVectorStore.from_documents(split_docs, embeddings_model, index_name=index_name)
+    index = PineconeVectorStore.from_documents(doc_text, embeddings_model, index_name=index_name)
 
     # Define a function to find similar documents based on a given query
 
