@@ -37,27 +37,20 @@ pinecone_api_key = secrets["pinecone"]["api_key"]
 os.environ["PINECONE_API_KEY"] = pinecone_api_key
 
 # File upload
-uploaded_file = st.file_uploader("Upload a .docx file", type=["docx"])
+uploaded_file = st.file_uploader("Upload your files here", accept_multiple_files=Tru)
 
-if uploaded_file is not None:
-    # Read the uploaded file
-    document = Document(uploaded_file)
-
-    # Extract text from the document
-    doc_text = ""
-    for paragraph in document.paragraphs:
-        doc_text += paragraph.text + "\n" 
-
-    # Extract the page content from the document objects
-    texts = document['page_content']
-
+for uploaded_file in uploaded_files:
+    bytes_data = uploaded_file.read()
+    st.write("filename:", uploaded_file.name)
+    st.write(bytes_data)
+    
     #Split the documents into smaller chunks for processing
     chunk_size=1000 
     chunk_overlap=200
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
-    split_docs = text_splitter.split_documents(texts)
+    split_docs = text_splitter.split_documents(bytes_data)
 
-
+    
     # Embed the documents
 
     embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
