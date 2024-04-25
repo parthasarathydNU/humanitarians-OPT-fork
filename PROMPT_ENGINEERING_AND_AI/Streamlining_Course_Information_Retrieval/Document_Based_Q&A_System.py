@@ -42,7 +42,7 @@ uploaded_files = st.file_uploader("Upload your files here", accept_multiple_file
 
 if uploaded_files is not None:
     # Read the uploaded file
-    document = Document(uploaded_file)
+    document = Document(uploaded_files)
     pages = document.load_and_split()
     len(pages)
     
