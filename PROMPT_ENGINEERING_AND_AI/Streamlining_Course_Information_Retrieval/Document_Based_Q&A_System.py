@@ -46,8 +46,9 @@ if uploaded_file is not None:
     st.write("File contents:", file_contents)
 else:
     st.write("Please upload a file.")
-    
-    pages = file_contents.load_and_split()
+
+    file = file_contents
+    pages = file.load_and_split()
     
     #Split the documents into smaller chunks for processing
     chunk_size=1000 
