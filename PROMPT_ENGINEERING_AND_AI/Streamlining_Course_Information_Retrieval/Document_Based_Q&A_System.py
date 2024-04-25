@@ -43,12 +43,12 @@ if uploaded_file is not None:
     # Read the uploaded file
     document = Document(uploaded_file)
 
-     # Extract text from the document
-    doc_text = ""
-    for paragraph in document.paragraphs:
-        doc_text += paragraph.text + "\n" 
+    #  # Extract text from the document
+    # doc_text = ""
+    # for paragraph in document.paragraphs:
+    #     doc_text += paragraph.text + "\n" 
 
-    text = doc_text["page_content"]
+    text = document["page_content"]
     
     #Split the documents into smaller chunks for processing
     chunk_size=1000 
