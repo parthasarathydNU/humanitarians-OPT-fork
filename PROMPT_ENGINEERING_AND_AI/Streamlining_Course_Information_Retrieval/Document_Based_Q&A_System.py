@@ -37,7 +37,7 @@ pinecone_api_key = secrets["pinecone"]["api_key"]
 os.environ["PINECONE_API_KEY"] = pinecone_api_key
 
 # File upload
-uploaded_file = st.file_uploader("Upload your files here", accept_multiple_files=Tru)
+uploaded_file = st.file_uploader("Upload your files here", accept_multiple_files=True)
 
 for uploaded_file in uploaded_files:
     bytes_data = uploaded_file.read()
