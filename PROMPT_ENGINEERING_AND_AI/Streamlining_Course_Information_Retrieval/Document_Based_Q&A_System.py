@@ -38,13 +38,16 @@ pinecone_api_key = secrets["pinecone"]["api_key"]
 os.environ["PINECONE_API_KEY"] = pinecone_api_key
 
 # File upload
-uploaded_files = st.file_uploader("Upload your files here", accept_multiple_files=True)
+uploaded_file = st.file_uploader("Upload your file")
 
-if uploaded_files is not None:
-    # Read the uploaded file
-    document = uploaded_files.read()
-    pages = document.load_and_split()
-    len(pages)
+if uploaded_file is not None:
+    # Process the uploaded file
+    file_contents = uploaded_file.read()
+    st.write("File contents:", file_contents)
+else:
+    st.write("Please upload a file.")
+    
+    pages = file_contents.load_and_split()
     
     #Split the documents into smaller chunks for processing
     chunk_size=1000 
