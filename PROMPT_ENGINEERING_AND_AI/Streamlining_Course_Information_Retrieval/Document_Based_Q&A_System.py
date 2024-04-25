@@ -49,7 +49,7 @@ if uploaded_file is not None:
         doc_text += paragraph.text + "\n" 
 
     # Extract the page content from the document objects
-    texts = [doc["page_content"] for doc in document]
+    texts = doc_text['page_content']
 
     #Split the documents into smaller chunks for processing
     chunk_size=1000 
