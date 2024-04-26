@@ -22,6 +22,7 @@ from langchain.prompts import PromptTemplate
 from docx import Document
 from io import StringIO
 import PyPDF2
+import docx
 
 # Set up the environment
 
