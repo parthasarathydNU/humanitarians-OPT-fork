@@ -44,8 +44,8 @@ if uploaded_file is not None:
     # Process the uploaded file
     file_contents = uploaded_file.read()
     st.write("File contents:", file_contents)
-    file = file_contents
-    pages = file.load_and_split()
+    file_contents = file_contents.decode("utf-8")
+    pages = file_contents.load_and_split()
     
     #Split the documents into smaller chunks for processing
     chunk_size=1000 
