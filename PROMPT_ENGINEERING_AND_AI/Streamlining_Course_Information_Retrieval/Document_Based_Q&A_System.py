@@ -44,8 +44,22 @@ if uploaded_file is not None:
     # Process the uploaded file
     file_contents = uploaded_file.read()
     st.write("File contents:", file_contents)
-    file_contents = file_contents.decode("utf-8")
-    pages = file_contents.load_and_split()
+
+    # Try decoding with different encodings until successful
+    encoding = ['utf-8', 'latin-1', 'iso-8859-1']  # Add more encodings if needed
+    decoded_content = None
+    for encoding in encodings_to_try:
+        try:
+            decoded_content = file_contents.decode(encoding)
+            break  # Break out of loop if decoding is successful
+        except UnicodeDecodeError:
+            continue  # Try next encoding if decoding fails
+    
+    if decoded_content is None:
+        st.write("Unable to decode file contents with any of the specified encodings.")
+    else:
+        # Call the function or method to split decoded_content into pages
+        pages = load_and_split(decoded_content)
     
     #Split the documents into smaller chunks for processing
     chunk_size=1000 
