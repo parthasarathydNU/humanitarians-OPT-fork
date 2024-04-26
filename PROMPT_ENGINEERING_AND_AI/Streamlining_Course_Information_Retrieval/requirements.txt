@@ -4,3 +4,4 @@ langchain
 langchain-openai
 langchain-pinecone
 python-docx
+PyPDF2
