@@ -113,7 +113,7 @@ if uploaded_file is not None:
     
     index_name = "langchain-demo"
     global index
-    index = PineconeVectorStore.from_documents(split_docs, embeddings_model, index_name=index_name)
+    index = PineconeVectorStore.from_documents(documents, embeddings_model, index_name=index_name)
 
     # Define a function to find similar documents based on a given query
 
