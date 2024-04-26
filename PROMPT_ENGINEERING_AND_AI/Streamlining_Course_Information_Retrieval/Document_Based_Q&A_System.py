@@ -46,7 +46,7 @@ if uploaded_file is not None:
     st.write("File contents:", file_contents)
 
     # Try decoding with different encodings until successful
-    encoding = ['utf-8', 'latin-1', 'iso-8859-1']  # Add more encodings if needed
+    encodings_to_try = ['utf-8', 'latin-1', 'iso-8859-1']  # Add more encodings if needed
     decoded_content = None
     for encoding in encodings_to_try:
         try:
