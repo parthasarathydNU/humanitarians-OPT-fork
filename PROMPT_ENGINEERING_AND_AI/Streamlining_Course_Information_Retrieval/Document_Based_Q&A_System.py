@@ -115,6 +115,9 @@ if uploaded_file is not None:
     global index
     index = PineconeVectorStore.from_documents(documents_with_metadata, embeddings_model, index_name=index_name)
 
+
+
+    
     # Define a function to find similar documents based on a given query
 
     def get_similiar_docs(query, k=1, score=False):
@@ -124,6 +127,10 @@ if uploaded_file is not None:
             similar_docs = index.similarity_search(query, k=k)
         return similar_docs
 
+
+
+
+    
     # Creating the Prompt
     question = st.text_input("Ask your question here")
 
@@ -132,13 +139,14 @@ if uploaded_file is not None:
             template = """
             Answer the question in your own words from the context given to you.
             If questions are asked where there is no relevant context available, please answer from what you know.
-
+            
             Context: {context}
 
             Human: {question}
             Assistant:
 
             """
+        
             prompt = PromptTemplate(input_variables=["context", "question"], template=template)
 
             # Assigning the OPENAI model and Retrieval chain
@@ -155,7 +163,28 @@ if uploaded_file is not None:
             st.write("Similar Documents:")
             for doc in similar_docs:
                 st.write(doc)
-            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # template = """
 # Answer the question in your own words from the context given to you.
 # If questions are asked where there is no relevant context available, please answer from what you know.
