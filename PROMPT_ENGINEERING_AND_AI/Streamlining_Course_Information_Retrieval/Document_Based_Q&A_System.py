@@ -89,18 +89,18 @@ if uploaded_file is not None:
     # Initialize text splitter
     text_splitter = RecursiveCharacterTextSplitter()
     
-    # Split the file contents into documents
-    documents = text_splitter.split_documents(file_contents)
+    split_docs = text_splitter.split_documents(file_contents)
+    
+    # Assuming each document is represented as a dictionary with 'page_content' key
+    documents_with_metadata = [{'page_content': doc} for doc in split_docs]
     
     # Display the number of documents
-    st.write(f"Number of documents: {len(documents)}")
+    st.write(f"Number of documents: {len(split_docs)}")
     
     # Display each document
-    for i, document in enumerate(documents):
+    for i, document in enumerate(split_docs):
         st.write(f"Document {i+1}:")
         st.write(document)
-
-
 
 
 
