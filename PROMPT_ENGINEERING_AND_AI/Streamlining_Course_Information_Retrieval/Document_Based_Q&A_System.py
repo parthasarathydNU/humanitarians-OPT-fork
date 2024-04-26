@@ -59,7 +59,7 @@ if uploaded_file is not None:
         st.write("Unable to decode file contents with any of the specified encodings.")
     else:
         # Call the function or method to split decoded_content into pages
-        pages = load_and_split(decoded_content)
+        pages = decoded_content.load_and_split()
     
     #Split the documents into smaller chunks for processing
     chunk_size=1000 
