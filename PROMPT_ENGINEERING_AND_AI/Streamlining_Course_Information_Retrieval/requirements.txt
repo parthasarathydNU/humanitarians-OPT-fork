@@ -6,3 +6,4 @@ langchain-pinecone
 python-docx
 PyPDF2
 PyPDF
+pinecone-client
