@@ -92,7 +92,7 @@ def doc_preprocessing():
 
     # Embed the documents
 def vector_db():
-    pc = Pincone(pinecone_api_key=pinecone_api_key)
+    pc = Pinecone(pinecone_api_key=pinecone_api_key)
     embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
 
     # Create a new Pinecone Index and setup the vector database and search engine
