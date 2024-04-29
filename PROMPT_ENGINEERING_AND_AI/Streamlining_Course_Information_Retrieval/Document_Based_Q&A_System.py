@@ -24,6 +24,7 @@ from docx import Document
 from io import StringIO
 import PyPDF2
 import docx
+from langchain_community.document_loaders import PyPDFLoader
 
 # Set up the environment
 
@@ -80,13 +81,14 @@ def doc_preprocessing():
     #     file_contents = uploaded_file.read()
     #     st.write("File contents:", file_contents)
 
-    raw_documents = TextLoader(file_contents).load()
-    
-    # Split documents into smaller chunks
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
+
+        loader = PyPDFLoader(file_contents)
+        docs = loader.load()
+        # Split documents into smaller chunks
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
                                                  chunk_overlap=50)
-    split_data = text_splitter.split_documents(raw_documents)
-    return split_data
+        split_data = text_splitter.split_documents(docs)
+        return split_data
 
     # Embed the documents
 def vector_db():
