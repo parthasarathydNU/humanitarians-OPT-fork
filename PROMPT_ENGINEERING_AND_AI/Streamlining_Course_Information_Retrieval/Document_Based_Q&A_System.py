@@ -37,10 +37,10 @@ os.environ["PINECONE_API_KEY"] = pinecone_api_key
 
 def doc_preprocessing():
     # Load text documents from a directory
-    loader = DirectoryLoader('input_files/', 
-                             glob="./*.txt",                          #only txt files
-                             loader_cls=TextLoader,
-                             show_progress=True)
+    # loader = DirectoryLoader('input_files/', 
+    #                          glob="./*.txt",                          #only txt files
+    #                          loader_cls=TextLoader,
+    #                          show_progress=True)
     uploaded_file = st.file_uploader("Upload your file")
 
     if uploaded_file is not None:
@@ -73,7 +73,7 @@ def vector_db():
         if total_vector_count == 0:
             raise Exception("Total Vector Count is 0")
         # If vectors exists, load it
-        indexes = PineconeVectorStore.from_existing_index(index_name, embeddings)
+        indexes = PineconeVectorStore.from_existing_index(index_name, embeddings_model)
     except Exception:
         # If index retrieval fails or total vector count is 0, create vector
         split_data = doc_preprocessing() 
@@ -81,7 +81,7 @@ def vector_db():
         print(indexes)
    
 
-    return index
+    return indexes
 
     
     # Define a function to find similar documents based on a given query
