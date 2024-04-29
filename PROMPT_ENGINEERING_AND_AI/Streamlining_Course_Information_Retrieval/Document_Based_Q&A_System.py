@@ -71,7 +71,7 @@ def doc_preprocessing():
     #     st.write("File contents:", file_contents)
 
 
-        loader = PyPDFLoader(file_contents)
+        loader = PyPDFLoader('file_contents')
         docs = loader.load()
         # Split documents into smaller chunks
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
@@ -151,7 +151,7 @@ if st.button("Get Answer"):
         llm = ChatOpenAI(model_name=model_name)
 
         # Define the Retrieval chain
-        chain = RetrievalQA.from_chain_type(llm, retriever=index.as_retriever(), chain_type_kwargs={'prompt': prompt})
+        chain = RetrievalQA.from_chain_type(llm, retriever=indexes.as_retriever(), chain_type_kwargs={'prompt': prompt})
 
         # Get similar documents
         similar_docs = get_similar_docs(question)
