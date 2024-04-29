@@ -119,15 +119,14 @@ def get_similiar_docs(query, k=1, score=False):
         similar_docs = index.similarity_search(query, k=k)
     return similar_docs
 
-
-if "vector_store" not in st.session_state:
-        # Initialize vector store
-        st.session_state.vector_store = vector_db()
-
 st.title("Document Splitter")
 
 # File uploader for user to upload a document
 uploaded_file = st.file_uploader("Upload your document", type=["docx", "pdf"])
+
+if "vector_store" not in st.session_state:
+        # Initialize vector store
+        st.session_state.vector_store = vector_db()
 
 # Creating the Prompt
 question = st.text_input("Ask your question here")
