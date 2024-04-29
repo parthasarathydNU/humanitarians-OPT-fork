@@ -43,16 +43,16 @@ def doc_preprocessing():
                              show_progress=True)
     uploaded_file = st.file_uploader("Upload your file")
 
-if uploaded_file is not None:
-    # Process the uploaded file
-    file_contents = uploaded_file.load()
-    st.write("File contents:", file_contents)
+    if uploaded_file is not None:
+        # Process the uploaded file
+        file_contents = uploaded_file.load()
+        st.write("File contents:", file_contents)
 
-    # Split documents into smaller chunks
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
+        # Split documents into smaller chunks
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
                                                  chunk_overlap=50)
-    split_data = text_splitter.split_documents(file_contents)
-    return split_data
+        split_data = text_splitter.split_documents(file_contents)
+        return split_data
 
     # Embed the documents
 def vector_db():
