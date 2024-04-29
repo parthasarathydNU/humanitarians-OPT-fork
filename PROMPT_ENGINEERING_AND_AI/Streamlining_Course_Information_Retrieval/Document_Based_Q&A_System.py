@@ -45,7 +45,7 @@ def doc_preprocessing():
 
     if uploaded_file is not None:
         # Process the uploaded file
-        file_contents = uploaded_file.load()
+        file_contents = uploaded_file.read()
         st.write("File contents:", file_contents)
 
         # Split documents into smaller chunks
