@@ -63,7 +63,23 @@ def vector_db():
     
     index_name = "langchain-demo"
     global index
-    index = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)
+
+     try:
+        # Try to retrieve vectors from existing index
+        index = pc.Index(index_name)
+        describe_stats = index.describe_index_stats()
+        total_vector_count = describe_stats['total_vector_count']
+        print(total_vector_count)
+        if total_vector_count == 0:
+            raise Exception("Total Vector Count is 0")
+        # If vectors exists, load it
+        indexes = PineconeVectorStore.from_existing_index(index_name, embeddings)
+    except Exception:
+        # If index retrieval fails or total vector count is 0, create vector
+        split_data = doc_preprocessing() 
+        index = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)
+        print(indexes)
+   
 
     return index
 
@@ -78,8 +94,12 @@ def get_similiar_docs(query, k=1, score=False):
     return similar_docs
 
 
+if "vector_store" not in st.session_state:
+        # Initialize vector store
+        st.session_state.vector_store = vector_db()
+
     
-    # Creating the Prompt
+# Creating the Prompt
 question = st.text_input("Ask your question here")
 
 if st.button("Get Answer"):
