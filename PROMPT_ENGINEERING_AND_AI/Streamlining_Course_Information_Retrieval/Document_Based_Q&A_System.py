@@ -38,12 +38,6 @@ os.environ["PINECONE_API_KEY"] = pinecone_api_key
 
 
 def doc_preprocessing():
-    # Load text documents from a directory
-    # loader = DirectoryLoader('input_files/', 
-    #                          glob="./*.txt",                          #only txt files
-    #                          loader_cls=TextLoader,
-    #                          show_progress=True)
-    # Function to extract text from DOCX file
     
     def extract_text_from_docx(uploaded_file):
         doc = docx.Document(uploaded_file)
@@ -60,11 +54,6 @@ def doc_preprocessing():
             page = pdf_reader.getPage(page_num)
             full_text.append(page.extractText())
         return '\n'.join(full_text)
-
-    st.title("Document Splitter")
-
-    # File uploader for user to upload a document
-    uploaded_file = st.file_uploader("Upload your document", type=["docx", "pdf"])
 
     if uploaded_file is not None:
         # Extract text from the uploaded file based on its format
@@ -135,7 +124,11 @@ if "vector_store" not in st.session_state:
         # Initialize vector store
         st.session_state.vector_store = vector_db()
 
-    
+st.title("Document Splitter")
+
+# File uploader for user to upload a document
+uploaded_file = st.file_uploader("Upload your document", type=["docx", "pdf"])
+
 # Creating the Prompt
 question = st.text_input("Ask your question here")
 
