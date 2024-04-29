@@ -64,7 +64,7 @@ def vector_db():
     index_name = "langchain-demo"
     global index
 
-     try:
+    try:
         # Try to retrieve vectors from existing index
         index = pc.Index(index_name)
         describe_stats = index.describe_index_stats()
