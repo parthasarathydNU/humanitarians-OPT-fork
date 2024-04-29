@@ -80,10 +80,12 @@ def doc_preprocessing():
     #     file_contents = uploaded_file.read()
     #     st.write("File contents:", file_contents)
 
+    raw_documents = TextLoader(file_contents).load()
+    
     # Split documents into smaller chunks
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
                                                  chunk_overlap=50)
-    split_data = text_splitter.split_documents(file_contents)
+    split_data = text_splitter.split_documents(raw_documents)
     return split_data
 
     # Embed the documents
