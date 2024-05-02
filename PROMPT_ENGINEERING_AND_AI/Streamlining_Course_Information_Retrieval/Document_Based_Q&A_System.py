@@ -71,7 +71,7 @@ def doc_preprocessing():
     #     st.write("File contents:", file_contents)
 
 
-        loader = PyPDFLoader('file_contents')
+        loader = PyPDFLoader(uploaded_file)
         docs = loader.load()
         # Split documents into smaller chunks
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
@@ -103,8 +103,8 @@ def vector_db():
         # If index retrieval fails or total vector count is 0, create vector
         st.error(f"An error occurred: {e}")
         
-    split_data = doc_preprocessing() 
-    indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)
+    documents = doc_preprocessing() 
+    indexes = PineconeVectorStore.from_documents(documents, embeddings_model, index_name=index_name)
     print(indexes)
 
     return indexes
