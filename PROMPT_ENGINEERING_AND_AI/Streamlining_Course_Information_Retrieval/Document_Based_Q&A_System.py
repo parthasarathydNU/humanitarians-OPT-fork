@@ -113,9 +113,9 @@ def vector_db():
 
 def get_similiar_docs(query, k=1, score=False):
     if score:
-        similar_docs = index.similarity_search_with_score(query, k=k)
+        similar_docs = indexes.similarity_search_with_score(query, k=k)
     else:
-        similar_docs = index.similarity_search(query, k=k)
+        similar_docs = indexes.similarity_search(query, k=k)
     return similar_docs
 
 st.title("Document Splitter")
@@ -127,35 +127,36 @@ if "vector_store" not in st.session_state:
         # Initialize vector store
         st.session_state.vector_store = vector_db()
 
+
 # Creating the Prompt
-question = st.text_input("Ask your question here")
 
-template = """
-Answer the question in your own words from the context given to you.
-If questions are asked where there is no relevant context available, please answer from what you know.
+# template = """
+# Answer the question in your own words from the context given to you.
+# If questions are asked where there is no relevant context available, please answer from what you know.
             
-Context: {context}
+# Context: {context}
 
-Human: {question}
-Assistant:
+# Human: {question}
+# Assistant:
 
-"""
+# """
         
-prompt = PromptTemplate(input_variables=["context", "question"], template=template)
+# prompt = PromptTemplate(input_variables=["context", "question"], template=template)
 
-# Assigning the OPENAI model and Retrieval chain
-model_name = "gpt-4"
-llm = ChatOpenAI(model_name=model_name)
+# # Assigning the OPENAI model and Retrieval chain
+# model_name = "gpt-4"
+# llm = ChatOpenAI(model_name=model_name)
 
-# Define the Retrieval chain
-chain = RetrievalQA.from_chain_type(llm, retriever=indexes.as_retriever(), chain_type_kwargs={'prompt': prompt})
+# # Define the Retrieval chain
+# st.session_state.chain = RetrievalQA.from_chain_type(llm, retriever=indexes.as_retriever(), chain_type_kwargs={'prompt': prompt})
+# st.session_state.chat_active = True
 
+question = st.text_input("Ask your question here")
 
 if st.button("Get Answer"):
 
         # Get similar documents
-        similar_docs = get_similar_docs(question)
-
+        st.session_state.similar_docs = get_similar_docs(question)
         # Display similar documents
         st.write("Similar Documents:")
         for doc in similar_docs:
