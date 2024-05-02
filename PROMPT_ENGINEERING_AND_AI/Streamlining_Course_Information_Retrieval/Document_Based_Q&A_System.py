@@ -102,10 +102,9 @@ def vector_db():
     except Exception:
         # If index retrieval fails or total vector count is 0, create vector
         st.error(f"An error occurred: {e}")
-        
-    documents = doc_preprocessing() 
-    indexes = PineconeVectorStore.from_documents(documents, embeddings_model, index_name=index_name)
-    print(indexes)
+        split_data = doc_preprocessing() 
+        indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)
+        print(indexes)
 
     return indexes
 
