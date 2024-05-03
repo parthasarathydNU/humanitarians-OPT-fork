@@ -126,8 +126,7 @@ uploaded_file = st.file_uploader("Upload your document", type=["docx", "pdf"])
 if "vector_store" not in st.session_state:
         # Initialize vector store
         st.session_state.vector_store = vector_db()
-
-
+    
 # Creating the Prompt
 
 # template = """
