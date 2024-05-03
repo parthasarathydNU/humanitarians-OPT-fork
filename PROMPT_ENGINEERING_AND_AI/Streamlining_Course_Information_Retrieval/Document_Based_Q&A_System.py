@@ -108,18 +108,22 @@ def vector_db():
 def get_retrieval_chain(result):
     
     # Creating the Prompt
-    template = """
+    system_prompt = (
+    """ 
     Answer the question in your own words from the context given to you.
     If questions are asked where there is no relevant context available, please answer from what you know.
-            
+    
     Context: {context}
-
-    Human: {question}
-    Assistant:
-
     """
         
-    prompt = PromptTemplate(input_variables=["context", "question"], template=template)
+    )
+    prompt = ChatPromptTemplate.from_messages(
+        [
+            ("system", system_prompt),
+            ("human", "{question}"),
+        ]
+    )
+            
 
     # Assigning the OPENAI model and Retrieval chain
     model_name = "gpt-4"
