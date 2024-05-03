@@ -23,7 +23,7 @@ from pinecone import Pinecone
 from docx import Document
 from io import StringIO
 import PyPDF2
-import docx
+import DocxLoader
 from langchain_community.document_loaders import PyPDFLoader
 
 # Set up the environment
@@ -59,21 +59,18 @@ def doc_preprocessing():
         # Extract text from the uploaded file based on its format
         if uploaded_file.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':  # DOCX
             file_contents = extract_text_from_docx(uploaded_file)
+            loader = DocxLoader(uploaded_file)
+            docs = loader.load()
+        
         elif uploaded_file.type == 'application/pdf':  # PDF
             file_contents = extract_text_from_pdf(uploaded_file)
+            loader = PyPDFLoader(uploaded_file)
+            docs = loader.load()
+        
         else:
             st.write("Unsupported file format. Please upload a DOCX or PDF file.")
             st.stop()
-
-    # if uploaded_file is not None:
-    #     # Process the uploaded file
-    #     file_contents = uploaded_file.read()
-    #     st.write("File contents:", file_contents)
-
-
-        loader = PyPDFLoader(uploaded_file)
-        docs = loader.load()
-        # Split documents into smaller chunks
+            
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
                                                  chunk_overlap=50)
         split_data = text_splitter.split_documents(docs)
