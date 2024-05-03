@@ -23,7 +23,7 @@ from pinecone import Pinecone
 from docx import Document
 from io import StringIO
 import PyPDF2  
-from langchain_community.document_loaders import PyPDFLoader,DocxLoader
+from langchain_community.document_loaders import PyPDFLoader,Docx2txtLoader
 
 # Set up the environment
 
@@ -58,7 +58,7 @@ def doc_preprocessing():
         # Extract text from the uploaded file based on its format
         if uploaded_file.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':  # DOCX
             file_contents = extract_text_from_docx(uploaded_file)
-            loader = DocxLoader(uploaded_file)
+            loader = Docx2txtLoader(uploaded_file)
             docs = loader.load()
         
         elif uploaded_file.type == 'application/pdf':  # PDF
