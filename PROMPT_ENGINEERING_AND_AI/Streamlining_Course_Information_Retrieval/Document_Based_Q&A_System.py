@@ -178,7 +178,7 @@ if "answers" not in st.session_state:
 for answer in st.session_state.messages:
     with st.chat_message("user"):
         st.markdown(answer)
-    st.session_state.answers.append((content = answer))
+    st.session_state.answers.append(answers(content = result))
 
 
 
