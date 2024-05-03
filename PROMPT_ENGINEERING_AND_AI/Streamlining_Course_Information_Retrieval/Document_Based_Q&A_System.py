@@ -111,7 +111,7 @@ def vector_db():
     
     # Define a function to find similar documents based on a given query
 
-def get_similiar_docs(query, k=1, score=False):
+def get_similar_docs(query, k=1, score=False):
     if score:
         similar_docs = indexes.similarity_search_with_score(query, k=k)
     else:
@@ -155,7 +155,7 @@ question = st.text_input("Ask your question here")
 if st.button("Get Answer"):
 
         # Get similar documents
-        st.session_state.get_similar_docs = get_similar_docs(question)
+        similar_docs = get_similar_docs(question)
         # Display similar documents
         st.write("Similar Documents:")
         for doc in similar_docs:
