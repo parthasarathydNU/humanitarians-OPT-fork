@@ -109,7 +109,7 @@ def vector_db():
 
 # Define chain
 
-def get_retrieval_chain(query):
+def get_retrieval_chain(result):
     
     # Creating the Prompt
     template = """
@@ -130,7 +130,7 @@ def get_retrieval_chain(query):
     llm = ChatOpenAI(model_name=model_name)
 
     # Define the Retrieval chain
-    retrieval_chain = RetrievalQA.from_chain_type(llm, retriever=indexes.as_retriever(), chain_type_kwargs={'prompt': prompt})
+    retrieval_chain = RetrievalQA.from_chain_type(llm, retriever=result.as_retriever(), chain_type_kwargs={'prompt': prompt})
 
     return retrieval_chain
 
@@ -146,9 +146,10 @@ def get_retrieval_chain(query):
 # Define Response Function
 
 def get_answer(query):
-  # similar_docs = get_similar_docs(query)
-  answer = get_retrieval_chain({"query":query})
-  return answer
+    
+    retrieval_chain = get_retrieval_chain(st.session_state.vector_store)
+    answer = retrieval_chain({"query":query})
+    return answer
 
 st.title("Document Splitter")
 
