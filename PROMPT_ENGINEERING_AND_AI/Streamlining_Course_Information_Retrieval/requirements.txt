@@ -7,4 +7,3 @@ python-docx
 PyPDF2
 PyPDF
 pinecone-client
-Docx2txtLoader
