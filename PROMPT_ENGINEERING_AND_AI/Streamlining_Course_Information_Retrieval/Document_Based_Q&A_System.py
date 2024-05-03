@@ -127,7 +127,8 @@ def get_retrieval_chain(result):
 
     # Define the Retrieval chain
     retrieval_chain = RetrievalQA.from_chain_type(llm, retriever=result.as_retriever(), chain_type_kwargs={'prompt': prompt})
-
+    st.session_state.chat_active = True
+    
     return retrieval_chain
 
 # Define a function to find similar documents based on a given query
