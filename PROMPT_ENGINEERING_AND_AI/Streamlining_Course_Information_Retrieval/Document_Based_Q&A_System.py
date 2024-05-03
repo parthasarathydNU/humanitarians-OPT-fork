@@ -104,12 +104,37 @@ def vector_db():
         # st.error(f"An error occurred: {e}")
         split_data = doc_preprocessing() 
         indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)
-        print(indexes)
 
     return indexes
 
+# Define chain
+
+def get_retrieval_chain(query):
     
-    # Define a function to find similar documents based on a given query
+    # Creating the Prompt
+    template = """
+    Answer the question in your own words from the context given to you.
+    If questions are asked where there is no relevant context available, please answer from what you know.
+            
+    Context: {vector_store}
+
+    Human: {question}
+    Assistant:
+
+    """
+        
+    prompt = PromptTemplate(input_variables=["vector_store", "question"], template=template)
+
+    # Assigning the OPENAI model and Retrieval chain
+    model_name = "gpt-4"
+    llm = ChatOpenAI(model_name=model_name)
+
+    # Define the Retrieval chain
+    retrieval_chain = RetrievalQA.from_chain_type(llm, retriever=indexes.as_retriever(), chain_type_kwargs={'prompt': prompt})
+
+    return retrieval_chain
+
+# Define a function to find similar documents based on a given query
 
 def get_similar_docs(query, k=1, score=False):
     if score:
@@ -117,6 +142,13 @@ def get_similar_docs(query, k=1, score=False):
     else:
         similar_docs = indexes.similarity_search(query, k=k)
     return similar_docs
+
+# Define Response Function
+
+def get_answer(query):
+  similar_docs = get_similiar_docs(query)
+  answer = retriever_chain({"query":query})
+  return answer
 
 st.title("Document Splitter")
 
@@ -127,39 +159,14 @@ if "vector_store" not in st.session_state:
         # Initialize vector store
         st.session_state.vector_store = vector_db()
     
-# Creating the Prompt
 
-# template = """
-# Answer the question in your own words from the context given to you.
-# If questions are asked where there is no relevant context available, please answer from what you know.
-            
-# Context: {context}
-
-# Human: {question}
-# Assistant:
-
-# """
-        
-# prompt = PromptTemplate(input_variables=["context", "question"], template=template)
-
-# # Assigning the OPENAI model and Retrieval chain
-# model_name = "gpt-4"
-# llm = ChatOpenAI(model_name=model_name)
-
-# # Define the Retrieval chain
-# st.session_state.chain = RetrievalQA.from_chain_type(llm, retriever=indexes.as_retriever(), chain_type_kwargs={'prompt': prompt})
-# st.session_state.chat_active = True
 
 question = st.text_input("Ask your question here")
 
 if st.button("Get Answer"):
-
-        # Get similar documents
-        similar_docs = get_similar_docs(question)
-        # Display similar documents
-        st.write("Similar Documents:")
-        for doc in similar_docs:
-            st.write(doc)
+    
+    answer = get_answer(query)
+    st.write("Answer:", answer)
 
 
 
