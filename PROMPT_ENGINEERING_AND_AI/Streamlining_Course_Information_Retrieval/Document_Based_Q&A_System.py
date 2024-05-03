@@ -136,18 +136,18 @@ def get_retrieval_chain(query):
 
 # Define a function to find similar documents based on a given query
 
-def get_similar_docs(query, k=1, score=False):
-    if score:
-        similar_docs = indexes.similarity_search_with_score(query, k=k)
-    else:
-        similar_docs = indexes.similarity_search(query, k=k)
-    return similar_docs
+# def get_similar_docs(query, k=1, score=False):
+#     if score:
+#         similar_docs = indexes.similarity_search_with_score(query, k=k)
+#     else:
+#         similar_docs = indexes.similarity_search(query, k=k)
+#     return similar_docs
 
 # Define Response Function
 
 def get_answer(query):
-  similar_docs = get_similiar_docs(query)
-  answer = retriever_chain({"query":query})
+  # similar_docs = get_similar_docs(query)
+  answer = get_retrieval_chain({"query":query})
   return answer
 
 st.title("Document Splitter")
