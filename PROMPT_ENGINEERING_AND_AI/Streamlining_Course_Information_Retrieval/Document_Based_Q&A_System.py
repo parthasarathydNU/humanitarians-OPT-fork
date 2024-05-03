@@ -23,7 +23,7 @@ from pinecone import Pinecone
 from docx import Document
 from io import StringIO
 import PyPDF2
-import DocxLoader
+import { DocxLoader } from "langchain/document_loaders/fs/docx"
 from langchain_community.document_loaders import PyPDFLoader
 
 # Set up the environment
