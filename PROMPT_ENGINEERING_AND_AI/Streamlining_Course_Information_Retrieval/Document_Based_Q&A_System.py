@@ -167,7 +167,7 @@ query = st.text_input("Ask your question here")
 if st.button("Get Answer"):
     
     answer = get_answer(query)
-    st.write("Answer:", answer)
+    st.write("Answer:", answer.result)
 
 
 
