@@ -155,7 +155,7 @@ question = st.text_input("Ask your question here")
 if st.button("Get Answer"):
 
         # Get similar documents
-        st.session_state.similar_docs = get_similar_docs(question)
+        st.session_state.get_similar_docs = get_similar_docs(question)
         # Display similar documents
         st.write("Similar Documents:")
         for doc in similar_docs:
