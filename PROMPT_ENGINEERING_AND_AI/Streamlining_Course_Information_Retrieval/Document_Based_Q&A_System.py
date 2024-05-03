@@ -161,7 +161,7 @@ if "vector_store" not in st.session_state:
     
 
 
-question = st.text_input("Ask your question here")
+query = st.text_input("Ask your question here")
 
 if st.button("Get Answer"):
     
