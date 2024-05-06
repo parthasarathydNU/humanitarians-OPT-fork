@@ -187,15 +187,14 @@ if query := st.chat_input("Ask your question here"):
     # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": query})
 
-    if st.button("Get Answer"):
-        answer = get_answer(query)
-        result = answer['result']
-
-        # Display assistant response in chat message container
-        with st.chat_message("assistant"):
-                st.markdown(result)
-        # Add assistant response to chat history
-        st.session_state.messages.append({"role": "assistant", "content": result})
+    answer = get_answer(query)
+    result = answer['result']
+    
+    # Display assistant response in chat message container
+    with st.chat_message("assistant"):
+            st.markdown(result)
+    # Add assistant response to chat history
+    st.session_state.messages.append({"role": "assistant", "content": result})
 
 
 # # React to user input
