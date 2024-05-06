@@ -152,7 +152,7 @@ def get_answer(query):
     answer = retrieval_chain({"query":query})
     return answer
 
-st.title("Document based Q&A")
+st.title("🦜🔗Learning Assistance")
 
 # File uploader for user to upload a document
 uploaded_file = st.file_uploader("Upload your document", type=["docx", "pdf"], accept_multiple_files = True)
@@ -195,6 +195,12 @@ if query := st.chat_input("Ask your question here"):
             st.markdown(result)
     # Add assistant response to chat history
     st.session_state.messages.append({"role": "assistant", "content": result})
+
+reset_button_key = "reset_button"
+reset_button = st.button("Reset Chat",key=reset_button_key)
+if reset_button:
+    st.session_state.messages = None
+    st.session_state.chat_message = None
 
 
 # # React to user input
