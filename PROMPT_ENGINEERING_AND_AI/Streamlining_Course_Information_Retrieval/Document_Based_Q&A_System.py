@@ -162,15 +162,6 @@ if uploaded_file is not None:
     if "vector_store" not in st.session_state:
         # Initialize vector store
         st.session_state.vector_store = vector_db()
-    
-
-
-# query = st.text_input("Ask your question here")
-
-# if st.button("Get Answer"):
-    
-#     answer = get_answer(query)
-#     st.write(answer['result'])
 
     # Initialize chat history
     if "messages" not in st.session_state:
@@ -198,11 +189,10 @@ if uploaded_file is not None:
         # Add assistant response to chat history
         st.session_state.messages.append({"role": "assistant", "content": result})
 
-        reset_button_key = "reset_button"
-        reset_button = st.button("Reset Chat",key=reset_button_key)
-        if reset_button:
-            st.session_state.messages = None
-            st.session_state.chat_message = None
+        def clear_messages():
+            st.session_state.messages = []
+            
+        st.button('Clear',on_click=clear_messages)
 
 
 # # React to user input
