@@ -65,17 +65,13 @@ def doc_preprocessing():
             file_contents = extract_text_from_pdf(uploaded_file)
             loader = PyPDFLoader(uploaded_file)
             docs = loader.load()
-        
-        else:
-            st.write("Unsupported file format. Please upload a DOCX or PDF file.")
-            st.stop()
             
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
+            text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
                                                  chunk_overlap=50)
-        split_data = text_splitter.split_documents(docs)
-        return split_data
+            split_data = text_splitter.split_documents(docs)
+            return split_data
 
-    # Embed the documents
+        # Embed the documents
 def vector_db():
     pc = Pinecone(pinecone_api_key=pinecone_api_key)
     embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
