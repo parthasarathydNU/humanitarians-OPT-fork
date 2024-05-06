@@ -157,7 +157,9 @@ st.title("🦜🔗Learning Assistance")
 # File uploader for user to upload a document
 uploaded_file = st.file_uploader("Upload your document", type=["docx", "pdf"], accept_multiple_files = True)
 
-if "vector_store" not in st.session_state:
+if uploaded_file is not None:
+    
+    if "vector_store" not in st.session_state:
         # Initialize vector store
         st.session_state.vector_store = vector_db()
     
@@ -170,37 +172,37 @@ if "vector_store" not in st.session_state:
 #     answer = get_answer(query)
 #     st.write(answer['result'])
 
-# Initialize chat history
-if "messages" not in st.session_state:
-    st.session_state.messages = []
+    # Initialize chat history
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
 
-# Display chat messages from history on app rerun
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
+    # Display chat messages from history on app rerun
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
         
-# React to user input
-if query := st.chat_input("Ask your question here"):
-    # Display user message in chat message container
-    with st.chat_message("user"):
-        st.markdown(query)
-    # Add user message to chat history
-    st.session_state.messages.append({"role": "user", "content": query})
+    # React to user input
+    if query := st.chat_input("Ask your question here"):
+        # Display user message in chat message container
+        with st.chat_message("user"):
+            st.markdown(query)
+        # Add user message to chat history
+        st.session_state.messages.append({"role": "user", "content": query})
 
-    answer = get_answer(query)
-    result = answer['result']
+        answer = get_answer(query)
+        result = answer['result']
     
-    # Display assistant response in chat message container
-    with st.chat_message("assistant"):
-            st.markdown(result)
-    # Add assistant response to chat history
-    st.session_state.messages.append({"role": "assistant", "content": result})
+        # Display assistant response in chat message container
+        with st.chat_message("assistant"):
+                st.markdown(result)
+        # Add assistant response to chat history
+        st.session_state.messages.append({"role": "assistant", "content": result})
 
-reset_button_key = "reset_button"
-reset_button = st.button("Reset Chat",key=reset_button_key)
-if reset_button:
-    st.session_state.messages = None
-    st.session_state.chat_message = None
+        reset_button_key = "reset_button"
+        reset_button = st.button("Reset Chat",key=reset_button_key)
+        if reset_button:
+            st.session_state.messages = None
+            st.session_state.chat_message = None
 
 
 # # React to user input
