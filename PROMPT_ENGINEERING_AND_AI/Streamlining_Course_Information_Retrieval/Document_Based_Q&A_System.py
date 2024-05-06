@@ -163,23 +163,37 @@ if "vector_store" not in st.session_state:
     
 
 
-query = st.text_input("Ask your question here")
+# query = st.text_input("Ask your question here")
 
-if st.button("Get Answer"):
+# if st.button("Get Answer"):
     
-    answer = get_answer(query)
-    st.write(answer['result'])
+#     answer = get_answer(query)
+#     st.write(answer['result'])
 
 # Initialize chat history
-if "answers" not in st.session_state:
+if "messages" not in st.session_state:
     st.session_state.messages = []
 
 # Display chat messages from history on app rerun
-for answer in st.session_state.messages:
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+        
+# React to user input
+if query := st.chat_input("Ask your question here"):
+    # Display user message in chat message container
     with st.chat_message("user"):
-        st.markdown(answer)
-    st.session_state.answers.append(answers(content = result))
+        st.markdown(query)
+    # Add user message to chat history
+    st.session_state.messages.append({"role": "user", "content": query})
 
+    answer = get_answer(query)
+
+    # Display assistant response in chat message container
+    with st.chat_message("assistant"):
+        st.markdown(answer)
+    # Add assistant response to chat history
+    st.session_state.messages.append({"role": "assistant", "content": answer})
 
 
 # # React to user input
