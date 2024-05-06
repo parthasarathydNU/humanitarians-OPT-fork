@@ -152,7 +152,7 @@ def get_answer(query):
     answer = retrieval_chain({"query":query})
     return answer
 
-st.title("Document Splitter")
+st.title("Document based Q&A")
 
 # File uploader for user to upload a document
 uploaded_file = st.file_uploader("Upload your document", type=["docx", "pdf"], accept_multiple_files = True)
