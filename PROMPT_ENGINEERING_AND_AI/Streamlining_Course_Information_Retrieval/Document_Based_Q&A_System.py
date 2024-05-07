@@ -63,12 +63,12 @@ os.environ["PINECONE_API_KEY"] = pinecone_api_key
             
     #     elif file_type == 'application/pdf':  # PDF
     #         # file_contents = extract_text_from_pdf(uploaded_file)
-    loader = PyPDFLoader(uploaded_file)
-    docs = loader.load()
+    # loader = PyPDFLoader(uploaded_file)
+    # docs = loader.load()
             
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
-                                                 chunk_overlap=50)
-    split_data = text_splitter.split_documents(docs)
+    # text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
+    #                                              chunk_overlap=50)
+    # split_data = text_splitter.split_documents(docs)
 
     # except Exception as e:
     #     st.error(f"An error occurred: {e}")
