@@ -80,6 +80,10 @@ os.environ["PINECONE_API_KEY"] = pinecone_api_key
 
 # Embed the documents
 def vector_db():
+
+    # File uploader for user to upload a document
+    uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
+
     pc = Pinecone(pinecone_api_key=pinecone_api_key)
     embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
 
@@ -167,9 +171,6 @@ def get_answer(query):
     return answer
 
 st.title("🦜🔗Learning Assistance")
-
-# File uploader for user to upload a document
-uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
 
 if "vector_store" not in st.session_state:
     # Initialize vector store
