@@ -101,9 +101,13 @@ def vector_db():
     # except Exception:
     #     # # If index retrieval fails or total vector count is 0, create vector
     #     # st.error(f"An error occurred: {e}")
-    
-    loader = PyPDFLoader(uploaded_file)
-    docs = loader.load()
+    if uploaded_file is not None:
+#   # Process the uploaded file
+        loader = PyPDFLoader(uploaded_file)
+        docs = loader.load()
+    elif uploaded_file is None:
+        st.write("Please upload a file first")
+
             
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
                                                  chunk_overlap=50)
