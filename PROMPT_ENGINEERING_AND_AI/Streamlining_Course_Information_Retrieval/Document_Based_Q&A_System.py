@@ -107,7 +107,7 @@ def vector_db():
     #     # st.error(f"An error occurred: {e}")
     if uploaded_file is not None:
 #   # Process the uploaded file
-        loader = PyPDF2.PdfFileReader(uploaded_file)
+        loader = PyPDF2.PdfReader(uploaded_file)
         docs = loader.load()
     elif uploaded_file is None:
         st.write("Please upload a file first")
