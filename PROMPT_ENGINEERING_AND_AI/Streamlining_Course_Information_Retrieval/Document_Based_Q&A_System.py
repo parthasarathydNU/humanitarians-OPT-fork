@@ -38,30 +38,31 @@ os.environ["PINECONE_API_KEY"] = pinecone_api_key
 
 def doc_preprocessing():
     
-    def extract_text_from_docx(uploaded_file):
-        doc = docx.Document(uploaded_file)
-        full_text = []
-        for para in doc.paragraphs:
-            full_text.append(para.text)
-        return '\n'.join(full_text)
+    # def extract_text_from_docx(uploaded_file):
+    #     doc = docx.Document(uploaded_file)
+    #     full_text = []
+    #     for para in doc.paragraphs:
+    #         full_text.append(para.text)
+    #     return '\n'.join(full_text)
 
-    # Function to extract text from PDF file
-    def extract_text_from_pdf(uploaded_file):
-        pdf_reader = PyPDF2.PdfFileReader(uploaded_file)
-        full_text = []
-        for page_num in range(pdf_reader.numPages):
-            page = pdf_reader.getPage(page_num)
-            full_text.append(page.extractText())
-        return '\n'.join(full_text)
+    # # Function to extract text from PDF file
+    # def extract_text_from_pdf(uploaded_file):
+    #     pdf_reader = PyPDF2.PdfFileReader(uploaded_file)
+    #     full_text = []
+    #     for page_num in range(pdf_reader.numPages):
+    #         page = pdf_reader.getPage(page_num)
+    #         full_text.append(page.extractText())
+    #     return '\n'.join(full_text)
 
     try:
-        if uploaded_file.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':  # DOCX
-            file_contents = extract_text_from_docx(uploaded_file)
+        file_type = uploaded_file.type
+        if  file_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':  # DOCX
+            # file_contents = extract_text_from_docx(uploaded_file)
             loader = Docx2txtLoader(uploaded_file)
             docs = loader.load()
             
-        elif uploaded_file.type == 'application/pdf':  # PDF
-            file_contents = extract_text_from_pdf(uploaded_file)
+        elif file_type == 'application/pdf':  # PDF
+            # file_contents = extract_text_from_pdf(uploaded_file)
             loader = PyPDFLoader(uploaded_file)
             docs = loader.load()
             
