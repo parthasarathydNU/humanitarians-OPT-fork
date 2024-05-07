@@ -152,14 +152,14 @@ def get_retrieval_chain(result):
 
 def get_answer(query):
     
-    retrieval_chain = get_retrieval_chain(vector_store)
+    retrieval_chain = get_retrieval_chain(st.session_state.vector_store)
     answer = retrieval_chain({"query":query})
     return answer
 
 st.title("🦜🔗Learning Assistance")
 
 # File uploader for user to upload a document
-uploaded_file = st.file_uploader("Upload your document", type=["docx", "pdf"], accept_multiple_files = True)
+uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
 
 if "vector_store" not in st.session_state:
     # Initialize vector store
