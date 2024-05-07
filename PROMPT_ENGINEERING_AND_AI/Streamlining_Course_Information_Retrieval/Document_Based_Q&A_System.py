@@ -144,7 +144,7 @@ def get_retrieval_chain(result):
 
 def get_answer(query):
     
-    retrieval_chain = get_retrieval_chain(st.session_state.vector_store)
+    retrieval_chain = get_retrieval_chain(vector_store)
     answer = retrieval_chain({"query":query})
     return answer
 
