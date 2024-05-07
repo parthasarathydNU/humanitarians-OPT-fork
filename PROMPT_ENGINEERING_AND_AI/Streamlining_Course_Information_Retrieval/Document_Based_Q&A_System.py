@@ -54,21 +54,28 @@ def doc_preprocessing():
             full_text.append(page.extractText())
         return '\n'.join(full_text)
 
-    if uploaded_file.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':  # DOCX
-        # file_contents = extract_text_from_docx(uploaded_file)
-        loader = Docx2txtLoader(uploaded_file)
-        docs = loader.load()
-        
-    elif uploaded_file.type == 'application/pdf':  # PDF
-        # file_contents = extract_text_from_pdf(uploaded_file)
-        loader = PyPDFLoader(uploaded_file)
-        docs = loader.load()
+    try:
+        if uploaded_file.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':  # DOCX
+            file_contents = extract_text_from_docx(uploaded_file)
+            loader = Docx2txtLoader(uploaded_file)
+            docs = loader.load()
             
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
+        elif uploaded_file.type == 'application/pdf':  # PDF
+            file_contents = extract_text_from_pdf(uploaded_file)
+            loader = PyPDFLoader(uploaded_file)
+            docs = loader.load()
+            
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
                                                  chunk_overlap=50)
-    split_data = text_splitter.split_documents(docs)
-        
+        split_data = text_splitter.split_documents(docs)
+
+    except Exception as e:
+        st.error(f"An error occurred: {e}")
+
+    
     return split_data
+
+
 
 # Embed the documents
 def vector_db():
