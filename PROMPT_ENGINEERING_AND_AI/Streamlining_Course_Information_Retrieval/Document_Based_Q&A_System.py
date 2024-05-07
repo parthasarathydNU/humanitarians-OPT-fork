@@ -36,7 +36,7 @@ pinecone_api_key = secrets["pinecone"]["api_key"] # Access Pinecone API key
 os.environ["PINECONE_API_KEY"] = pinecone_api_key
 
 
-def doc_preprocessing():
+# def doc_preprocessing():
     
     # def extract_text_from_docx(uploaded_file):
     #     doc = docx.Document(uploaded_file)
@@ -74,7 +74,7 @@ def doc_preprocessing():
     #     st.error(f"An error occurred: {e}")
 
     
-    return split_data
+    # return split_data
 
 
 
@@ -102,7 +102,13 @@ def vector_db():
     #     # # If index retrieval fails or total vector count is 0, create vector
     #     # st.error(f"An error occurred: {e}")
     
-    split_data = doc_preprocessing() 
+    loader = PyPDFLoader(uploaded_file)
+    docs = loader.load()
+            
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
+                                                 chunk_overlap=50)
+    split_data = text_splitter.split_documents(docs)
+    
     indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)
 
     return indexes
