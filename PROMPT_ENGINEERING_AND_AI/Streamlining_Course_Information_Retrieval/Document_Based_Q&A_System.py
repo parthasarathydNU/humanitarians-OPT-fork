@@ -144,10 +144,7 @@ def get_retrieval_chain(result):
     llm = ChatOpenAI(model_name=model_name)
 
     # Define the Retrieval chain
-    retrieval_chain = RetrievalQA.from_chain_type(llm, retriever=result.as_retriever(), chain_type_kwargs={'prompt': prompt},{
-        "question": chat_message.messages,
-        "context": docs,
-    })
+    retrieval_chain = RetrievalQA.from_chain_type(llm, retriever=result.as_retriever(), chain_type_kwargs={'prompt': prompt})
     st.session_state.chat_active = True
     
     return retrieval_chain
