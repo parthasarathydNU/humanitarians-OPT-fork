@@ -93,7 +93,7 @@ def vector_db():
     global index
 
     # try:
-    loader = PyPDF2.PdfFileReader(uploaded_file)
+    loader = PyPDF2.PdfReader(uploaded_file)
     
     # loader = PyPDFLoader("uploaded_file")
     docs = loader.load()
