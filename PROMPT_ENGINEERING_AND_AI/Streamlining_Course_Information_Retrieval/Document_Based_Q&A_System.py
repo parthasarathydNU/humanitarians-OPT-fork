@@ -125,7 +125,7 @@ def get_retrieval_chain(result):
     Answer the question in your own words from the context given to you.
     If questions are asked where there is no relevant context available, please answer from what you know.
     
-    Context: {split_data}
+    Context: {context}
     """
         
     )
