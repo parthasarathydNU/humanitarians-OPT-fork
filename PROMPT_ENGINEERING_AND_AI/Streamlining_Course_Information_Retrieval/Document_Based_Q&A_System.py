@@ -134,7 +134,7 @@ def get_retrieval_chain(result):
         [
             ("system", system_prompt),
             ("human", "{question}"),
-            (input_variables=['split_data', 'question']),
+            (input_variables==['split_data', 'question']),
         ]
     )
             
