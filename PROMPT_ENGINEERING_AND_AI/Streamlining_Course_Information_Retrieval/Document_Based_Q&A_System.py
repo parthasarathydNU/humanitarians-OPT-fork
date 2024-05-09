@@ -92,26 +92,26 @@ def vector_db():
     index_name = "langchain-demo"
     global index
 
-    try:
-        loader = PyPDFLoader('uploaded_file')
-        docs = loader.load()
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
-                                                 chunk_overlap=50)
-        split_data = text_splitter.split_documents(docs)
-        indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)
+    # try:
+    loader = PyPDFLoader('uploaded_file')
+    docs = loader.load()
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
+                                                   chunk_overlap=50)
+    split_data = text_splitter.split_documents(docs)
+    indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)
         
-    except Exception:
-        # If index retrieval fails or total vector count is 0, create vector
-        # st.error(f"An error occurred: {e}")   
-        # Try to retrieve vectors from existing index
-        index = pc.Index(index_name)
-        describe_stats = index.describe_index_stats()
-        total_vector_count = describe_stats['total_vector_count']
-        print(total_vector_count)
-        if total_vector_count == 0:
-            raise Exception("Total Vector Count is 0")
-        # If vectors exists, load it
-        indexes = PineconeVectorStore.from_existing_index(index_name, embeddings_model)
+    # except Exception:
+    #     # If index retrieval fails or total vector count is 0, create vector
+    #     # st.error(f"An error occurred: {e}")   
+    #     # Try to retrieve vectors from existing index
+    #     index = pc.Index(index_name)
+    #     describe_stats = index.describe_index_stats()
+    #     total_vector_count = describe_stats['total_vector_count']
+    #     print(total_vector_count)
+    #     if total_vector_count == 0:
+    #         raise Exception("Total Vector Count is 0")
+    #     # If vectors exists, load it
+    #     indexes = PineconeVectorStore.from_existing_index(index_name, embeddings_model)
 
     return indexes
 
