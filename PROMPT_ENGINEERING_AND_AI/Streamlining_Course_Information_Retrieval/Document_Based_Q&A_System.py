@@ -93,7 +93,9 @@ def vector_db():
     global index
 
     # try:
-    loader = PyPDFLoader("uploaded_file")
+    loader = PyPDF2.PdfFileReader(uploaded_file)
+    
+    # loader = PyPDFLoader("uploaded_file")
     docs = loader.load()
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
                                                    chunk_overlap=50)
