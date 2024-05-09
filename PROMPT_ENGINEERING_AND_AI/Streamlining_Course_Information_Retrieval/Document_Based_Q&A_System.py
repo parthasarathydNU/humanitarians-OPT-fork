@@ -126,7 +126,7 @@ def get_retrieval_chain(result):
     Answer the question in your own words from the context given to you.
     If questions are asked where there is no relevant context available, please answer from what you know.
     
-    Context: {split_data}
+    Context: {context}
     """
         
     )
@@ -134,17 +134,20 @@ def get_retrieval_chain(result):
         [
             ("system", system_prompt),
             ("human", "{question}"),
-            (input_variables==['split_data', 'question']),
         ]
     )
             
-
+    prompt.format("context" = indexes, "question" = query)
+    
     # Assigning the OPENAI model and Retrieval chain
     model_name = "gpt-4"
     llm = ChatOpenAI(model_name=model_name)
 
     # Define the Retrieval chain
-    retrieval_chain = RetrievalQA.from_chain_type(llm, retriever=result.as_retriever(), chain_type_kwargs={'prompt': prompt})
+    retrieval_chain = RetrievalQA.from_chain_type(llm, retriever=result.as_retriever(), chain_type_kwargs={'prompt': prompt},{
+        "question": chat_message.messages,
+        "context": docs,
+    })
     st.session_state.chat_active = True
     
     return retrieval_chain
