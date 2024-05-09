@@ -122,10 +122,11 @@ def get_retrieval_chain(result):
     # Creating the Prompt
     system_prompt = (
     """ 
+    You are a helpful assistant who helps users answer their question.
     Answer the question in your own words from the context given to you.
     If questions are asked where there is no relevant context available, please answer from what you know.
     
-    Context: {context}
+    Context: {split_data}
     """
         
     )
@@ -133,6 +134,7 @@ def get_retrieval_chain(result):
         [
             ("system", system_prompt),
             ("human", "{question}"),
+            (input_variables=['split_data', 'question']),
         ]
     )
             
