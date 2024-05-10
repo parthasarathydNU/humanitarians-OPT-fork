@@ -83,7 +83,12 @@ def vector_db():
 
     # File uploader for user to upload a document
     uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
-
+    if uploaded_file is not None:
+    st.success("Uploaded the file")
+    with pdfplumber.open(uploaded_file) as file:
+        all_pages = file.pages
+        st.write(all_pages[0].extract_text())
+    
     pc = Pinecone(pinecone_api_key=pinecone_api_key)
     embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
 
@@ -95,8 +100,8 @@ def vector_db():
     # try:
     # loader = PyPDF2.PdfReader(uploaded_file)
     
-    loader = PyPDFLoader(uploaded_file)
-    docs = loader.load()
+    # loader = PyPDFLoader(uploaded_file)
+    docs = file.load()
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
                                                    chunk_overlap=50)
     split_data = text_splitter.split_documents(docs)
