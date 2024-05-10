@@ -9,3 +9,4 @@ PyPDF
 pinecone-client
 langchain-community
 docx2txt
+pdfplumber
