@@ -24,6 +24,7 @@ from docx import Document
 from io import StringIO
 import PyPDF2  
 from langchain_community.document_loaders import PyPDFLoader,Docx2txtLoader
+import pdfplumber
 
 # Set up the environment
 
