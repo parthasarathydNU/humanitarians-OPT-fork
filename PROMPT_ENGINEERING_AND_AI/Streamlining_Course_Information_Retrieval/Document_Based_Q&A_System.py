@@ -87,8 +87,12 @@ def vector_db():
     if uploaded_file is not None:
         st.success("Uploaded the file")
         with pdfplumber.open(uploaded_file) as file:
-            all_pages = file.pages
-            st.write(all_pages[0].extract_text())
+            # all_pages = file.pages
+            # st.write(all_pages[0].extract_text())
+            docs = file.load_and_split()
+            text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
+                                                   chunk_overlap=50)
+            split_data = text_splitter.split_documents(docs)
     
     pc = Pinecone(pinecone_api_key=pinecone_api_key)
     embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
@@ -102,10 +106,7 @@ def vector_db():
     # loader = PyPDF2.PdfReader(uploaded_file)
     
     # loader = PyPDFLoader(uploaded_file)
-    docs = file.load()
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
-                                                   chunk_overlap=50)
-    split_data = text_splitter.split_documents(docs)
+   
     indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)
         
     # except Exception:
