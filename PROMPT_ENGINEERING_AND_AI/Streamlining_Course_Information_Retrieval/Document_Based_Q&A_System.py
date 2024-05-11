@@ -89,6 +89,11 @@ def vector_db():
         uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
     elif uploaded_file is not None:
         st.success("Uploaded the file")
+        # Check if uploaded_file is a list
+        if isinstance(uploaded_file, list):
+            # If uploaded_file is a list, take the first element
+            uploaded_file = uploaded_file[0]
+        
         # Read the content of the uploaded file
         file_content = uploaded_file.read()
         # Create a file-like object from the content
