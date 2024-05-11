@@ -184,9 +184,7 @@ st.title("🦜🔗Learning Assistance")
 # File uploader for user to upload a document
 uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
 
-if uploaded_file is None:
-    st.error(f"An error occurred: {e}")
-elif uploaded_file is not None:
+if uploaded_file is not None:
     st.success("Uploaded the file")
 
     if "vector_store" not in st.session_state:
