@@ -83,18 +83,16 @@ os.environ["PINECONE_API_KEY"] = pinecone_api_key
 def vector_db():
     # File uploader for user to upload a document
     uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
-
-    # Read the content of the uploaded file
-    file_content = uploaded_file.read()
-    
-    # Create a file-like object from the content
-    file_buffer = BytesIO(file_content)
     
     if uploaded_file is None:
         st.write("Please a file")
         uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
     elif uploaded_file is not None:
         st.success("Uploaded the file")
+        # Read the content of the uploaded file
+        file_content = uploaded_file.read()
+        # Create a file-like object from the content
+        file_buffer = BytesIO(file_content)
         with pdfplumber.open(file_buffer) as file:
             # all_pages = file.pages
             # st.write(all_pages[0].extract_text())
