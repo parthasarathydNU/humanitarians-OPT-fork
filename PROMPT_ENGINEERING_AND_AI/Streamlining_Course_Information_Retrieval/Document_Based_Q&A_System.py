@@ -81,14 +81,7 @@ os.environ["PINECONE_API_KEY"] = pinecone_api_key
 
 # Embed the documents
 def vector_db():
-    # File uploader for user to upload a document
-    uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
     
-    if uploaded_file is None:
-        st.write("Please a file")
-        uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
-    elif uploaded_file is not None:
-        st.success("Uploaded the file")
         # Check if uploaded_file is a list
         if isinstance(uploaded_file, list):
             # If uploaded_file is a list, take the first element
@@ -189,40 +182,48 @@ def get_answer(query):
 
 st.title("🦜🔗Learning Assistance")
 
-if "vector_store" not in st.session_state:
-    # Initialize vector store
-    st.session_state.vector_store = vector_db()
+# File uploader for user to upload a document
+uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
 
-# Initialize chat history
-if "messages" not in st.session_state:
-    st.session_state.messages = []
+if uploaded_file is None:
+    st.write("Please upload a file")
+elif uploaded_file is not None:
+    st.success("Uploaded the file")
 
-# Display chat messages from history on app rerun
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
-        
-# React to user input
-if query := st.chat_input("Ask your question here"):
-    # Display user message in chat message container
-    with st.chat_message("user"):
-        st.markdown(query)
-    # Add user message to chat history
-    st.session_state.messages.append({"role": "user", "content": query})
+    if "vector_store" not in st.session_state:
+        # Initialize vector store
+        st.session_state.vector_store = vector_db()
 
-    answer = get_answer(query)
-    result = answer['result']
-    
-    # Display assistant response in chat message container
-    with st.chat_message("assistant"):
-            st.markdown(result)
-    # Add assistant response to chat history
-    st.session_state.messages.append({"role": "assistant", "content": result})
-
-    def clear_messages():
+    # Initialize chat history
+    if "messages" not in st.session_state:
         st.session_state.messages = []
+
+    # Display chat messages from history on app rerun
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+        
+    # React to user input
+    if query := st.chat_input("Ask your question here"):
+        # Display user message in chat message container
+        with st.chat_message("user"):
+            st.markdown(query)
+        # Add user message to chat history
+        st.session_state.messages.append({"role": "user", "content": query})
+
+        answer = get_answer(query)
+        result = answer['result']
+    
+        # Display assistant response in chat message container
+        with st.chat_message("assistant"):
+            st.markdown(result)
+            # Add assistant response to chat history
+            st.session_state.messages.append({"role": "assistant", "content": result})
+
+        def clear_messages():
+            st.session_state.messages = []
             
-    st.button('Clear',on_click=clear_messages)
+        st.button('Clear',on_click=clear_messages)
 
 
 # # React to user input
