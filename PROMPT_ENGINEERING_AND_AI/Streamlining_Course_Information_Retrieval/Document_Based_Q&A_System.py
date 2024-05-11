@@ -81,10 +81,13 @@ os.environ["PINECONE_API_KEY"] = pinecone_api_key
 
 # Embed the documents
 def vector_db():
-
     # File uploader for user to upload a document
     uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
-    if uploaded_file is not None:
+    
+    if uploaded_file is None:
+        st.write("Please a file")
+        uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
+    elif uploaded_file is not None:
         st.success("Uploaded the file")
         with pdfplumber.open(uploaded_file) as file:
             # all_pages = file.pages
