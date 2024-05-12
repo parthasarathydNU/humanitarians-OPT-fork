@@ -84,22 +84,26 @@ def vector_db():
     
     if uploaded_file is not None:
         
-        # # Check if uploaded_file is a list
-        # if isinstance(uploaded_file, list):
-        #     # If uploaded_file is a list, take the first element
-        #     uploaded_file = uploaded_file[0]
+        # # # Check if uploaded_file is a list
+        # # if isinstance(uploaded_file, list):
+        # #     # If uploaded_file is a list, take the first element
+        # #     uploaded_file = uploaded_file[0]
             
-        # Read the content of the uploaded file
-        file_content = uploaded_file.read()
-        # Create a file-like object from the content
-        file_buffer = BytesIO(file_content)
-        with pdfplumber.open(file_buffer) as file:
-            # all_pages = file.pages
-            # st.write(all_pages[0].extract_text())
-            docs = file.load_and_split()
-            text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
+        # # Read the content of the uploaded file
+        # file_content = uploaded_file.read()
+        # # Create a file-like object from the content
+        # file_buffer = BytesIO(file_content)
+        # with pdfplumber.open(file_buffer) as file:
+        #     # all_pages = file.pages
+        #     # st.write(all_pages[0].extract_text())
+        #     docs = file.load_and_split()
+
+        loader = PyPDFLoader(uploaded_file)
+        docs = loader.load()
+            
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
                                                            chunk_overlap=50)
-            split_data = text_splitter.split_documents(docs)
+        split_data = text_splitter.split_documents(docs)
         
         pc = Pinecone(pinecone_api_key=pinecone_api_key)
         embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
