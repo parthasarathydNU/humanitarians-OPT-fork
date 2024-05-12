@@ -81,52 +81,55 @@ os.environ["PINECONE_API_KEY"] = pinecone_api_key
 
 # Embed the documents
 def vector_db():
-    # Check if uploaded_file is a list
-    if isinstance(uploaded_file, list):
-        # If uploaded_file is a list, take the first element
-        uploaded_file = uploaded_file[0]
+    
+    if uploaded_file is not None:
         
-    # Read the content of the uploaded file
-    file_content = uploaded_file.read()
-    # Create a file-like object from the content
-    file_buffer = BytesIO(file_content)
-    with pdfplumber.open(file_buffer) as file:
-        # all_pages = file.pages
-        # st.write(all_pages[0].extract_text())
-        docs = file.load_and_split()
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
-                                                       chunk_overlap=50)
-        split_data = text_splitter.split_documents(docs)
-    
-    pc = Pinecone(pinecone_api_key=pinecone_api_key)
-    embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
-
-    # Create a new Pinecone Index and setup the vector database and search engine
-    
-    index_name = "langchain-demo"
-    global index
-
-    # try:
-    # loader = PyPDF2.PdfReader(uploaded_file)
-    
-    # loader = PyPDFLoader(uploaded_file)
-   
-    indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)
+        # Check if uploaded_file is a list
+        if isinstance(uploaded_file, list):
+            # If uploaded_file is a list, take the first element
+            uploaded_file = uploaded_file[0]
+            
+        # Read the content of the uploaded file
+        file_content = uploaded_file.read()
+        # Create a file-like object from the content
+        file_buffer = BytesIO(file_content)
+        with pdfplumber.open(file_buffer) as file:
+            # all_pages = file.pages
+            # st.write(all_pages[0].extract_text())
+            docs = file.load_and_split()
+            text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
+                                                           chunk_overlap=50)
+            split_data = text_splitter.split_documents(docs)
         
-    # except Exception:
-    #     # If index retrieval fails or total vector count is 0, create vector
-    #     # st.error(f"An error occurred: {e}")   
-    #     # Try to retrieve vectors from existing index
-    #     index = pc.Index(index_name)
-    #     describe_stats = index.describe_index_stats()
-    #     total_vector_count = describe_stats['total_vector_count']
-    #     print(total_vector_count)
-    #     if total_vector_count == 0:
-    #         raise Exception("Total Vector Count is 0")
-    #     # If vectors exists, load it
-    #     indexes = PineconeVectorStore.from_existing_index(index_name, embeddings_model)
-
-    return indexes
+        pc = Pinecone(pinecone_api_key=pinecone_api_key)
+        embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
+    
+        # Create a new Pinecone Index and setup the vector database and search engine
+        
+        index_name = "langchain-demo"
+        global index
+    
+        # try:
+        # loader = PyPDF2.PdfReader(uploaded_file)
+        
+        # loader = PyPDFLoader(uploaded_file)
+       
+        indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)
+            
+        # except Exception:
+        #     # If index retrieval fails or total vector count is 0, create vector
+        #     # st.error(f"An error occurred: {e}")   
+        #     # Try to retrieve vectors from existing index
+        #     index = pc.Index(index_name)
+        #     describe_stats = index.describe_index_stats()
+        #     total_vector_count = describe_stats['total_vector_count']
+        #     print(total_vector_count)
+        #     if total_vector_count == 0:
+        #         raise Exception("Total Vector Count is 0")
+        #     # If vectors exists, load it
+        #     indexes = PineconeVectorStore.from_existing_index(index_name, embeddings_model)
+    
+        return indexes
 
 # Define chain
 
@@ -184,47 +187,46 @@ st.title("🦜🔗Learning Assistance")
 # File uploader for user to upload a document
 uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
 
-try:
-    if uploaded_file is not None:
-        st.success("Uploaded the file")
+# try:
+#     if uploaded_file is not None:
+#         # st.success("Uploaded the file")
+if "vector_store" not in st.session_state:
+    # Initialize vector store
+    st.session_state.vector_store = vector_db()
 
-        if "vector_store" not in st.session_state:
-            # Initialize vector store
-            st.session_state.vector_store = vector_db()
+# Initialize chat history
+if "messages" not in st.session_state:
+    st.session_state.messages = []
 
-        # Initialize chat history
-        if "messages" not in st.session_state:
-            st.session_state.messages = []
-
-        # Display chat messages from history on app rerun
-        for message in st.session_state.messages:
-            with st.chat_message(message["role"]):
-                st.markdown(message["content"])
+# Display chat messages from history on app rerun
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
         
-        # React to user input
-        if query := st.chat_input("Ask your question here"):
-            # Display user message in chat message container
-            with st.chat_message("user"):
-                st.markdown(query)
-            # Add user message to chat history
-            st.session_state.messages.append({"role": "user", "content": query})
+    # React to user input
+if query := st.chat_input("Ask your question here"):
+    # Display user message in chat message container
+    with st.chat_message("user"):
+        st.markdown(query)
+    # Add user message to chat history
+    st.session_state.messages.append({"role": "user", "content": query})
     
-            answer = get_answer(query)
-            result = answer['result']
+    answer = get_answer(query)
+    result = answer['result']
         
-            # Display assistant response in chat message container
-            with st.chat_message("assistant"):
-                st.markdown(result)
-                # Add assistant response to chat history
-                st.session_state.messages.append({"role": "assistant", "content": result})
-    
-            def clear_messages():
-                st.session_state.messages = []
+    # Display assistant response in chat message container
+    with st.chat_message("assistant"):
+        st.markdown(result)
+        # Add assistant response to chat history
+        st.session_state.messages.append({"role": "assistant", "content": result})
                 
-            st.button('Clear',on_click=clear_messages)
+    def clear_messages():
+        st.session_state.messages = []
+                
+    st.button('Clear',on_click=clear_messages)
 
-except Exception as e:
-        st.error(f"An error occurred: {e}")
+# except Exception as e:
+#         st.error(f"An error occurred: {e}")
 
 
 # # React to user input
