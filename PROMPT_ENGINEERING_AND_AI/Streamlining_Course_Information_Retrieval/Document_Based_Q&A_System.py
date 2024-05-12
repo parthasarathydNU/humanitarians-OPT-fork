@@ -84,10 +84,10 @@ def vector_db():
     
     if uploaded_file is not None:
         
-        # Check if uploaded_file is a list
-        if isinstance(uploaded_file, list):
-            # If uploaded_file is a list, take the first element
-            uploaded_file = uploaded_file[0]
+        # # Check if uploaded_file is a list
+        # if isinstance(uploaded_file, list):
+        #     # If uploaded_file is a list, take the first element
+        #     uploaded_file = uploaded_file[0]
             
         # Read the content of the uploaded file
         file_content = uploaded_file.read()
