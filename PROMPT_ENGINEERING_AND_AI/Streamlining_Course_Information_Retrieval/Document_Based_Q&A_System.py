@@ -86,7 +86,16 @@ os.environ["PINECONE_API_KEY"] = pinecone_api_key
 def vector_db():
     
     if uploaded_file is not None:
-        bytes_data = uploaded_file.getvalue()
+        # Check if uploaded_file is a list
+        if isinstance(uploaded_file, list):
+            # If uploaded_file is a list, take the first element
+            uploaded_file = uploaded_file[0]
+            
+        # Read the content of the uploaded file
+        file_content = uploaded_file.read()
+        # Create a file-like object from the content
+        file_buffer = BytesIO(file_content)
+        bytes_data = file_buffer.getvalue()
         data = uploaded_file.getvalue().decode('utf-8').splitlines()         
         st.session_state["preview"] = ''
         for i in range(0, min(5, len(data))):
