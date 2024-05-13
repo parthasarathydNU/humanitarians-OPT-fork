@@ -85,54 +85,7 @@ os.environ["PINECONE_API_KEY"] = pinecone_api_key
 # Embed the documents
 def vector_db():
     
-    if uploaded_file is not None:
-        # Check if uploaded_file is a list
-        if isinstance(uploaded_file, list):
-            # If uploaded_file is a list, take the first element
-            uploaded_file = uploaded_file[0]
-            
-        # Read the content of the uploaded file
-        file_content = uploaded_file.read()
-        # Create a file-like object from the content
-        file_buffer = BytesIO(file_content)
-        bytes_data = file_buffer.getvalue()
-        data = uploaded_file.getvalue().decode('utf-8').splitlines()         
-        st.session_state["preview"] = ''
-        for i in range(0, min(5, len(data))):
-            st.session_state["preview"] += data[i]
-        preview = st.text_area("File Preview", "", height=150, key="preview")
-        upload_state = st.text_area("Upload State", "", key="upload_state")
-        def upload():
-            if uploaded_file is None:
-                st.session_state["upload_state"] = "Upload a file first!"
-            else:
-                data = uploaded_file.getvalue().decode('utf-8')
-                parent_path = pathlib.Path(__file__).parent.parent.resolve()           
-                save_path = os.path.join(parent_path, "data")
-                complete_name = os.path.join(save_path, uploaded_file.name)
-                destination_file = open(complete_name, "w")
-                destination_file.write(data)
-                destination_file.close()
-                st.session_state["upload_state"] = "Saved " + complete_name + " successfully!"
-        st.button("Upload file to Sandbox", on_click=upload)
-    
-    # if uploaded_file is not None:
-        
-    #     # # # Check if uploaded_file is a list
-    #     # # if isinstance(uploaded_file, list):
-    #     # #     # If uploaded_file is a list, take the first element
-    #     # #     uploaded_file = uploaded_file[0]
-            
-    #     # # Read the content of the uploaded file
-    #     # file_content = uploaded_file.read()
-    #     # # Create a file-like object from the content
-    #     # file_buffer = BytesIO(file_content)
-    #     # with pdfplumber.open(file_buffer) as file:
-    #     #     # all_pages = file.pages
-    #     #     # st.write(all_pages[0].extract_text())
-    #     #     docs = file.load_and_split()
-    #     file_path = os.path.join(os.getcwd(), uploaded_file.filename)
-        loader = PyPDFLoader('complete_name')
+        loader = PyPDFLoader(complete_name)
         docs = loader.load()
             
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
@@ -220,8 +173,37 @@ def get_answer(query):
     answer = retrieval_chain({"query":query})
     return answer
 
+    
+def upload():
+    if uploaded_file is None:
+        st.session_state["upload_state"] = "Upload a file first!"
+    else:
+        if isinstance(uploaded_file, list):
+            # If uploaded_file is a list, take the first element
+            uploaded_file = uploaded_file[0]
+                
+        # Read the content of the uploaded file
+        file_content = uploaded_file.read()
+        # Create a file-like object from the content
+        file_buffer = BytesIO(file_content)
+        bytes_data = file_buffer.getvalue()
+        data = file_buffer.getvalue().decode('utf-8').splitlines()         
+        st.session_state["preview"] = ''
+        for i in range(0, min(5, len(data))):
+            st.session_state["preview"] += data[i]
+        preview = st.text_area("File Preview", "", height=150, key="preview")
+        upload_state = st.text_area("Upload State", "", key="upload_state")
+            
+        data = uploaded_file.getvalue().decode('utf-8')
+        parent_path = pathlib.Path(__file__).parent.parent.resolve()           
+        save_path = os.path.join(parent_path, "data")
+        complete_name = os.path.join(save_path, file_buffer.name)
+        destination_file = open(complete_name, "w")
+        destination_file.write(data)
+        destination_file.close()
+        st.session_state["upload_state"] = "Saved " + complete_name + " successfully!"
+            
 
-def finish_button():
 
     if "vector_store" not in st.session_state:
         # Initialize vector store
@@ -264,7 +246,7 @@ st.title("🦜🔗Learning Assistance")
 # File uploader for user to upload a document
 uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
 
-st.button('Finished',on_click=finish_button)
+st.button("Upload file to Sandbox", on_click=upload)
 
 # try:
 #     if uploaded_file is not None:
