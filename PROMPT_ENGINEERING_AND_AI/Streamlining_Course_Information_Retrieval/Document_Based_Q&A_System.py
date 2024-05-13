@@ -98,7 +98,7 @@ def vector_db():
         #     # st.write(all_pages[0].extract_text())
         #     docs = file.load_and_split()
 
-        loader = PyPDFLoader(uploaded_file)
+        loader = PyPDFLoader('uploaded_file.name')
         docs = loader.load()
             
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
