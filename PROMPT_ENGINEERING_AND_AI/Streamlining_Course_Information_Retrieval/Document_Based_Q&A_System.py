@@ -239,7 +239,7 @@ def process():
     loader = PyPDFLoader(complete_name)
     docs = loader.load()
 
-def retrieve()
+def retrieve():
 
     if "vector_store" not in st.session_state:
         # Initialize vector store
