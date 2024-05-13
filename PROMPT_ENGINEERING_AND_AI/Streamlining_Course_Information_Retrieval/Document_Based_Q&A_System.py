@@ -97,7 +97,7 @@ def vector_db():
         #     # all_pages = file.pages
         #     # st.write(all_pages[0].extract_text())
         #     docs = file.load_and_split()
-        file_path = os.path.join(os.getcwd(), uploaded_file.name)
+        file_path = os.path.join(os.getcwd(), uploaded_file.filename)
         loader = PyPDFLoader(file_path)
         docs = loader.load()
             
