@@ -89,8 +89,17 @@ def vector_db():
     if uploaded_file is None:
         st.session_state["upload_state"] = "Upload a file first!"
     else:
-        st.write("file_content", uploaded_file)
-        loader = PyPDFLoader(uploaded_file)
+        data = uploaded_file.getvalue().decode('utf-8')
+        parent_path = pathlib.Path(__file__).parent.parent.resolve()           
+        save_path = os.path.join(parent_path, "data")
+        complete_name = os.path.join(save_path, uploaded_file.name)
+        destination_file = open(complete_name, "w")
+        destination_file.write(data)
+        destination_file.close()
+        st.session_state["upload_state"] = "Saved " + complete_name + " successfully!"
+        
+        st.write("file_content", destination_file)
+        loader = PyPDFLoader(complete_name)
         docs = loader.load()
     
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
