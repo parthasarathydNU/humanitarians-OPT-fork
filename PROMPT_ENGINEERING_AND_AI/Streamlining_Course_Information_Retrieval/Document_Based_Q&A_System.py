@@ -88,6 +88,8 @@ def vector_db():
     # docs = loader.load()
     if uploaded_file is None:
         st.session_state["upload_state"] = "Upload a file first!"
+        uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
+
     else:
         if isinstance(uploaded_file, list):
             # If uploaded_file is a list, take the first element
