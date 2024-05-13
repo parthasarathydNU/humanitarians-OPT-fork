@@ -90,7 +90,8 @@ def vector_db():
         st.session_state["upload_state"] = "Upload a file first!"
     else:
         st.write("file_content", uploaded_file)
-        docs = pre.load_document(uploaded_file)
+        loader = PyPDFLoader(uploaded_file)
+        docs = loader.load()
     
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
                                                            chunk_overlap=50)
