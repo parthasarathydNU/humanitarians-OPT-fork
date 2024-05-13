@@ -84,42 +84,6 @@ os.environ["PINECONE_API_KEY"] = pinecone_api_key
 
 # Embed the documents
 def vector_db():
-    # loader = PyPDFLoader(complete_name)
-    # docs = loader.load()
-    if uploaded_file is None:
-        # st.session_state["upload_state"] = "Upload a file first!"
-        # uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
-        st.write("Upload a file first!")
-
-    else:
-        if isinstance(uploaded_file, list):
-            # If uploaded_file is a list, take the first element
-            uploaded_file = uploaded_file[0]
-                
-        # Read the content of the uploaded file
-        file_content = uploaded_file.read()
-        st.write("file_content", file_content)
-        # Create a file-like object from the content
-        file_buffer = BytesIO(file_content)
-        bytes_data = file_buffer.getvalue()
-        data = file_buffer.getvalue().decode('utf-8').splitlines()         
-        st.session_state["preview"] = ''
-        for i in range(0, min(5, len(data))):
-            st.session_state["preview"] += data[i]
-        preview = st.text_area("File Preview", "", height=150, key="preview")
-        upload_state = st.text_area("Upload State", "", key="upload_state")
-        
-        data = file_buffer.getvalue().decode('utf-8')
-        parent_path = pathlib.Path(__file__).parent.parent.resolve()           
-        save_path = os.path.join(parent_path, "data")
-        complete_name = os.path.join(save_path, file_buffer.name)
-        destination_file = open(complete_name, "w")
-        destination_file.write(data)
-        destination_file.close()
-        st.session_state["upload_state"] = "Saved " + complete_name + " successfully!"
-        
-        loader = PyPDFLoader(complete_name)
-        docs = loader.load()
     
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
                                                            chunk_overlap=50)
@@ -238,6 +202,45 @@ def get_answer(query):
             
 def process():
 
+    # # loader = PyPDFLoader(complete_name)
+    # # docs = loader.load()
+    # if uploaded_file is None:
+    #     # st.session_state["upload_state"] = "Upload a file first!"
+    #     # uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
+    #     st.write("Upload a file first!")
+
+    # else:
+    if isinstance(uploaded_file, list):
+        # If uploaded_file is a list, take the first element
+        uploaded_file = uploaded_file[0]
+                
+    # Read the content of the uploaded file
+    file_content = uploaded_file.read()
+    st.write("file_content", file_content)
+    # Create a file-like object from the content
+    file_buffer = BytesIO(file_content)
+    bytes_data = file_buffer.getvalue()
+    data = file_buffer.getvalue().decode('utf-8').splitlines()         
+    st.session_state["preview"] = ''
+    for i in range(0, min(5, len(data))):
+        st.session_state["preview"] += data[i]
+        preview = st.text_area("File Preview", "", height=150, key="preview")
+    upload_state = st.text_area("Upload State", "", key="upload_state")
+        
+    data = file_buffer.getvalue().decode('utf-8')
+    parent_path = pathlib.Path(__file__).parent.parent.resolve()           
+    save_path = os.path.join(parent_path, "data")
+    complete_name = os.path.join(save_path, file_buffer.name)
+    destination_file = open(complete_name, "w")
+    destination_file.write(data)
+    destination_file.close()
+    st.session_state["upload_state"] = "Saved " + complete_name + " successfully!"
+        
+    loader = PyPDFLoader(complete_name)
+    docs = loader.load()
+
+def retrieve()
+
     if "vector_store" not in st.session_state:
         # Initialize vector store
         st.session_state.vector_store = vector_db()
@@ -280,6 +283,8 @@ st.title("🦜🔗Learning Assistance")
 uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
 
 st.button("Process the uploaded file", on_click=process)
+
+st.button("Retrieve", on_click = retrieve)
 
 # try:
 #     if uploaded_file is not None:
