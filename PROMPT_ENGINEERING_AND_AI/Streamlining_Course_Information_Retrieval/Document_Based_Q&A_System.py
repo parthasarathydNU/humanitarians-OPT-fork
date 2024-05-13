@@ -87,8 +87,9 @@ def vector_db():
     # loader = PyPDFLoader(complete_name)
     # docs = loader.load()
     if uploaded_file is None:
-        st.session_state["upload_state"] = "Upload a file first!"
-        uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
+        # st.session_state["upload_state"] = "Upload a file first!"
+        # uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
+        st.write("Upload a file first!")
 
     else:
         if isinstance(uploaded_file, list):
