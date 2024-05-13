@@ -89,6 +89,7 @@ def vector_db():
     if uploaded_file is None:
         st.session_state["upload_state"] = "Upload a file first!"
     else:
+        st.write("file_content", uploaded_file)
         docs = pre.load_document(uploaded_file)
     
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
