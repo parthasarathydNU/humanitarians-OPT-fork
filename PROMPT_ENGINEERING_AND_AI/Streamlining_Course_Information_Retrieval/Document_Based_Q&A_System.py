@@ -89,16 +89,32 @@ def vector_db():
     if uploaded_file is None:
         st.session_state["upload_state"] = "Upload a file first!"
     else:
-        data = uploaded_file.getvalue().decode('utf-8')
+        if isinstance(uploaded_file, list):
+            # If uploaded_file is a list, take the first element
+            uploaded_file = uploaded_file[0]
+                
+        # Read the content of the uploaded file
+        file_content = uploaded_file.read()
+        st.write("file_content", file_content)
+        # Create a file-like object from the content
+        file_buffer = BytesIO(file_content)
+        bytes_data = file_buffer.getvalue()
+        data = file_buffer.getvalue().decode('utf-8').splitlines()         
+        st.session_state["preview"] = ''
+        for i in range(0, min(5, len(data))):
+            st.session_state["preview"] += data[i]
+        preview = st.text_area("File Preview", "", height=150, key="preview")
+        upload_state = st.text_area("Upload State", "", key="upload_state")
+        
+        data = file_buffer.getvalue().decode('utf-8')
         parent_path = pathlib.Path(__file__).parent.parent.resolve()           
         save_path = os.path.join(parent_path, "data")
-        complete_name = os.path.join(save_path, uploaded_file.name)
+        complete_name = os.path.join(save_path, file_buffer.name)
         destination_file = open(complete_name, "w")
         destination_file.write(data)
         destination_file.close()
         st.session_state["upload_state"] = "Saved " + complete_name + " successfully!"
         
-        st.write("file_content", destination_file)
         loader = PyPDFLoader(complete_name)
         docs = loader.load()
     
