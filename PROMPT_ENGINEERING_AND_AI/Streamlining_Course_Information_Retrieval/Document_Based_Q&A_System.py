@@ -27,7 +27,7 @@ from langchain_community.document_loaders import PyPDFLoader,Docx2txtLoader
 import pdfplumber
 import os.path
 import pathlib
-
+import preprocessing as pre
 
 # Set up the environment
 
@@ -84,10 +84,13 @@ os.environ["PINECONE_API_KEY"] = pinecone_api_key
 
 # Embed the documents
 def vector_db():
+    # loader = PyPDFLoader(complete_name)
+    # docs = loader.load()
+    if uploaded_file is None:
+        st.session_state["upload_state"] = "Upload a file first!"
+    else:
+        docs = pre.load_document(uploaded_file)
     
-        loader = PyPDFLoader(complete_name)
-        docs = loader.load()
-            
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
                                                            chunk_overlap=50)
         split_data = text_splitter.split_documents(docs)
@@ -174,50 +177,50 @@ def get_answer(query):
     return answer
 
     
-def upload():
-    if uploaded_file is None:
-        st.session_state["upload_state"] = "Upload a file first!"
-    else:
-        if isinstance(uploaded_file, list):
-            # If uploaded_file is a list, take the first element
-            uploaded_file = uploaded_file[0]
+# def upload():
+#     if uploaded_file is None:
+#         st.session_state["upload_state"] = "Upload a file first!"
+#     else:
+#         if isinstance(uploaded_file, list):
+#             # If uploaded_file is a list, take the first element
+#             uploaded_file = uploaded_file[0]
                 
-        # Read the content of the uploaded file
-        file_content = uploaded_file.read()
-        # Create a file-like object from the content
-        file_buffer = BytesIO(file_content)
-        bytes_data = file_buffer.getvalue()
-        data = file_buffer.getvalue().decode('utf-8').splitlines()         
-        st.session_state["preview"] = ''
-        for i in range(0, min(5, len(data))):
-            st.session_state["preview"] += data[i]
-        preview = st.text_area("File Preview", "", height=150, key="preview")
-        upload_state = st.text_area("Upload State", "", key="upload_state")
+#         # Read the content of the uploaded file
+#         file_content = uploaded_file.read()
+#         # Create a file-like object from the content
+#         file_buffer = BytesIO(file_content)
+#         bytes_data = file_buffer.getvalue()
+#         data = file_buffer.getvalue().decode('utf-8').splitlines()         
+#         st.session_state["preview"] = ''
+#         for i in range(0, min(5, len(data))):
+#             st.session_state["preview"] += data[i]
+#         preview = st.text_area("File Preview", "", height=150, key="preview")
+#         upload_state = st.text_area("Upload State", "", key="upload_state")
             
-        data = uploaded_file.getvalue().decode('utf-8')
-        parent_path = pathlib.Path(__file__).parent.parent.resolve()           
-        save_path = os.path.join(parent_path, "data")
-        complete_name = os.path.join(save_path, file_buffer.name)
-        destination_file = open(complete_name, "w")
-        destination_file.write(data)
-        destination_file.close()
-        st.session_state["upload_state"] = "Saved " + complete_name + " successfully!"
+#         data = uploaded_file.getvalue().decode('utf-8')
+#         parent_path = pathlib.Path(__file__).parent.parent.resolve()           
+#         save_path = os.path.join(parent_path, "data")
+#         complete_name = os.path.join(save_path, file_buffer.name)
+#         destination_file = open(complete_name, "w")
+#         destination_file.write(data)
+#         destination_file.close()
+#         st.session_state["upload_state"] = "Saved " + complete_name + " successfully!"
             
-
+def process():
 
     if "vector_store" not in st.session_state:
         # Initialize vector store
         st.session_state.vector_store = vector_db()
-
+    
     # Initialize chat history
     if "messages" not in st.session_state:
         st.session_state.messages = []
-    
+        
     # Display chat messages from history on app rerun
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
-            
+                
         # React to user input
     if query := st.chat_input("Ask your question here"):
         # Display user message in chat message container
@@ -225,19 +228,19 @@ def upload():
             st.markdown(query)
         # Add user message to chat history
         st.session_state.messages.append({"role": "user", "content": query})
-        
+            
         answer = get_answer(query)
         result = answer['result']
-            
+                
         # Display assistant response in chat message container
         with st.chat_message("assistant"):
             st.markdown(result)
             # Add assistant response to chat history
             st.session_state.messages.append({"role": "assistant", "content": result})
-                    
+                        
         def clear_messages():
             st.session_state.messages = []
-                    
+                        
         st.button('Clear',on_click=clear_messages)
 
 
@@ -246,7 +249,7 @@ st.title("🦜🔗Learning Assistance")
 # File uploader for user to upload a document
 uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
 
-st.button("Upload file to Sandbox", on_click=upload)
+st.button("Process the uploaded file", on_click=process)
 
 # try:
 #     if uploaded_file is not None:
