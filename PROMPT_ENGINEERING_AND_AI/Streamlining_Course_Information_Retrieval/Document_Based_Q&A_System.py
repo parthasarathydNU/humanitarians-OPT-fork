@@ -236,7 +236,7 @@ def process():
     # destination_file.close()
     # st.session_state["upload_state"] = "Saved " + complete_name + " successfully!"
         
-    loader = PyPDFLoader("uploaded_file.upload_url")
+    loader = PyPDFLoader(uploaded_file)
     docs = loader.load()
 
 def retrieve():
