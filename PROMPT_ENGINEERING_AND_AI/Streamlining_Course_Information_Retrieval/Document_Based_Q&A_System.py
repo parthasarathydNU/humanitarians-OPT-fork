@@ -276,9 +276,19 @@ def get_answer(query):
     # st.session_state["upload_state"] = "Saved " + complete_name + " successfully!"
 
 
-    
-def process():
 
+        st.button('Clear',on_click=clear_messages)
+
+
+
+st.title("🦜🔗Learning Assistance")
+
+# File uploader for user to upload a document
+uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
+
+
+if uploaded_file is not None:
+    
     if "vector_store" not in st.session_state:
         # Initialize vector store
         st.session_state.vector_store = vector_db()
@@ -311,17 +321,14 @@ def process():
                         
         def clear_messages():
             st.session_state.messages = []
+
+
+else:
+
+    st.write("Please upload a file first")
                         
-        st.button('Clear',on_click=clear_messages)
 
-
-
-st.title("🦜🔗Learning Assistance")
-
-# File uploader for user to upload a document
-uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
-
-st.button("Process the uploaded file", on_click=process)
+# st.button("Process the uploaded file", on_click=process)
 
 # st.button("Retrieve", on_click = process)
 
