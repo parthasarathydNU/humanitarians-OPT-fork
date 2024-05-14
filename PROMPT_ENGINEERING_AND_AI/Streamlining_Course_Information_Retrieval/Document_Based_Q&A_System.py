@@ -101,12 +101,17 @@ def vector_db():
     
     if uploaded_file:
         
-        data = file.getvalue()
-        parent_path = pathlib.Path(__file__).parent.parent.resolve()           
-        save_path = os.path.join(parent_path, "data")
-        complete_name = os.path.join(save_path, file.name)
-            
-        loader = PyPDFLoader(complete_name)
+        # data = file.getvalue()
+        # parent_path = pathlib.Path(__file__).parent.parent.resolve()           
+        # save_path = os.path.join(parent_path, "data")
+        # complete_name = os.path.join(save_path, file.name)
+
+        temp_dir = tempfile.mkdtemp()
+        path = os.path.join(temp_dir, file.name)
+        with open(path, "wb") as f:
+            f.write(file.getvalue())
+        
+        loader = PyPDFLoader(path)
         docs = loader.load()
         st.write("file contents: ", file)
     
@@ -115,10 +120,7 @@ def vector_db():
         split_data = text_splitter.split_documents(docs)
           
        
-        # temp_dir = tempfile.mkdtemp()
-        # path = os.path.join(temp_dir, file.name)
-        # with open(path, "wb") as f:
-        #     f.write(file.getvalue())
+
     
     else:
         # Handle the case where uploaded_file is not a file object
