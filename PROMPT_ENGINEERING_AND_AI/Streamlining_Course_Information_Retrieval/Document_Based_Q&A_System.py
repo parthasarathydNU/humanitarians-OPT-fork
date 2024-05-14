@@ -275,12 +275,14 @@ def get_answer(query):
 
 
     
-def retrieve():
+def process():
 
     if "vector_store" not in st.session_state:
         # Initialize vector store
         st.session_state.vector_store = vector_db()
-    
+
+def chat()
+
     # Initialize chat history
     if "messages" not in st.session_state:
         st.session_state.messages = []
@@ -321,6 +323,8 @@ uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_mu
 # st.button("Process the uploaded file", on_click=process)
 
 st.button("Retrieve", on_click = retrieve)
+
+st.button("Chat", on_click = chat)
 
 # try:
 #     if uploaded_file is not None:
