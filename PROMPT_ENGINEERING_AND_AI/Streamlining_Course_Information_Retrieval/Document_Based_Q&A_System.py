@@ -118,9 +118,17 @@ def vector_db():
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
                                                                chunk_overlap=50)
         split_data = text_splitter.split_documents(docs)
-          
-       
 
+        pc = Pinecone(pinecone_api_key=pinecone_api_key)
+        embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
+
+        index_name = "langchain-demo"
+        global index
+
+        indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)
+       
+        return indexes
+        
     
     else:
         # Handle the case where uploaded_file is not a file object
@@ -128,20 +136,17 @@ def vector_db():
     
     
 
-    pc = Pinecone(pinecone_api_key=pinecone_api_key)
-    embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
+
     
     # Create a new Pinecone Index and setup the vector database and search engine
         
-    index_name = "langchain-demo"
-    global index
-    
+
         # try:
         # loader = PyPDF2.PdfReader(uploaded_file)
         
         # loader = PyPDFLoader(uploaded_file)
        
-    indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)
+    
             
         # except Exception:
         #     # If index retrieval fails or total vector count is 0, create vector
@@ -156,7 +161,7 @@ def vector_db():
         #     # If vectors exists, load it
         #     indexes = PineconeVectorStore.from_existing_index(index_name, embeddings_model)
     
-    return indexes
+    
 
 # Define chain
 
