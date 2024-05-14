@@ -99,7 +99,7 @@ def vector_db():
 
     temp_dir = tempfile.mkdtemp()
     path = os.path.join(temp_dir, file.name)
-    with open(path, "wb") as f:
+    # with open(path, "wb") as f:
         # f.write(file.getvalue())
         
     loader = PyPDFLoader(path)
