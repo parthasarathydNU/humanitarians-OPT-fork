@@ -251,7 +251,7 @@ def process():
     if uploaded_file:
         temp_file = "./temp.pdf"
         with open(temp_file, "wb") as f:
-           f.write(uploaded_file.getvalue())
+           f.write(file.getvalue())
            file_name = file.name
        
         # temp_dir = tempfile.mkdtemp()
