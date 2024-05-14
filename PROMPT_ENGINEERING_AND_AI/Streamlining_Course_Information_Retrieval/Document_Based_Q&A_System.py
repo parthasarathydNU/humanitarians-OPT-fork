@@ -236,9 +236,10 @@ def process():
     # destination_file.close()
     # st.session_state["upload_state"] = "Saved " + complete_name + " successfully!"
         
-    loader = PyPDFLoader(uploaded_file.upload_url)
-    docs = loader.load()
-
+    # loader = PyPDFLoader('uploaded_file.upload_url')
+    # docs = loader.load()
+    st.write("file contents: ", uploaded_file)
+    
 def retrieve():
 
     if "vector_store" not in st.session_state:
