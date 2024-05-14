@@ -121,7 +121,8 @@ def get_answer(query):
     answer = retrieval_chain({"query":query})
     return answer
 
-    
+
+
 
 
 st.title("🦜🔗Learning Assistance")
