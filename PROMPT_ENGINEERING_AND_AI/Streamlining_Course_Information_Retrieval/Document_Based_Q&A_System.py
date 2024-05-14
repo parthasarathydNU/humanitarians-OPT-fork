@@ -277,9 +277,6 @@ def get_answer(query):
 
 
 
-        st.button('Clear',on_click=clear_messages)
-
-
 
 st.title("🦜🔗Learning Assistance")
 
@@ -318,13 +315,13 @@ if uploaded_file is not None:
             st.markdown(result)
             # Add assistant response to chat history
             st.session_state.messages.append({"role": "assistant", "content": result})
-                        
+        
         def clear_messages():
             st.session_state.messages = []
 
+        st.button('Clear',on_click=clear_messages)
 
 else:
-
     st.write("Please upload a file first")
                         
 
