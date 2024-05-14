@@ -86,24 +86,28 @@ os.environ["PINECONE_API_KEY"] = pinecone_api_key
 # Embed the documents
 def vector_db():
     
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
+    loader = PyPDFLoader(temp_file)
+    docs = loader.load()
+    st.write("file contents: ", file)
+
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
                                                            chunk_overlap=50)
-        split_data = text_splitter.split_documents(docs)
+    split_data = text_splitter.split_documents(docs)
         
-        pc = Pinecone(pinecone_api_key=pinecone_api_key)
-        embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
+    pc = Pinecone(pinecone_api_key=pinecone_api_key)
+    embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
     
-        # Create a new Pinecone Index and setup the vector database and search engine
+    # Create a new Pinecone Index and setup the vector database and search engine
         
-        index_name = "langchain-demo"
-        global index
+    index_name = "langchain-demo"
+    global index
     
         # try:
         # loader = PyPDF2.PdfReader(uploaded_file)
         
         # loader = PyPDFLoader(uploaded_file)
        
-        indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)
+    indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)
             
         # except Exception:
         #     # If index retrieval fails or total vector count is 0, create vector
@@ -118,7 +122,7 @@ def vector_db():
         #     # If vectors exists, load it
         #     indexes = PineconeVectorStore.from_existing_index(index_name, embeddings_model)
     
-        return indexes
+    return indexes
 
 # Define chain
 
@@ -252,17 +256,12 @@ def process():
         temp_file = "./temp.pdf"
         with open(temp_file, "wb") as f:
            f.write(file.getvalue())
-           file_name = file.name
+          
        
         # temp_dir = tempfile.mkdtemp()
         # path = os.path.join(temp_dir, file.name)
         # with open(path, "wb") as f:
         #     f.write(file.getvalue())
-
-        loader = PyPDFLoader(temp_file)
-        docs = loader.load()
-        st.write("file contents: ", file)
-    
     else:
         # Handle the case where uploaded_file is not a file object
         st.write("Please upload a file.")
