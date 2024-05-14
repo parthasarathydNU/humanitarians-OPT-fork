@@ -28,6 +28,7 @@ import pdfplumber
 import os.path
 import pathlib
 import preprocessing as pre
+import tempfile
 
 # Set up the environment
 
@@ -235,9 +236,15 @@ def process():
     # destination_file.write(data)
     # destination_file.close()
     # st.session_state["upload_state"] = "Saved " + complete_name + " successfully!"
-        
-    # loader = PyPDFLoader('uploaded_file.upload_url')
-    # docs = loader.load()
+
+    if uploaded_file:
+        temp_dir = tempfile.mkdtemp()
+        path = os.path.join(temp_dir, uploaded_file.name)
+        with open(path, "wb") as f:
+                f.write(uploaded_file.getvalue())
+            
+    loader = PyPDFLoader('path')
+    docs = loader.load()
     st.write("file contents: ", uploaded_file)
     
 def retrieve():
