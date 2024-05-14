@@ -281,7 +281,7 @@ def process():
         # Initialize vector store
         st.session_state.vector_store = vector_db()
 
-def chat()
+def chat():
 
     # Initialize chat history
     if "messages" not in st.session_state:
