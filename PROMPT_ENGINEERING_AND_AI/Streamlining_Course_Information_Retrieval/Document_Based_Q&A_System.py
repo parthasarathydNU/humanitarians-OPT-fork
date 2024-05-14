@@ -254,7 +254,7 @@ def process():
         with open(path, "wb") as f:
             f.write(file.getvalue())
 
-        loader = PyPDFLoader('path')
+        loader = PyPDFLoader(path)
         docs = loader.load()
         st.write("file contents: ", file)
     
