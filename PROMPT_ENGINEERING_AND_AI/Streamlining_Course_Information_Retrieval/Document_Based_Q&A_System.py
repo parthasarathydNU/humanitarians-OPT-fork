@@ -317,6 +317,9 @@ def chat():
         st.button('Clear',on_click=clear_messages)
 
 
+    return 
+
+
 st.title("🦜🔗Learning Assistance")
 
 # File uploader for user to upload a document
