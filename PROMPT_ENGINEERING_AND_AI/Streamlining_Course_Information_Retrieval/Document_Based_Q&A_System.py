@@ -237,15 +237,21 @@ def process():
     # destination_file.close()
     # st.session_state["upload_state"] = "Saved " + complete_name + " successfully!"
 
-    if uploaded_file:
+    if uploaded_file and hasattr(uploaded_file, 'name'):
+        # Now it's safe to access uploaded_file.name
         temp_dir = tempfile.mkdtemp()
         path = os.path.join(temp_dir, uploaded_file.name)
         with open(path, "wb") as f:
-                f.write(uploaded_file.getvalue())
-            
-    loader = PyPDFLoader('path')
-    docs = loader.load()
-    st.write("file contents: ", uploaded_file)
+            f.write(uploaded_file.getvalue())
+
+        loader = PyPDFLoader('path')
+        docs = loader.load()
+        st.write("file contents: ", uploaded_file)
+    
+    else:
+        # Handle the case where uploaded_file is not a file object
+        st.write("Uploaded file is not valid.")
+
     
 def retrieve():
 
