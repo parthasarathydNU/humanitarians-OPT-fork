@@ -249,12 +249,17 @@ def process():
             st.write(file_details)    
 
     if uploaded_file:
-        temp_dir = tempfile.mkdtemp()
-        path = os.path.join(temp_dir, file.name)
-        with open(path, "wb") as f:
-            f.write(file.getvalue())
+        temp_file = "./temp.pdf"
+        with open(temp_file, "wb") as f:
+           f.write(uploaded_file.getvalue())
+           file_name = file.name
+       
+        # temp_dir = tempfile.mkdtemp()
+        # path = os.path.join(temp_dir, file.name)
+        # with open(path, "wb") as f:
+        #     f.write(file.getvalue())
 
-        loader = PyPDFLoader(file.name)
+        loader = PyPDFLoader(temp_file)
         docs = loader.load()
         st.write("file contents: ", file)
     
