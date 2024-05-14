@@ -165,7 +165,7 @@ def vector_db():
 
 # Define chain
 
-def get_retrieval_chain(result):
+def get_retrieval_chain():
     
     # Creating the Prompt
     system_prompt = (
@@ -192,7 +192,7 @@ def get_retrieval_chain(result):
     llm = ChatOpenAI(model_name=model_name)
 
     # Define the Retrieval chain
-    retrieval_chain = RetrievalQA.from_chain_type(llm, retriever=result.as_retriever(), chain_type_kwargs={'prompt': prompt})
+    retrieval_chain = RetrievalQA.from_chain_type(llm, retriever=indexes.as_retriever(), chain_type_kwargs={'prompt': prompt})
     st.session_state.chat_active = True
     
     return retrieval_chain
