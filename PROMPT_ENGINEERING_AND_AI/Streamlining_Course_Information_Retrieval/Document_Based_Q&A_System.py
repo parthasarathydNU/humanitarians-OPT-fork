@@ -320,9 +320,9 @@ st.title("🦜🔗Learning Assistance")
 # File uploader for user to upload a document
 uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
 
-# st.button("Process the uploaded file", on_click=process)
+st.button("Process the uploaded file", on_click=process)
 
-st.button("Retrieve", on_click = retrieve)
+# st.button("Retrieve", on_click = process)
 
 st.button("Chat", on_click = chat)
 
