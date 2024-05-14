@@ -89,45 +89,38 @@ def vector_db():
     for file in uploaded_file:
         file.seek(0)
 
-    if uploaded_file is not None:
-        for file in uploaded_file:
-            # display the name and the type of the file
-            file_details = {"filename":file.name,
-                            "filetype":file.type
-            }
-            st.write(file_details)    
+    # if uploaded_file is not None:
+        # for file in uploaded_file:
+        #     # display the name and the type of the file
+        #     file_details = {"filename":file.name,
+        #                     "filetype":file.type
+        #     }
+        #     st.write(file_details)    
 
-
-    
-    if uploaded_file:
+    temp_dir = tempfile.mkdtemp()
+    path = os.path.join(temp_dir, file.name)
+    with open(path, "wb") as f:
+        # f.write(file.getvalue())
         
-        # data = file.getvalue()
-        # parent_path = pathlib.Path(__file__).parent.parent.resolve()           
-        # save_path = os.path.join(parent_path, "data")
-        # complete_name = os.path.join(save_path, file.name)
-
-        temp_dir = tempfile.mkdtemp()
-        path = os.path.join(temp_dir, file.name)
-        with open(path, "wb") as f:
-            f.write(file.getvalue())
-        
-        loader = PyPDFLoader(path)
-        docs = loader.load()
-        st.write("file contents: ", file)
+    loader = PyPDFLoader(path)
+    docs = loader.load()
+    st.write("file contents: ", file)
     
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
                                                                chunk_overlap=50)
-        split_data = text_splitter.split_documents(docs)
+    split_data = text_splitter.split_documents(docs)
 
-        pc = Pinecone(pinecone_api_key=pinecone_api_key)
-        embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
+    pc = Pinecone(pinecone_api_key=pinecone_api_key)
+    embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
 
-        index_name = "langchain-demo"
-        global index
+    index_name = "langchain-demo"
+    global index
 
-        indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)      
+    indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)      
 
-    return indexes
+return indexes
+
+    
     
     # else:
     #     # Handle the case where uploaded_file is not a file object
