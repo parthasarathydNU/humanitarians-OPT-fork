@@ -127,8 +127,6 @@ def vector_db():
 
         indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)
        
-    
-    return indexes
         
     
     else:
@@ -136,7 +134,7 @@ def vector_db():
         st.write("Please upload a file.")
     
     
-
+    return indexes
 
     
     # Create a new Pinecone Index and setup the vector database and search engine
