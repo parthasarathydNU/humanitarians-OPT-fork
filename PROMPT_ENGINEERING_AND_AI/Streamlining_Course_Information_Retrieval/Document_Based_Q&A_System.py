@@ -282,9 +282,7 @@ def process():
     if "vector_store" not in st.session_state:
         # Initialize vector store
         st.session_state.vector_store = vector_db()
-
-def chat():
-
+        
     # Initialize chat history
     if "messages" not in st.session_state:
         st.session_state.messages = []
@@ -317,8 +315,6 @@ def chat():
         st.button('Clear',on_click=clear_messages)
 
 
-    return 
-
 
 st.title("🦜🔗Learning Assistance")
 
@@ -329,7 +325,7 @@ st.button("Process the uploaded file", on_click=process)
 
 # st.button("Retrieve", on_click = process)
 
-st.button("Chat", on_click = chat)
+# st.button("Chat", on_click = chat)
 
 # try:
 #     if uploaded_file is not None:
