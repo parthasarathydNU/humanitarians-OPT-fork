@@ -41,61 +41,18 @@ pinecone_api_key = secrets["pinecone"]["api_key"] # Access Pinecone API key
 os.environ["PINECONE_API_KEY"] = pinecone_api_key
 
 
-# def doc_preprocessing():
-    
-    # def extract_text_from_docx(uploaded_file):
-    #     doc = docx.Document(uploaded_file)
-    #     full_text = []
-    #     for para in doc.paragraphs:
-    #         full_text.append(para.text)
-    #     return '\n'.join(full_text)
-
-    # # Function to extract text from PDF file
-    # def extract_text_from_pdf(uploaded_file):
-    #     pdf_reader = PyPDF2.PdfFileReader(uploaded_file)
-    #     full_text = []
-    #     for page_num in range(pdf_reader.numPages):
-    #         page = pdf_reader.getPage(page_num)
-    #         full_text.append(page.extractText())
-    #     return '\n'.join(full_text)
-
-    # try:
-    #     file_type = uploaded_file.type
-    #     if  file_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':  # DOCX
-    #         # file_contents = extract_text_from_docx(uploaded_file)
-    #         loader = Docx2txtLoader(uploaded_file)
-    #         docs = loader.load()
-            
-    #     elif file_type == 'application/pdf':  # PDF
-    #         # file_contents = extract_text_from_pdf(uploaded_file)
-    # loader = PyPDFLoader(uploaded_file)
-    # docs = loader.load()
-            
-    # text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
-    #                                              chunk_overlap=50)
-    # split_data = text_splitter.split_documents(docs)
-
-    # except Exception as e:
-    #     st.error(f"An error occurred: {e}")
-
-    
-    # return split_data
-
-
 
 # Embed the documents
 def vector_db():
 
     for file in uploaded_file:
         file.seek(0)
-
-    # if uploaded_file is not None:
-        # for file in uploaded_file:
-        #     # display the name and the type of the file
-        #     file_details = {"filename":file.name,
-        #                     "filetype":file.type
-        #     }
-        #     st.write(file_details)    
+        
+        # display the name and the type of the file
+        file_details = {"filename":file.name,
+                        "filetype":file.type
+        }
+        st.write(file_details)    
 
     temp_dir = tempfile.mkdtemp()
     path = os.path.join(temp_dir, file.name)
@@ -120,28 +77,6 @@ def vector_db():
 
     return indexes
 
-    
-    
-    # else:
-    #     # Handle the case where uploaded_file is not a file object
-    #     st.write("Please upload a file.")
-    
-    
-        
-
-            
-        # except Exception:
-        #     # If index retrieval fails or total vector count is 0, create vector
-        #     # st.error(f"An error occurred: {e}")   
-        #     # Try to retrieve vectors from existing index
-        #     index = pc.Index(index_name)
-        #     describe_stats = index.describe_index_stats()
-        #     total_vector_count = describe_stats['total_vector_count']
-        #     print(total_vector_count)
-        #     if total_vector_count == 0:
-        #         raise Exception("Total Vector Count is 0")
-        #     # If vectors exists, load it
-        #     indexes = PineconeVectorStore.from_existing_index(index_name, embeddings_model)
     
     
 
@@ -177,14 +112,6 @@ def get_retrieval_chain(result):
     
     return retrieval_chain
 
-# Define a function to find similar documents based on a given query
-
-# def get_similar_docs(query, k=1, score=False):
-#     if score:
-#         similar_docs = indexes.similarity_search_with_score(query, k=k)
-#     else:
-#         similar_docs = indexes.similarity_search(query, k=k)
-#     return similar_docs
 
 # Define Response Function
 
@@ -241,7 +168,7 @@ if uploaded_file is not None:
         st.button('Clear',on_click=clear_messages)
 
 else:
-    st.write("Please upload a file first")
+    st.info("Please upload a file first")
                         
 
 
