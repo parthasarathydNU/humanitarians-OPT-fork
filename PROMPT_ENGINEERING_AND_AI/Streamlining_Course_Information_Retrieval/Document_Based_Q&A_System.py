@@ -85,15 +85,43 @@ os.environ["PINECONE_API_KEY"] = pinecone_api_key
 
 # Embed the documents
 def vector_db():
-    
-    loader = PyPDFLoader(temp_file)
-    docs = loader.load()
-    st.write("file contents: ", file)
 
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
-                                                           chunk_overlap=50)
-    split_data = text_splitter.split_documents(docs)
-        
+    for file in uploaded_file:
+        file.seek(0)
+
+    if uploaded_file is not None:
+        for file in uploaded_file:
+            # display the name and the type of the file
+            file_details = {"filename":file.name,
+                            "filetype":file.type
+            }
+            st.write(file_details)    
+
+    if uploaded_file:
+        temp_file = "./temp.pdf"
+        with open(temp_file, "wb") as f:
+           f.write(file.getvalue())
+            
+        loader = PyPDFLoader(temp_file)
+        docs = loader.load()
+        st.write("file contents: ", file)
+    
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
+                                                               chunk_overlap=50)
+        split_data = text_splitter.split_documents(docs)
+          
+       
+        # temp_dir = tempfile.mkdtemp()
+        # path = os.path.join(temp_dir, file.name)
+        # with open(path, "wb") as f:
+        #     f.write(file.getvalue())
+    
+    else:
+        # Handle the case where uploaded_file is not a file object
+        st.write("Please upload a file.")
+    
+    
+
     pc = Pinecone(pinecone_api_key=pinecone_api_key)
     embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
     
@@ -241,30 +269,6 @@ def process():
     # destination_file.close()
     # st.session_state["upload_state"] = "Saved " + complete_name + " successfully!"
 
-    for file in uploaded_file:
-        file.seek(0)
-
-    if uploaded_file is not None:
-        for file in uploaded_file:
-            # display the name and the type of the file
-            file_details = {"filename":file.name,
-                            "filetype":file.type
-            }
-            st.write(file_details)    
-
-    if uploaded_file:
-        temp_file = "./temp.pdf"
-        with open(temp_file, "wb") as f:
-           f.write(file.getvalue())
-          
-       
-        # temp_dir = tempfile.mkdtemp()
-        # path = os.path.join(temp_dir, file.name)
-        # with open(path, "wb") as f:
-        #     f.write(file.getvalue())
-    else:
-        # Handle the case where uploaded_file is not a file object
-        st.write("Please upload a file.")
 
     
 def retrieve():
