@@ -126,13 +126,15 @@ def vector_db():
         global index
 
         indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)      
+
+        return indexes
     
     else:
         # Handle the case where uploaded_file is not a file object
         st.write("Please upload a file.")
     
     
-        return indexes
+        
 
             
         # except Exception:
