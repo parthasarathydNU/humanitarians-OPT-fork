@@ -125,27 +125,15 @@ def vector_db():
         index_name = "langchain-demo"
         global index
 
-        indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)
-       
-        
+        indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)      
     
     else:
         # Handle the case where uploaded_file is not a file object
         st.write("Please upload a file.")
     
     
-    return indexes
+        return indexes
 
-    
-    # Create a new Pinecone Index and setup the vector database and search engine
-        
-
-        # try:
-        # loader = PyPDF2.PdfReader(uploaded_file)
-        
-        # loader = PyPDFLoader(uploaded_file)
-       
-    
             
         # except Exception:
         #     # If index retrieval fails or total vector count is 0, create vector
@@ -161,8 +149,6 @@ def vector_db():
         #     indexes = PineconeVectorStore.from_existing_index(index_name, embeddings_model)
     
     
-
-# Define chain
 
 def get_retrieval_chain(result):
     
@@ -214,72 +200,6 @@ def get_answer(query):
     return answer
 
     
-# def upload():
-#     if uploaded_file is None:
-#         st.session_state["upload_state"] = "Upload a file first!"
-#     else:
-#         if isinstance(uploaded_file, list):
-#             # If uploaded_file is a list, take the first element
-#             uploaded_file = uploaded_file[0]
-                
-#         # Read the content of the uploaded file
-#         file_content = uploaded_file.read()
-#         # Create a file-like object from the content
-#         file_buffer = BytesIO(file_content)
-#         bytes_data = file_buffer.getvalue()
-#         data = file_buffer.getvalue().decode('utf-8').splitlines()         
-#         st.session_state["preview"] = ''
-#         for i in range(0, min(5, len(data))):
-#             st.session_state["preview"] += data[i]
-#         preview = st.text_area("File Preview", "", height=150, key="preview")
-#         upload_state = st.text_area("Upload State", "", key="upload_state")
-            
-#         data = uploaded_file.getvalue().decode('utf-8')
-#         parent_path = pathlib.Path(__file__).parent.parent.resolve()           
-#         save_path = os.path.join(parent_path, "data")
-#         complete_name = os.path.join(save_path, file_buffer.name)
-#         destination_file = open(complete_name, "w")
-#         destination_file.write(data)
-#         destination_file.close()
-#         st.session_state["upload_state"] = "Saved " + complete_name + " successfully!"
-            
-# def process():
-
-    # # loader = PyPDFLoader(complete_name)
-    # # docs = loader.load()
-    # if uploaded_file is None:
-    #     # st.session_state["upload_state"] = "Upload a file first!"
-    #     # uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
-    #     st.write("Upload a file first!")
-
-    # # else:
-    # if isinstance(uploaded_file, list):
-    #     # If uploaded_file is a list, take the first element
-    #     uploaded_file = uploaded_file[0]
-                
-    # # Read the content of the uploaded file
-    # file_content = uploaded_file.read()
-    # st.write("file_content", file_content)
-    # # Create a file-like object from the content
-    # file_buffer = BytesIO(file_content)
-    # bytes_data = file_buffer.getvalue()
-    # data = file_buffer.getvalue().decode('utf-8').splitlines()         
-    # st.session_state["preview"] = ''
-    # for i in range(0, min(5, len(data))):
-    #     st.session_state["preview"] += data[i]
-    #     preview = st.text_area("File Preview", "", height=150, key="preview")
-    # upload_state = st.text_area("Upload State", "", key="upload_state")
-        
-    # data = file_buffer.getvalue().decode('utf-8')
-    # parent_path = pathlib.Path(__file__).parent.parent.resolve()           
-    # save_path = os.path.join(parent_path, "data")
-    # complete_name = os.path.join(save_path, file_buffer.name)
-    # destination_file = open(complete_name, "w")
-    # destination_file.write(data)
-    # destination_file.close()
-    # st.session_state["upload_state"] = "Saved " + complete_name + " successfully!"
-
-
 
 
 st.title("🦜🔗Learning Assistance")
@@ -328,31 +248,6 @@ if uploaded_file is not None:
 else:
     st.write("Please upload a file first")
                         
-
-# st.button("Process the uploaded file", on_click=process)
-
-# st.button("Retrieve", on_click = process)
-
-# st.button("Chat", on_click = chat)
-
-# try:
-#     if uploaded_file is not None:
-#         # st.success("Uploaded the file")
-
-
-# except Exception as e:
-#         st.error(f"An error occurred: {e}")
-
-
-# # React to user input
-# if prompt := st.chat_input("What is up?"):
-#     # Display user message in chat message container
-#     with st.chat_message("user"):
-#         st.markdown(prompt)
-#     # Add user message to chat history
-#     st.session_state.messages.append({"role": "user", "content": prompt})
-
-
 
 
 
