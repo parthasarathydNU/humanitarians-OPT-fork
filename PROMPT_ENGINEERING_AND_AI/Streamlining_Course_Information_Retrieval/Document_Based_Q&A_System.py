@@ -118,7 +118,7 @@ def vector_db():
 
     indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)      
 
-return indexes
+    return indexes
 
     
     
