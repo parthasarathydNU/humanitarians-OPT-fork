@@ -100,13 +100,13 @@ def vector_db():
 
     
     if uploaded_file:
-        # save the file temporarily
-        tmp_location = os.path.join('/tmp', file.name)
-        # temp_file = "./temp.pdf"
-        # with open(temp_file, "wb") as f:
-        #    f.write(file.getvalue())
+        
+        data = file.getvalue().decode('utf-8')
+        parent_path = pathlib.Path(__file__).parent.parent.resolve()           
+        save_path = os.path.join(parent_path, "data")
+        complete_name = os.path.join(save_path, file.name)
             
-        loader = PyPDFLoader(tmp_location)
+        loader = PyPDFLoader(complete_name)
         docs = loader.load()
         st.write("file contents: ", file)
     
