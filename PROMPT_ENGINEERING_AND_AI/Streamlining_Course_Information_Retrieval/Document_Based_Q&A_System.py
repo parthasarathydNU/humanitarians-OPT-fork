@@ -248,16 +248,15 @@ def process():
             }
             st.write(file_details)    
 
-    # if uploaded_file and hasattr(uploaded_file, 'name'):
-    #     # Now it's safe to access uploaded_file.name
-    #     temp_dir = tempfile.mkdtemp()
-    #     path = os.path.join(temp_dir, uploaded_file.name)
-    #     with open(path, "wb") as f:
-    #         f.write(uploaded_file.getvalue())
+    if uploaded_file:
+        temp_dir = tempfile.mkdtemp()
+        path = os.path.join(temp_dir, file.name)
+        with open(path, "wb") as f:
+            f.write(file.getvalue())
 
-    #     loader = PyPDFLoader('path')
-    #     docs = loader.load()
-    #     st.write("file contents: ", uploaded_file)
+        loader = PyPDFLoader('path')
+        docs = loader.load()
+        st.write("file contents: ", file)
     
     else:
         # Handle the case where uploaded_file is not a file object
