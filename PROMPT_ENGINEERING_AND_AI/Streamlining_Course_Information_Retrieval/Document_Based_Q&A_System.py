@@ -233,7 +233,7 @@ def get_answer(query):
 #         destination_file.close()
 #         st.session_state["upload_state"] = "Saved " + complete_name + " successfully!"
             
-def process():
+# def process():
 
     # # loader = PyPDFLoader(complete_name)
     # # docs = loader.load()
@@ -314,7 +314,7 @@ st.title("🦜🔗Learning Assistance")
 # File uploader for user to upload a document
 uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
 
-st.button("Process the uploaded file", on_click=process)
+# st.button("Process the uploaded file", on_click=process)
 
 st.button("Retrieve", on_click = retrieve)
 
