@@ -101,7 +101,7 @@ def vector_db():
     
     if uploaded_file:
         
-        data = file.getvalue().decode('utf-8')
+        data = file.getvalue()
         parent_path = pathlib.Path(__file__).parent.parent.resolve()           
         save_path = os.path.join(parent_path, "data")
         complete_name = os.path.join(save_path, file.name)
