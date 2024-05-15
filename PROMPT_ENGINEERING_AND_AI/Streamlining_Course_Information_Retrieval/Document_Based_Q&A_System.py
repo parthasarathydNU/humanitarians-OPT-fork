@@ -1,39 +1,29 @@
 # Import necessary libraries and modules
 
 import os
-import streamlit as st
-import pinecone
-from openai import OpenAI 
-from langchain_community.document_loaders import DirectoryLoader
-from langchain.text_splitter import Language, RecursiveCharacterTextSplitter
-from langchain.embeddings.openai import OpenAIEmbeddings
-from langchain.vectorstores import Pinecone
-from langchain.llms import OpenAI
-from langchain.chains.question_answering import load_qa_chain
+from openai import OpenAI
 from langchain_openai import ChatOpenAI
+import pinecone
 from pinecone import Pinecone, PodSpec
+from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain_pinecone import PineconeVectorStore
-from langchain_community.chat_models import ChatOpenAI
-from langchain_core.documents import Document
+import streamlit as st
+from langchain.text_splitter import Language, RecursiveCharacterTextSplitter
 from langchain_core.prompts import ChatPromptTemplate
-from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains import ConversationalRetrievalChain, RetrievalQA
-from langchain.prompts import PromptTemplate
-from pinecone import Pinecone
-from docx import Document
-from io import StringIO
-import PyPDF2  
 from langchain_community.document_loaders import PyPDFLoader,Docx2txtLoader
-import pdfplumber
 import os.path
 import pathlib
 import preprocessing as pre
 import tempfile
 
-# Set up the environment
 
+
+## Set up the environment
 # Load secret keys
+
 secrets = st.secrets
+
 openai_api_key = secrets["openai"]["api_key"] # Access OpenAI API key
 os.environ["OPENAI_API_KEY"] = openai_api_key
 
@@ -43,6 +33,7 @@ os.environ["PINECONE_API_KEY"] = pinecone_api_key
 
 
 # Embed the documents
+
 def vector_db():
 
     for file in uploaded_file:
@@ -132,7 +123,7 @@ uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_mu
 
 
 if uploaded_file is None:
-    st.info("Please upload a file first")
+    st.write("Please upload a file first")
 
 elif uploaded_file is not None:
     
