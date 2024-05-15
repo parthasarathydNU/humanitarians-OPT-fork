@@ -113,16 +113,6 @@ def get_answer(query):
     return answer
 
 
-
-
-
-st.title("🦜🔗Learning Assistance")
-
-# File uploader for user to upload a document
-uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
-
-st.button('process your file', on_click = process)
-
 def process():
     if uploaded_file is not None:
         
@@ -168,7 +158,12 @@ def process():
 
 
 
+st.title("🦜🔗Learning Assistance")
 
+# File uploader for user to upload a document
+uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
+
+st.button('process your file', on_click = process)
 
 
 
