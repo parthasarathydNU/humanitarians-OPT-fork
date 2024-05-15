@@ -122,10 +122,7 @@ st.title("🦜🔗Learning Assistance")
 uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
 
 
-if uploaded_file is None:
-    st.write("Please upload a file first")
-
-elif uploaded_file is not None:
+if uploaded_file is not None:
     
     if "vector_store" not in st.session_state:
         # Initialize vector store
@@ -164,7 +161,8 @@ elif uploaded_file is not None:
 
 
                         
-
+else:
+    st.write("Please upload a file first")
 
 
 
