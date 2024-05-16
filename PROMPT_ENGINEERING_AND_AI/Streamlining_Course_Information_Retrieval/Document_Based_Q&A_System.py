@@ -101,7 +101,7 @@ def get_retrieval_chain(result):
         ]
     )
             
-    prompt.format(documents = "indexes", question = "query")
+    prompt.format(documents = "docs", question = "query")
     
     # Assigning the OPENAI model and Retrieval chain
     model_name = "gpt-4"
