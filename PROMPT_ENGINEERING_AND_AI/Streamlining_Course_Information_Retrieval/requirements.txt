@@ -12,3 +12,4 @@ docx2txt
 pdfplumber
 preprocessing
 unstructured
+pptx
