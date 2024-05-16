@@ -121,6 +121,67 @@ def get_answer(query):
     answer = retrieval_chain({"query":query})
     return answer
 
+
+
+
+st.title("🦜🔗Learning Assistance")
+# File uploader for user to upload a document
+uploaded_file = st.file_uploader("Upload your document", type=["pdf","docx"], accept_multiple_files = True)
+if st.button("Process your File"):
+    if uploaded_file is None:
+        st.warning("Please upload a file first.")
+        return
+        
+    elif uploaded_file is not None:
+        if "vector_store" not in st.session_state:
+            # Initialize vector store
+            st.session_state.vector_store = vector_db(uploaded_file)
+
+
+# Initialize chat history
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+                
+# Display chat messages from history on app rerun
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+                        
+# React to user input
+if query := st.chat_input("Ask your question here"):
+    # Display user message in chat message container
+    with st.chat_message("user"):
+        st.markdown(query)
+    # Add user message to chat history
+    st.session_state.messages.append({"role": "user", "content": query})
+                    
+    answer = get_answer(query)
+    result = answer['result']
+                        
+    # Display assistant response in chat message container
+    with st.chat_message("assistant"):
+        st.markdown(result)
+        # Add assistant response to chat history
+        st.session_state.messages.append({"role": "assistant", "content": result})
+                
+    def clear_messages():
+        st.session_state.messages = []
+        
+    st.button('Clear',on_click=clear_messages)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def upload_file_section():
     st.title("🦜🔗Learning Assistance")
     # File uploader for user to upload a document
@@ -175,34 +236,34 @@ def chat_section():
 
 
 
-def main():
-    st.sidebar.title("Navigation")
+# def main():
+#     st.sidebar.title("Navigation")
 
     
         
-    app_mode = st.sidebar.radio("Choose a mode", ["Upload File", "Chat"])
+#     app_mode = st.sidebar.radio("Choose a mode", ["Upload File", "Chat"])
 
-    if "uploaded_file" not in st.session_state:
-        st.session_state.uploaded_file = None
+#     if "uploaded_file" not in st.session_state:
+#         st.session_state.uploaded_file = None
             
-    if app_mode == "Upload File":
-        uploaded_file = upload_file_section()
-        if uploaded_file is not None:
-            st.session_state.uploaded_file = uploaded_file
+#     if app_mode == "Upload File":
+#         uploaded_file = upload_file_section()
+#         if uploaded_file is not None:
+#             st.session_state.uploaded_file = uploaded_file
             
-        if st.button("Process File"):
-            process_file_section(uploaded_file)
+#         if st.button("Process File"):
+#             process_file_section(uploaded_file)
         
-    # elif app_mode =="Process File":
-    #     process_file_section(uploaded_file)
-    if app_mode == "Chat":
-         if st.session_state.uploaded_file is None:
-            st.warning("Please upload a file first.")
-         else:
-             chat_section()
+#     # elif app_mode =="Process File":
+#     #     process_file_section(uploaded_file)
+#     if app_mode == "Chat":
+#          if st.session_state.uploaded_file is None:
+#             st.warning("Please upload a file first.")
+#          else:
+#              chat_section()
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
 
 
 
