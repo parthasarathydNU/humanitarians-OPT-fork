@@ -199,8 +199,8 @@ def main():
     if app_mode == "Chat":
          if st.session_state.uploaded_file is None:
             st.warning("Please upload a file first.")
-        else:
-            chat_section()
+         else:
+             chat_section()
 
 if __name__ == "__main__":
     main()
