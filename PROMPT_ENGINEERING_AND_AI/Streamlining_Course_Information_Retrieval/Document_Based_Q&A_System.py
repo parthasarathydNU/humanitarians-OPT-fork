@@ -166,8 +166,8 @@ if query := st.chat_input("Ask your question here"):
     st.button('Clear',on_click=clear_messages)
 
 
-if st.button("Reset"):
-    st.rerun()
+# if st.button("Reset"):
+#     st.rerun()
 
 
 
