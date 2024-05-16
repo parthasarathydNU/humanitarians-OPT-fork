@@ -126,7 +126,7 @@ def get_answer(query):
 
 
 def process():
-    if uploaded_file:
+    if uploaded_file is not None:
         if "vector_store" not in st.session_state:
             # Initialize vector store
             st.session_state.vector_store = vector_db()                        
