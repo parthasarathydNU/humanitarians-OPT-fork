@@ -124,12 +124,6 @@ def get_answer(query):
     answer = retrieval_chain({"query":query})
     return answer
 
-
-def process():
-
-
-
-
 def upload_file_section():
     st.title("🦜🔗Learning Assistance")
     # File uploader for user to upload a document
