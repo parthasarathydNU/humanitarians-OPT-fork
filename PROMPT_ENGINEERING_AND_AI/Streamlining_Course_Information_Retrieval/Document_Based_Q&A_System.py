@@ -70,7 +70,7 @@ def vector_db():
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
                                                        chunk_overlap=50)
         split_data = text_splitter.split_documents(docs)      
-        indexes = PineconeVectorStore.from_documents(all_documents, embeddings_model, index_name=index_name)
+        indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)
 
     
     return indexes
