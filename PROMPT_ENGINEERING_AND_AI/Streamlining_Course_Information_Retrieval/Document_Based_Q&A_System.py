@@ -84,9 +84,9 @@ def get_retrieval_chain(result):
     system_prompt = (
     """ 
     You are a helpful assistant who helps users answer their question based on the documents they upload.
-    Answer the question in your own words from the documents given to you.
-    If the documents are not uploaded, say please upload your documents first.
-    If questions are asked where there is no relevant documents available, please answer from what you know.
+    Answer the question in your own words from the context given to you.
+    If the context is not found, say please upload your documents first.
+    If questions are asked where there is no relevant context available, please answer from what you know.
 
     
     Context: {context}
