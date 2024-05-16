@@ -11,11 +11,12 @@ import streamlit as st
 from langchain.text_splitter import Language, RecursiveCharacterTextSplitter
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.chains import ConversationalRetrievalChain, RetrievalQA
-from langchain_community.document_loaders import PyPDFLoader,Docx2txtLoader
+from langchain_community.document_loaders import PyPDFLoader,Docx2txtLoader, UnstructuredPowerPointLoader
 import os.path
 import pathlib
 import preprocessing as pre
 import tempfile
+
 
 
 
@@ -49,10 +50,21 @@ def vector_db():
     path = os.path.join(temp_dir, file.name)
     with open(path, "wb") as f:
         f.write(file.getvalue())
-        
-    loader = PyPDFLoader(path)
+
+    # Get the file extension from the filename
+    file_extension = file.name.split(".")[-1].lower()
+
+    # Check the file extension and process accordingly
+    if file_extension == "pdf":
+        loader = PyPDFLoader(path)
+    elif file_extension == "docx":
+        loader = Docx2txtLoader(path)
+    elif file_extension == "pptx":
+        loader = UnstructuredPowerPointLoader(path)
+    else: 
+        st.error("Unsupported file format. Please upload a PDF, DOCX, or PPTX file.")
+    
     docs = loader.load()
-    st.write("file contents: ", file)
     
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
                                                                chunk_overlap=50)
@@ -126,17 +138,9 @@ def process():
 st.title("🦜🔗Learning Assistance")
 
 # File uploader for user to upload a document
-uploaded_file = st.file_uploader("Upload your document", type=["pdf"], accept_multiple_files = True)
+uploaded_file = st.file_uploader("Upload your document", type=["pdf","docx","pptx"], accept_multiple_files = True)
 
 st.button('process your file', on_click = process)
-
-
-
-
-
-
-
-
 
 
 
@@ -170,6 +174,18 @@ if query := st.chat_input("Ask your question here"):
         st.session_state.messages = []
     
     st.button('Clear',on_click=clear_messages)
+
+
+
+
+
+
+
+
+
+
+
+
 
 # template = """
 # Answer the question in your own words from the context given to you.
