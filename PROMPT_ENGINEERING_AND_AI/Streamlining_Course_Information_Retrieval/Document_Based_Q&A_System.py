@@ -35,7 +35,7 @@ os.environ["PINECONE_API_KEY"] = pinecone_api_key
 
 # Embed the documents
 
-def vector_db(uploaded_file):
+def vector_db():
 
     for file in uploaded_file:
         file.seek(0)
@@ -128,13 +128,12 @@ def get_answer(query):
 def process(uploaded_file):
     if uploaded_file is None:
         # Exit the function if uploaded_file is None
-        st.error("Please Upload a File")
-        
+        st.error("Please Upload a File")  
         return
     
     if "vector_store" not in st.session_state:
         # Initialize vector store
-        st.session_state.vector_store = vector_db(uploaded_file)
+        st.session_state.vector_store = vector_db()
 
 
 
@@ -142,7 +141,7 @@ def upload_file_section():
     st.title("🦜🔗Learning Assistance")
     # File uploader for user to upload a document
     uploaded_file = st.file_uploader("Upload your document", type=["pdf","docx","pptx"], accept_multiple_files = True)
-    st.button('process your file', on_click = process(uploaded_file))
+    process = st.button('process your file', on_click = process(uploaded_file))
 
 def chat_section():
     st.title("Chat with Me 🦜")
