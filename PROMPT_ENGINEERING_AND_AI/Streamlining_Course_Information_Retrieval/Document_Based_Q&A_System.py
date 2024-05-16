@@ -76,7 +76,7 @@ def vector_db():
         split_data = text_splitter.split_documents(docs)
         indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)
 
-    text = docs.page_content()
+    text = docs.page_content
     st.write("file contents:", text)
     
     return indexes
