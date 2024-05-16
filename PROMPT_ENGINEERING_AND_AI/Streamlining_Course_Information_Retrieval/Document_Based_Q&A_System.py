@@ -139,7 +139,7 @@ def upload_file_section():
     st.title("🦜🔗Learning Assistance")
     # File uploader for user to upload a document
     uploaded_file = st.file_uploader("Upload your document", type=["pdf","docx","pptx"], accept_multiple_files = True)
-    st.button('process your file', on_click = process(uploaded_file))
+    st.button('process your file', on_click = process)
 
 def chat_section():
     st.title("Chat with Me 🦜")
