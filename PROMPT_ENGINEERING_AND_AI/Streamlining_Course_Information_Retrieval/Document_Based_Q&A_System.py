@@ -48,43 +48,29 @@ def vector_db():
         st.write(file_details)    
 
     
-    temp_dir = tempfile.mkdtemp()
-    path = os.path.join(temp_dir, file.name)
-    with open(path, "wb") as f:
-        f.write(file.getvalue())
-    # Get the file extension from the filename
-    file_extension = file.name.split(".")[-1].lower()
-
-    
-    if uploaded_files:
-        all_documents = []
-        for uploaded_file in uploaded_files:
-            # Check the file extension and process accordingly
-            if file_extension == "pdf":
+        temp_dir = tempfile.mkdtemp()
+        path = os.path.join(temp_dir, file.name)
+        with open(path, "wb") as f:
+            f.write(file.getvalue())
+        # Get the file extension from the filename
+        file_extension = file.name.split(".")[-1].lower()
+        
+        if file_extension == "pdf":
                 loader = PyPDFLoader(path)
                 docs = loader.load()
             
-                for doc in docs:
-                    text = doc.page_content  
-                    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
-                                                                           chunk_overlap=50)
-                    split_data = text_splitter.split_documents(docs)
-                    all_documents.extend(split_data)
-                    
-            elif file_extension == "docx":
+         elif file_extension == "docx":
                 loader = Docx2txtLoader(path)
-                docs = loader.load()
-                
-                for doc in docs:
-                    text = doc.page_content
-                    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
-                                                                           chunk_overlap=50)
-                    split_data = text_splitter.split_documents(docs)
-                    all_documents.extend(split_data)
 
+        docs = loader.load()
+        for doc in docs:
+            text = doc.page_content
+            st.write("file contents:", text) 
+    
             
-            
-        st.write("file contents:", text)      
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
+                                                       chunk_overlap=50)
+        split_data = text_splitter.split_documents(docs)      
         indexes = PineconeVectorStore.from_documents(all_documents, embeddings_model, index_name=index_name)
 
     
