@@ -136,7 +136,7 @@ def upload_file_section():
     st.title("🦜🔗Learning Assistance")
     # File uploader for user to upload a document
     uploaded_file = st.file_uploader("Upload your document", type=["pdf","docx","pptx"], accept_multiple_files = True)
-    return uploaded_file is not None, uploaded_file
+    return uploaded_file 
 
 
 def process_file_section(uploaded_file):
