@@ -121,14 +121,6 @@ def get_answer(query):
     return answer
 
 
-# Function to reset the state of the app
-def reset_state():
-    # Reset any state variables or session state here
-    st.session_state.clear()  # Clear all session state variables
-
-
-
-
 st.title("🦜🔗Learning Assistance")
 # File uploader for user to upload a document
 uploaded_files = st.file_uploader("Upload your document", type=["pdf","docx"], accept_multiple_files = True)
@@ -174,9 +166,8 @@ if query := st.chat_input("Ask your question here"):
     st.button('Clear',on_click=clear_messages)
 
 
-# Create a reset button
 if st.button("Reset"):
-    reset_state()
+    st.experimental_rerun()
 
 
 
