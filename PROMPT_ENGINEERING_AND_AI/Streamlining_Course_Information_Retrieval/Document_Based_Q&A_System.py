@@ -17,8 +17,6 @@ import pathlib
 import tempfile
 
 
-
-
 ## Set up the environment
 # Load secret keys
 
@@ -146,10 +144,9 @@ if st.button("Process your File"):
         st.warning("Please upload a file first.")
         
     elif uploaded_files is not None:
-        for uploaded_file in uploaded_files:
-            if "vector_store" not in st.session_state:
-                # Initialize vector store
-                st.session_state.vector_store = vector_db()
+        if "vector_store" not in st.session_state:
+            # Initialize vector store
+            st.session_state.vector_store = vector_db()
 
 
 # Initialize chat history
