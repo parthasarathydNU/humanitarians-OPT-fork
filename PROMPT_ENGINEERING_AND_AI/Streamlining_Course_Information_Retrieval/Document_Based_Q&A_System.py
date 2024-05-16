@@ -36,6 +36,12 @@ os.environ["PINECONE_API_KEY"] = pinecone_api_key
 
 def vector_db(uploaded_file):
 
+    pc = Pinecone(pinecone_api_key=pinecone_api_key)
+    embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
+
+    index_name = "langchain-demo"
+    global index
+
     for file in uploaded_file:
         file.seek(0)
         
@@ -56,23 +62,28 @@ def vector_db(uploaded_file):
     # Check the file extension and process accordingly
     if file_extension == "pdf":
         loader = PyPDFLoader(path)
+        docs = loader.load()
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
+                                                               chunk_overlap=50)
+        split_data = text_splitter.split_documents(docs)
+        for page in docs.pages:
+                text = page.extract_text()
+                st.write(text)
+
+        indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)  
     elif file_extension == "docx":
         loader = Docx2txtLoader(path)
-        
-    docs = loader.load()
-    
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
+        docs = loader.load()
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
                                                                chunk_overlap=50)
-    split_data = text_splitter.split_documents(docs)
+        split_data = text_splitter.split_documents(docs)
+        text = ""
+        for para in docs.paragraphs:
+            text += para.text + "\n"
+        st.write(text)
+        indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)
 
-    pc = Pinecone(pinecone_api_key=pinecone_api_key)
-    embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
-
-    index_name = "langchain-demo"
-    global index
-
-    indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)      
-
+    
     return indexes
 
     
@@ -85,8 +96,7 @@ def get_retrieval_chain(result):
     """ 
     You are a helpful assistant who helps users answer their question based on the documents they upload.
     Answer the question in your own words from the context given to you.
-    If the context is not found, say please upload your documents first.
-    If questions are asked where there is no relevant context available, please answer from what you know.
+    If questions are asked where there is no relevant context available, please answer from what you know and say please upload your documents first for better response.
 
     
     Context: {context}
@@ -100,7 +110,7 @@ def get_retrieval_chain(result):
         ]
     )
             
-    prompt.format(context = "docs", question = "query")
+    prompt.format(context = "split_data", question = "query")
     
     # Assigning the OPENAI model and Retrieval chain
     model_name = "gpt-4"
