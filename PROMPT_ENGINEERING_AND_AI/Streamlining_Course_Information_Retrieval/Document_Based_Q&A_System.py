@@ -141,7 +141,7 @@ def upload_file_section():
     st.title("Upload Your File")
     # File uploader for user to upload a document
     uploaded_file = st.file_uploader("Upload your document", type=["pdf","docx","pptx"], accept_multiple_files = True)
-    st.button('process your file', on_click = process):
+    st.button('process your file', on_click = process)
 
 def main():
     st.sidebar.title("Navigation")
