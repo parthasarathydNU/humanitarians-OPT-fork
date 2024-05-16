@@ -186,14 +186,15 @@ def chat_section():
 def main():
     st.sidebar.title("Navigation")
 
-    uploaded_file = upload_file_section()
-    if st.button("Process File"):
-        process_file(uploaded_file)
+    
         
-    app_mode = st.sidebar.radio("Choose a mode", ["Chat"])
+    app_mode = st.sidebar.radio("Choose a mode", ["Upload File", "Chat"])
    
-    # if app_mode == "Upload File":
-    #     upload_file_section()
+    if app_mode == "Upload File":
+        uploaded_file = upload_file_section()
+        if st.button("Process File"):
+            process_file_section(uploaded_file)
+        
     # elif app_mode =="Process File":
     #     process_file_section(uploaded_file)
     if app_mode == "Chat":
