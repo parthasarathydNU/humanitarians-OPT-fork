@@ -121,7 +121,7 @@ def get_answer(query):
     return answer
 
 
-st.title("🦜🔗Learning Assistance")
+st.title("🦜🔗 QueryDoc")
 # File uploader for user to upload a document
 uploaded_files = st.file_uploader("Upload your document", type=["pdf","docx"], accept_multiple_files = True)
 if st.button("Process your File"):
