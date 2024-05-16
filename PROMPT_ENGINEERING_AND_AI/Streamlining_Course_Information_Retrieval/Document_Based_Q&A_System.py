@@ -61,9 +61,7 @@ def vector_db(uploaded_file):
 
     # Check the file extension and process accordingly
     if file_extension == "pdf":
-        loader = PyPDFLoader(path)
-        text = loader.load()
-        st.write(text)        
+        loader = PyPDFLoader(path)    
         docs = loader.load()
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
                                                                chunk_overlap=50)
@@ -72,14 +70,14 @@ def vector_db(uploaded_file):
         
     elif file_extension == "docx":
         loader = Docx2txtLoader(path)
-        text = loader.load()
-        st.write(text)
         docs = loader.load()
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
                                                                chunk_overlap=50)
         split_data = text_splitter.split_documents(docs)
         indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)
 
+    text = docs.page_content()
+    st.write("file contents:", text)
     
     return indexes
 
@@ -133,13 +131,14 @@ def get_answer(query):
 
 st.title("🦜🔗Learning Assistance")
 # File uploader for user to upload a document
-uploaded_file = st.file_uploader("Upload your document", type=["pdf","docx"], accept_multiple_files = True)
+uploaded_files = st.file_uploader("Upload your document", type=["pdf","docx"], accept_multiple_files = True)
 if st.button("Process your File"):
-    if uploaded_file is None:
+    if uploaded_files is None:
         st.warning("Please upload a file first.")
         
-    elif uploaded_file is not None:
-        if "vector_store" not in st.session_state:
+    elif uploaded_files is not None:
+        for uploaded_file in uploaded_files:
+            if "vector_store" not in st.session_state:
             # Initialize vector store
             st.session_state.vector_store = vector_db(uploaded_file)
 
