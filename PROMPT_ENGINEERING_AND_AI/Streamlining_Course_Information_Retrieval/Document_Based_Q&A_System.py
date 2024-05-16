@@ -62,7 +62,7 @@ def vector_db(uploaded_file):
     # Check the file extension and process accordingly
     if file_extension == "pdf":
         loader = PyPDFLoader(path)
-        text = loader.extract_text()
+        text = loader.load()
         st.write(text)        
         docs = loader.load()
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
