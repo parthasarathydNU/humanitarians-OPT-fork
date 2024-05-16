@@ -126,9 +126,7 @@ def get_answer(query):
 
 
 def process():
-    if "vector_store" not in st.session_state:
-        # Initialize vector store
-        st.session_state.vector_store = vector_db()
+
 
 
 
@@ -143,9 +141,15 @@ def process_file_section(uploaded_file):
     if uploaded_file is None:
         st.warning("Please upload a file first.")
         return
-
+        
+    elif uploaded_file is not None:
+        if "vector_store" not in st.session_state:
+            # Initialize vector store
+            st.session_state.vector_store = vector_db()
+        
 def chat_section():
     st.title("Chat with Me 🦜")
+
     # Initialize chat history
     if "messages" not in st.session_state:
         st.session_state.messages = []
