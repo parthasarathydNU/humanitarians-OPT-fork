@@ -105,7 +105,7 @@ def get_retrieval_chain(result):
         ]
     )
             
-    prompt.format(context = "split_data", question = "query")
+    prompt.format(context = "text", question = "query")
     
     # Assigning the OPENAI model and Retrieval chain
     model_name = "gpt-4"
@@ -139,8 +139,8 @@ if st.button("Process your File"):
     elif uploaded_files is not None:
         for uploaded_file in uploaded_files:
             if "vector_store" not in st.session_state:
-            # Initialize vector store
-            st.session_state.vector_store = vector_db(uploaded_file)
+                # Initialize vector store
+                st.session_state.vector_store = vector_db(uploaded_file)
 
 
 # Initialize chat history
