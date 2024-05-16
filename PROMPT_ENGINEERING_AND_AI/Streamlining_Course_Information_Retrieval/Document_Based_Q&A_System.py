@@ -143,8 +143,6 @@ def process_file_section(uploaded_file):
     if uploaded_file is None:
         st.warning("Please upload a file first.")
         return
-    else:
-        process()
 
 def chat_section():
     st.title("Chat with Me 🦜")
