@@ -89,7 +89,7 @@ def get_retrieval_chain(result):
     If questions are asked where there is no relevant documents available, please answer from what you know.
 
     
-    Context: {documents}
+    Context: {context}
     """
         
     )
@@ -100,7 +100,7 @@ def get_retrieval_chain(result):
         ]
     )
             
-    prompt.format(documents = "docs", question = "query")
+    prompt.format(context = "docs", question = "query")
     
     # Assigning the OPENAI model and Retrieval chain
     model_name = "gpt-4"
