@@ -59,26 +59,26 @@ def vector_db():
     # Get the file extension from the filename
     file_extension = file.name.split(".")[-1].lower()
 
-    # Check the file extension and process accordingly
-    if file_extension == "pdf":
-        loader = PyPDFLoader(path)    
-        docs = loader.load()
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
-                                                               chunk_overlap=50)
-        split_data = text_splitter.split_documents(docs)
-        indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)
-        
-    elif file_extension == "docx":
-        loader = Docx2txtLoader(path)
-        docs = loader.load()
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
-                                                               chunk_overlap=50)
-        split_data = text_splitter.split_documents(docs)
-        indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)
+    if uploaded_files:
+        for uploaded_file in uploaded_files:
+            # Check the file extension and process accordingly
+            if file_extension == "pdf":
+                loader = PyPDFLoader(path)    
+                docs = loader.load()
+                
+            elif file_extension == "docx":
+                loader = Docx2txtLoader(path)
+                docs = loader.load()
 
-    for doc in docs:
-        text = doc.page_content
-        st.write("file contents:", text)
+        
+            for doc in docs:
+                text = doc.page_content
+                st.write("file contents:", text)
+                text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
+                                                                       chunk_overlap=50)
+                split_data = text_splitter.split_documents(docs)
+                indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)
+
     
     return indexes
 
