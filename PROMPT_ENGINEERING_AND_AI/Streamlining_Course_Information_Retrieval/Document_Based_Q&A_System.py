@@ -59,11 +59,7 @@ def vector_db(uploaded_file):
         loader = PyPDFLoader(path)
     elif file_extension == "docx":
         loader = Docx2txtLoader(path)
-    elif file_extension == "pptx":
-        loader = UnstructuredPowerPointLoader(path)
-    else: 
-        st.error("Unsupported file format. Please upload a PDF, DOCX, or PPTX file.")
-    
+        
     docs = loader.load()
     
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
@@ -127,7 +123,7 @@ def get_answer(query):
 def upload_file_section():
     st.title("🦜🔗Learning Assistance")
     # File uploader for user to upload a document
-    uploaded_file = st.file_uploader("Upload your document", type=["pdf","docx","pptx"], accept_multiple_files = True)
+    uploaded_file = st.file_uploader("Upload your document", type=["pdf","docx"], accept_multiple_files = True)
     return uploaded_file 
 
 
