@@ -69,7 +69,7 @@ def vector_db():
                     st.write("file contents:", text)
                     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
                                                                            chunk_overlap=50)
-                    split_data = text_splitter.split_documents(text)
+                    split_data = text_splitter.split_documents(docs)
                     all_documents.extend(split_data)
                     
             elif file_extension == "docx":
@@ -81,7 +81,7 @@ def vector_db():
                     st.write("file contents:", text)
                     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
                                                                            chunk_overlap=50)
-                    split_data = text_splitter.split_documents(text)
+                    split_data = text_splitter.split_documents(docs)
                     all_documents.extend(split_data)
 
             
