@@ -145,7 +145,7 @@ def process_file_section(uploaded_file):
         st.warning("Please upload a file first.")
         return
 
-    st.button('process your file', on_click = process(uploaded_file))
+    st.button('process your file', on_click = process))
 
 def chat_section():
     st.title("Chat with Me 🦜")
