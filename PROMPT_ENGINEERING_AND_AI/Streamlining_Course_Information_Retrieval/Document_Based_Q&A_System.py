@@ -140,12 +140,11 @@ def upload_file_section():
 
 
 def process_file_section(uploaded_file):
-    st.title("Process Your File")
     if uploaded_file is None:
         st.warning("Please upload a file first.")
         return
-
-    st.button('process your file', on_click = process)
+    else:
+        process()
 
 def chat_section():
     st.title("Chat with Me 🦜")
