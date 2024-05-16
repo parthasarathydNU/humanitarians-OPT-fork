@@ -143,18 +143,6 @@ def upload_file_section():
     uploaded_file = st.file_uploader("Upload your document", type=["pdf","docx","pptx"], accept_multiple_files = True)
     st.button('process your file', on_click = process)
 
-def main():
-    st.sidebar.title("Navigation")
-    app_mode = st.sidebar.radio("Choose a mode", ["Upload File", "Chat"])
-
-    if app_mode == "Upload File":
-        upload_file_section()
-    elif app_mode == "Chat":
-        chat_section()
-
-if __name__ == "__main__":
-    main()
-
 def chat_section():
     st.title("Chat with Me 🦜")
     # Initialize chat history
@@ -188,6 +176,20 @@ def chat_section():
         
         st.button('Clear',on_click=clear_messages)
 
+
+
+
+def main():
+    st.sidebar.title("Navigation")
+    app_mode = st.sidebar.radio("Choose a mode", ["Upload File", "Chat"])
+
+    if app_mode == "Upload File":
+        upload_file_section()
+    elif app_mode == "Chat":
+        chat_section()
+
+if __name__ == "__main__":
+    main()
 
 
 
