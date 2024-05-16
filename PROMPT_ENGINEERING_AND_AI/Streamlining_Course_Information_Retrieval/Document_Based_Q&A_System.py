@@ -167,7 +167,7 @@ if query := st.chat_input("Ask your question here"):
 
 
 if st.button("Reset"):
-    st.experimental_rerun()
+    st.rerun()
 
 
 
