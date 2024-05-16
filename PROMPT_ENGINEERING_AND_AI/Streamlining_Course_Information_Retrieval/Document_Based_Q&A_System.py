@@ -34,7 +34,7 @@ os.environ["PINECONE_API_KEY"] = pinecone_api_key
 
 # Embed the documents
 
-def vector_db(uploaded_file):
+def vector_db():
 
     pc = Pinecone(pinecone_api_key=pinecone_api_key)
     embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
@@ -42,7 +42,7 @@ def vector_db(uploaded_file):
     index_name = "langchain-demo"
     global index
 
-    for file in uploaded_file:
+    for file in uploaded_files:
         file.seek(0)
         
         # display the name and the type of the file
@@ -140,7 +140,7 @@ if st.button("Process your File"):
         for uploaded_file in uploaded_files:
             if "vector_store" not in st.session_state:
                 # Initialize vector store
-                st.session_state.vector_store = vector_db(uploaded_file)
+                st.session_state.vector_store = vector_db()
 
 
 # Initialize chat history
