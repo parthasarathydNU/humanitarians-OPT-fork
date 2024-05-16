@@ -13,4 +13,4 @@ pdfplumber
 preprocessing
 unstructured
 python-pptx
-upgrade-nltk
+--upgrade-nltk
