@@ -72,7 +72,7 @@ def vector_db(uploaded_file):
         
     elif file_extension == "docx":
         loader = Docx2txtLoader(path)
-        text = loader.extract_text()
+        text = loader.load()
         st.write(text)
         docs = loader.load()
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
