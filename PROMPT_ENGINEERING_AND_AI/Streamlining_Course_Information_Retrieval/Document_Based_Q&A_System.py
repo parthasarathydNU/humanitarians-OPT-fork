@@ -32,16 +32,14 @@ os.environ["PINECONE_API_KEY"] = pinecone_api_key
 
 
 
+pc = Pinecone(pinecone_api_key=pinecone_api_key)
+embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
+index_name = "langchain-demo"
+
 # Embed the documents
 
 def vector_db():
-
-    pc = Pinecone(pinecone_api_key=pinecone_api_key)
-    embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
-
-    index_name = "langchain-demo"
-    global index
-
+    
     for file in uploaded_files:
         file.seek(0)
         
@@ -51,15 +49,17 @@ def vector_db():
         }
         st.write(file_details)    
 
+    
     temp_dir = tempfile.mkdtemp()
     path = os.path.join(temp_dir, file.name)
     with open(path, "wb") as f:
         f.write(file.getvalue())
-
     # Get the file extension from the filename
     file_extension = file.name.split(".")[-1].lower()
 
+    
     if uploaded_files:
+        all_documents = []
         for uploaded_file in uploaded_files:
             # Check the file extension and process accordingly
             if file_extension == "pdf":
@@ -77,7 +77,9 @@ def vector_db():
                 text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
                                                                        chunk_overlap=50)
                 split_data = text_splitter.split_documents(docs)
-                indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)
+                all_documents.extend(split_data)
+                
+        indexes = PineconeVectorStore.from_documents(all_documents, embeddings_model, index_name=index_name)
 
     
     return indexes
@@ -128,6 +130,12 @@ def get_answer(query):
     return answer
 
 
+# Function to reset the state of the app
+def reset_state():
+    # Reset any state variables or session state here
+    st.session_state.clear()  # Clear all session state variables
+
+
 
 
 st.title("🦜🔗Learning Assistance")
@@ -176,6 +184,9 @@ if query := st.chat_input("Ask your question here"):
     st.button('Clear',on_click=clear_messages)
 
 
+# Create a reset button
+if st.button("Reset"):
+    reset_state()
 
 
 
