@@ -84,11 +84,13 @@ def get_retrieval_chain(result):
     # Creating the Prompt
     system_prompt = (
     """ 
-    You are a helpful assistant who helps users answer their question.
-    Answer the question in your own words from the context given to you.
-    If questions are asked where there is no relevant context available, please answer from what you know.
+    You are a helpful assistant who helps users answer their question based on the documents they upload.
+    Answer the question in your own words from the documents given to you.
+    If the documents are not uploaded, say please upload your documents first.
+    If questions are asked where there is no relevant documents available, please answer from what you know.
+
     
-    Context: {context}
+    Context: {documents}
     """
         
     )
@@ -99,7 +101,7 @@ def get_retrieval_chain(result):
         ]
     )
             
-    prompt.format(context = "split_data", question = "query")
+    prompt.format(documents = "indexes", question = "query")
     
     # Assigning the OPENAI model and Retrieval chain
     model_name = "gpt-4"
