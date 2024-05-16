@@ -57,9 +57,8 @@ def vector_db():
         
         if file_extension == "pdf":
                 loader = PyPDFLoader(path)
-                docs = loader.load()
             
-         elif file_extension == "docx":
+        elif file_extension == "docx":
                 loader = Docx2txtLoader(path)
 
         docs = loader.load()
