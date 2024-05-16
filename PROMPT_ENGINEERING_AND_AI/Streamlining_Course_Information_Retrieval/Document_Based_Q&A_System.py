@@ -61,21 +61,31 @@ def vector_db():
         for uploaded_file in uploaded_files:
             # Check the file extension and process accordingly
             if file_extension == "pdf":
-                loader = PyPDFLoader(path)    
-                
+                loader = PyPDFLoader(path)
+                docs = loader.load()
+            
+                for doc in docs:
+                    text = doc.page_content
+                    st.write("file contents:", text)
+                    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
+                                                                           chunk_overlap=50)
+                    split_data = text_splitter.split_documents(text)
+                    all_documents.extend(split_data)
+                    
             elif file_extension == "docx":
                 loader = Docx2txtLoader(path)
+                docs = loader.load()
+                
+                for doc in docs:
+                    text = doc.page_content
+                    st.write("file contents:", text)
+                    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
+                                                                           chunk_overlap=50)
+                    split_data = text_splitter.split_documents(text)
+                    all_documents.extend(split_data)
 
             
-            docs = loader.load()
             
-            for doc in docs:
-                text = doc.page_content
-                st.write("file contents:", text)
-                text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
-                                                                       chunk_overlap=50)
-                split_data = text_splitter.split_documents(docs)
-                all_documents.extend(split_data)
                 
         indexes = PineconeVectorStore.from_documents(all_documents, embeddings_model, index_name=index_name)
 
