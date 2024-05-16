@@ -14,7 +14,6 @@ from langchain.chains import ConversationalRetrievalChain, RetrievalQA
 from langchain_community.document_loaders import PyPDFLoader,Docx2txtLoader, UnstructuredPowerPointLoader
 import os.path
 import pathlib
-import preprocessing as pre
 import tempfile
 
 
