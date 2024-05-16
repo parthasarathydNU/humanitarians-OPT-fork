@@ -125,12 +125,7 @@ def get_answer(query):
     return answer
 
 
-def process(uploaded_file):
-    if uploaded_file is None:
-        # Exit the function if uploaded_file is None
-        st.error("Please Upload a File")  
-        return
-    
+def process():
     if "vector_store" not in st.session_state:
         # Initialize vector store
         st.session_state.vector_store = vector_db()
@@ -141,7 +136,16 @@ def upload_file_section():
     st.title("🦜🔗Learning Assistance")
     # File uploader for user to upload a document
     uploaded_file = st.file_uploader("Upload your document", type=["pdf","docx","pptx"], accept_multiple_files = True)
-    process = st.button('process your file', on_click = process(uploaded_file))
+    return uploaded_file is not None, uploaded_file
+
+
+def process_file_section(uploaded_file):
+    st.title("Process Your File")
+    if uploaded_file is None:
+        st.warning("Please upload a file first.")
+        return
+
+    st.button('process your file', on_click = process(uploaded_file))
 
 def chat_section():
     st.title("Chat with Me 🦜")
@@ -181,10 +185,12 @@ def chat_section():
 
 def main():
     st.sidebar.title("Navigation")
-    app_mode = st.sidebar.radio("Choose a mode", ["Upload File", "Chat"])
+    app_mode = st.sidebar.radio("Choose a mode", ["Upload File", "Process File", "Chat",])
 
     if app_mode == "Upload File":
         upload_file_section()
+    elif app_mode =="Process File":
+        process_file_section(uploaded_file)
     elif app_mode == "Chat":
         chat_section()
 
