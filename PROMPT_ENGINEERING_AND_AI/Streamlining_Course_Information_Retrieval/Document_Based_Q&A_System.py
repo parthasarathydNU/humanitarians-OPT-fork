@@ -35,7 +35,7 @@ os.environ["PINECONE_API_KEY"] = pinecone_api_key
 
 # Embed the documents
 
-def vector_db():
+def vector_db(uploaded_file):
 
     for file in uploaded_file:
         file.seek(0)
@@ -139,7 +139,7 @@ def process_file_section(uploaded_file):
     elif uploaded_file is not None:
         if "vector_store" not in st.session_state:
             # Initialize vector store
-            st.session_state.vector_store = vector_db()
+            st.session_state.vector_store = vector_db(uploaded_file)
         
 def chat_section():
     st.title("Chat with Me 🦜")
