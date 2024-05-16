@@ -137,43 +137,56 @@ def process():
 
 st.title("🦜🔗Learning Assistance")
 
-# File uploader for user to upload a document
-uploaded_file = st.file_uploader("Upload your document", type=["pdf","docx","pptx"], accept_multiple_files = True)
+def upload_file_section():
+    st.title("Upload Your File")
+    # File uploader for user to upload a document
+    uploaded_file = st.file_uploader("Upload your document", type=["pdf","docx","pptx"], accept_multiple_files = True)
+    st.button('process your file', on_click = process):
 
-st.button('process your file', on_click = process)
+def main():
+    st.sidebar.title("Navigation")
+    app_mode = st.sidebar.radio("Choose a mode", ["Upload File", "Chat"])
 
+    if app_mode == "Upload File":
+        upload_file_section()
+    elif app_mode == "Chat":
+        chat_section()
 
+if __name__ == "__main__":
+    main()
 
-# Initialize chat history
-if "messages" not in st.session_state:
-    st.session_state.messages = []
-            
-# Display chat messages from history on app rerun
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
-                    
-            # React to user input
-if query := st.chat_input("Ask your question here"):
-    # Display user message in chat message container
-    with st.chat_message("user"):
-        st.markdown(query)
-    # Add user message to chat history
-    st.session_state.messages.append({"role": "user", "content": query})
-                
-    answer = get_answer(query)
-    result = answer['result']
-                    
-    # Display assistant response in chat message container
-    with st.chat_message("assistant"):
-        st.markdown(result)
-        # Add assistant response to chat history
-        st.session_state.messages.append({"role": "assistant", "content": result})
-            
-    def clear_messages():
+def chat_section():
+    st.title("Chat with Me 🦜")
+    # Initialize chat history
+    if "messages" not in st.session_state:
         st.session_state.messages = []
-    
-    st.button('Clear',on_click=clear_messages)
+                
+    # Display chat messages from history on app rerun
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+                        
+                # React to user input
+    if query := st.chat_input("Ask your question here"):
+        # Display user message in chat message container
+        with st.chat_message("user"):
+            st.markdown(query)
+        # Add user message to chat history
+        st.session_state.messages.append({"role": "user", "content": query})
+                    
+        answer = get_answer(query)
+        result = answer['result']
+                        
+        # Display assistant response in chat message container
+        with st.chat_message("assistant"):
+            st.markdown(result)
+            # Add assistant response to chat history
+            st.session_state.messages.append({"role": "assistant", "content": result})
+                
+        def clear_messages():
+            st.session_state.messages = []
+        
+        st.button('Clear',on_click=clear_messages)
 
 
 
