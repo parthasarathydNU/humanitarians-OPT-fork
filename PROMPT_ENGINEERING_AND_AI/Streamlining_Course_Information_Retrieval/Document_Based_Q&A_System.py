@@ -64,13 +64,13 @@ def vector_db():
             # Check the file extension and process accordingly
             if file_extension == "pdf":
                 loader = PyPDFLoader(path)    
-                docs = loader.load()
                 
             elif file_extension == "docx":
                 loader = Docx2txtLoader(path)
-                docs = loader.load()
 
-        
+            
+            docs = loader.load()
+            
             for doc in docs:
                 text = doc.page_content
                 st.write("file contents:", text)
