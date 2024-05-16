@@ -65,8 +65,7 @@ def vector_db():
                 docs = loader.load()
             
                 for doc in docs:
-                    text = doc.page_content
-                    st.write("file contents:", text)
+                    text = doc.page_content  
                     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
                                                                            chunk_overlap=50)
                     split_data = text_splitter.split_documents(docs)
@@ -78,7 +77,6 @@ def vector_db():
                 
                 for doc in docs:
                     text = doc.page_content
-                    st.write("file contents:", text)
                     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, 
                                                                            chunk_overlap=50)
                     split_data = text_splitter.split_documents(docs)
@@ -86,7 +84,7 @@ def vector_db():
 
             
             
-                
+        st.write("file contents:", text)      
         indexes = PineconeVectorStore.from_documents(all_documents, embeddings_model, index_name=index_name)
 
     
@@ -151,7 +149,7 @@ st.title("🦜🔗Learning Assistance")
 uploaded_files = st.file_uploader("Upload your document", type=["pdf","docx"], accept_multiple_files = True)
 if st.button("Process your File"):
     if uploaded_files is None:
-        st.warning("Please upload a file first.")
+        st.write("Please upload a file first.")
         
     elif uploaded_files is not None:
         if "vector_store" not in st.session_state:
