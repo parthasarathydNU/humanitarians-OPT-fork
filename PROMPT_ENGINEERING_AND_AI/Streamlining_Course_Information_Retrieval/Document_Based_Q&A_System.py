@@ -130,7 +130,6 @@ uploaded_file = st.file_uploader("Upload your document", type=["pdf","docx"], ac
 if st.button("Process your File"):
     if uploaded_file is None:
         st.warning("Please upload a file first.")
-        return
         
     elif uploaded_file is not None:
         if "vector_store" not in st.session_state:
