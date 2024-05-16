@@ -180,16 +180,25 @@ def main():
     
         
     app_mode = st.sidebar.radio("Choose a mode", ["Upload File", "Chat"])
-   
+
+    if "uploaded_file" not in st.session_state:
+        st.session_state.uploaded_file = None
+            
     if app_mode == "Upload File":
         uploaded_file = upload_file_section()
+        if uploaded_file is not None:
+            st.session_state.uploaded_file = uploaded_file
+            
         if st.button("Process File"):
             process_file_section(uploaded_file)
         
     # elif app_mode =="Process File":
     #     process_file_section(uploaded_file)
     if app_mode == "Chat":
-        chat_section()
+         if st.session_state.uploaded_file is None:
+            st.warning("Please upload a file first.")
+        else:
+            chat_section()
 
 if __name__ == "__main__":
     main()
