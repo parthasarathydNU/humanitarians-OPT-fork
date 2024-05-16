@@ -125,7 +125,7 @@ def get_answer(query):
     return answer
 
 
-def process():
+def process(uploaded_file):
     if uploaded_file is not None:
         if "vector_store" not in st.session_state:
             # Initialize vector store
@@ -139,7 +139,7 @@ def upload_file_section():
     st.title("🦜🔗Learning Assistance")
     # File uploader for user to upload a document
     uploaded_file = st.file_uploader("Upload your document", type=["pdf","docx","pptx"], accept_multiple_files = True)
-    st.button('process your file', on_click = process)
+    st.button('process your file', on_click = process(uploaded_file))
 
 def chat_section():
     st.title("Chat with Me 🦜")
