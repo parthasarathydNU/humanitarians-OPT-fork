@@ -171,8 +171,6 @@ elif uploaded_files is None:
 def reset_session():
     index = pc.Index(index_name)
     index.delete(delete_all = True, namespace = '')
-    session_state = SessionState.get()
-    session_state.uploaded_files = None
 
 
 # Add a button at the bottom right corner
