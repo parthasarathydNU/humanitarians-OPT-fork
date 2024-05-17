@@ -169,21 +169,22 @@ elif uploaded_files is None:
 
 # Function to reset the session
 def reset_session():
-    st.rerun()
     index = pc.Index(index_name)
     index.delete(delete_all = True, namespace = "")
+    st.rerun()
+
 
 # Add a button at the bottom right corner
 if st.button("Reset", help="Click to reset the app", on_click=reset_session):
     pass
 
-# Create a placeholder for the button
-placeholder = st.empty()
+# # Create a placeholder for the button
+# placeholder = st.empty()
 
-# Move the placeholder to the bottom right corner
-placeholder.markdown(
-    '<div style="position: fixed; bottom: 10px; right: 10px;">'
-    '<button onclick="window.location.reload()">Reset</button>'
-    '</div>',
-    unsafe_allow_html=True
-)
+# # Move the placeholder to the bottom right corner
+# placeholder.markdown(
+#     '<div style="position: fixed; bottom: 10px; right: 10px;">'
+#     '<button onclick="window.location.reload()">Reset</button>'
+#     '</div>',
+#     unsafe_allow_html=True
+# )
