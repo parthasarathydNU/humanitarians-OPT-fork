@@ -169,7 +169,7 @@ elif uploaded_files is None:
 
 # Function to reset the session
 def reset_session():
-    st.experimental_rerun()
+    st.rerun()
     index = pc.Index(index_name)
     index.delete(delete_all = True, namespace = "")
 
