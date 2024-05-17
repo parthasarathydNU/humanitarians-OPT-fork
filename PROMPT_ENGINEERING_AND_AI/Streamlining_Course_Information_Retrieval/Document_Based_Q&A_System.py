@@ -169,26 +169,21 @@ elif uploaded_files is None:
 
 # Function to reset the session
 def reset_session():
-    session_state = SessionState.get()
-    session_state.reset = True
-
-# Define a class to hold session state
-class SessionState:
-    def __init__(self, **kwargs):
-        self.reset = False
-
-    def clear(self):
-        self.reset = False
-
-# Create a session state object
-session_state = SessionState()
+    st.experimental_rerun()
+    index = pc.Index(index_name)
+    index.delete(delete_all = True, namespace = "")
 
 # Add a button at the bottom right corner
-if st.button("Reset", key="reset_button", help="Click to reset the app", on_click=reset_session):
+if st.button("Reset", help="Click to reset the app", on_click=reset_session):
     pass
 
-# Check if the session needs to be reset
-if session_state.reset:
-    st.caching.clear_cache()
-    st.experimental_rerun()
+# Create a placeholder for the button
+placeholder = st.empty()
 
+# Move the placeholder to the bottom right corner
+placeholder.markdown(
+    '<div style="position: fixed; bottom: 10px; right: 10px;">'
+    '<button onclick="window.location.reload()">Reset</button>'
+    '</div>',
+    unsafe_allow_html=True
+)
