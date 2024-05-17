@@ -78,17 +78,22 @@ def get_retrieval_chain(result):
     # Define system prompt for chat interaction
     system_prompt = (
         """ 
-        You are a helpful assistant who helps users answer their question based on the documents they upload.
+        You are a helpful assistant who helps users answer their {question} based on the documents they upload.
+        The context is latest documents that are retrived.
         Answer the question in your own words from the context given to you.
-        If questions are asked where there is no relevant context available, please answer from what you know and say please upload your documents first for better response.
+        If questions are asked where there is no relevant context available, please answer from what you know.
+        
         
         Context: {context}
         """
     )
+    system_prompt.format(context = "text", question = "query")
+    
     prompt = ChatPromptTemplate.from_messages(
         [("system", system_prompt), ("human", "{question}")]
     )
-
+    
+    
     # Assigning the OPENAI model and Retrieval chain
     model_name = "gpt-4"
     llm = ChatOpenAI(model_name=model_name)
