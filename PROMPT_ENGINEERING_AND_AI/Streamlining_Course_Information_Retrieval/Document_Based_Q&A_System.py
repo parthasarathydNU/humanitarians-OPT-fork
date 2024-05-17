@@ -167,3 +167,28 @@ elif uploaded_files is None:
     st.write("Please upload a file first.")
 
 
+# Function to reset the session
+def reset_session():
+    session_state = SessionState.get()
+    session_state.reset = True
+
+# Define a class to hold session state
+class SessionState:
+    def __init__(self, **kwargs):
+        self.reset = False
+
+    def clear(self):
+        self.reset = False
+
+# Create a session state object
+session_state = SessionState()
+
+# Add a button at the bottom right corner
+if st.button("Reset", key="reset_button", help="Click to reset the app", on_click=reset_session):
+    pass
+
+# Check if the session needs to be reset
+if session_state.reset:
+    st.caching.clear_cache()
+    st.experimental_rerun()
+
