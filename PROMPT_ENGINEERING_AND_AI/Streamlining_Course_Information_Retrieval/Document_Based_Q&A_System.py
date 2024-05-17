@@ -122,7 +122,7 @@ uploaded_files = st.file_uploader(
     "Upload your document", type=["pdf", "docx"], accept_multiple_files=True
 )
 # Button to process uploaded file
-if st.button("Process your File"):
+if st.button("Process your File",  help = "Click to process your file"):
     if uploaded_files is None:
         st.write("Please upload a file first.")
     elif uploaded_files is not None:
@@ -161,7 +161,7 @@ if uploaded_files is not None:
         # Button to clear chat messages
         def clear_messages():
             st.session_state.messages = []
-        st.button("Clear", on_click=clear_messages)
+        st.button("Clear", help = "Click to clear the chat", on_click=clear_messages)
 
 elif uploaded_files is None:
     st.write("Please upload a file first.")
@@ -171,11 +171,11 @@ elif uploaded_files is None:
 def reset_session():
     index = pc.Index(index_name)
     index.delete(delete_all = True, namespace = "")
-    st.rerun()
+    session_state.uploaded_files = None
 
 
 # Add a button at the bottom right corner
-if st.button("Reset", help="Click to reset the app", on_click=reset_session):
+if st.button("Reset your Documents", help="Click to reset the documents", on_click=reset_session):
     pass
 
 # # Create a placeholder for the button
