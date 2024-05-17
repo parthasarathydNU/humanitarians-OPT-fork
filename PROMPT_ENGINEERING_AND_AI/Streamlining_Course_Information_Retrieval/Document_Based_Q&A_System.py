@@ -80,7 +80,7 @@ def get_retrieval_chain(result):
         """ 
         You are a helpful assistant who helps users answer their {question}.
         Answer the question in your own words only from the context given to you.
-        If questions are asked where there is no relevant context available, please answer from what you know and ask the user to upload relevant document.
+        If questions are asked where there is no relevant context available, please ask the user to upload relevant document.
         
         
         Context: {context}
@@ -167,15 +167,15 @@ elif uploaded_files is None:
     st.write("Please upload a file first.")
 
 
-# Function to reset the session
-def reset_session():
-    index = pc.Index(index_name)
-    index.delete(delete_all = True)
+# # Function to reset the session
+# def reset_session():
+#     index = pc.Index(index_name)
+#     index.delete(delete_all = True)
 
 
-# Add a button at the bottom right corner
-if st.button("Reset your Documents", help="Click to reset the documents", on_click=reset_session):
-    pass
+# # Add a button at the bottom right corner
+# if st.button("Reset your Documents", help="Click to reset the documents", on_click=reset_session):
+#     pass
 
 # # Create a placeholder for the button
 # placeholder = st.empty()
