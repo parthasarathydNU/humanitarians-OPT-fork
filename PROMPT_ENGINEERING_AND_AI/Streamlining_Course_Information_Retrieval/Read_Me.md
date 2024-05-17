@@ -1,12 +1,27 @@
 # Document-based Q&A System
 
-# Introcution:
+Thank you for joining us. Are you eager to enhance your understanding and address any queries using your own documents? Kindly, explore the link below to access and engage with this valuable resource:
 
-In today's fast-paced educational environment, accessing course materials and clarifying doubts efficiently can significantly impact a student's learning journey. The project aims to address this by developing a state-of-the-art Document Based Q&A System. By leveraging advanced technologies like semantic search and Large Language Models (LLM), the goal is to create a user-friendly application where students can ask questions about any subject and receive accurate answers promptly.
+https://humanitarians-opt-fork-qbaiw5rhxyepqdije8tnh2.streamlit.app/
 
-# Problem Statement:
+This Application allows you to upload your own set of documents and and receive accurate responses to your inquiries through the advanced GPT-4 model. 
 
-Current methods of accessing course information and resolving student queries often fall short in terms of effectiveness and precision. Students struggle to navigate through vast amounts of content, and existing Q&A systems may not always provide satisfactory responses. This highlights the need for a solution that streamlines information retrieval and enhances query resolution for students.
+
+
+
+# Introduction:
+
+The project is to develop a user-friendly application tailored for students seeking easy access to course-related information. 
+Users will be able to upload their own documents, ask questions on and receive concise, accurate responses from those documents.
+Leveraging advanced technologies like semantic search and Large Language Models (LLM).
+
+# Objective:
+
+•	Developing a scalable and efficient platform for document-based question answering.
+•	Implementing state-of-the-art NLP algorithms for text analysis, document parsing, and answer extraction.
+•	Enhancing the system's performance through continuous optimization and refinement of machine learning models.
+•	Providing users with a seamless and intuitive interface for querying documents and accessing extracted answers.
+
 
 # Proposed Methodology:
 
@@ -15,6 +30,7 @@ The approach involves combining Pinecone, a robust vector database engine, with 
 # Scope:
 
 The project focuses on developing a user-friendly application tailored for students seeking easy access to course-related information. Users will be able to submit queries on specific subjects or topics and receive concise, accurate responses. The system will enhance overall learning experience. While the initial focus is on academic settings, the scalability of the solution allows for potential applications across various domains.
+
 
 # Conclusion:
 
