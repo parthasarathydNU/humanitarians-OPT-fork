@@ -34,7 +34,7 @@ pc = Pinecone(pinecone_api_key=pinecone_api_key)
 embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
 
 # Name for the index
-index_name = "documents"
+index_name = "info-7375"
 
 # Embed the documents
 def vector_db():
@@ -59,6 +59,8 @@ def vector_db():
             loader = PyPDFLoader(path)
         elif file_extension == "docx":
             loader = Docx2txtLoader(path)
+        elif file_extension == "pptx":
+            loader = UnstructuredPowerPointLoader(path)
 
         # Load documents and split text
         docs = loader.load()
