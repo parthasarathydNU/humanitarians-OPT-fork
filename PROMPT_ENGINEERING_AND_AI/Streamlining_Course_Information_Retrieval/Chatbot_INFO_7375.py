@@ -39,6 +39,21 @@ index_name = "langchain-demo"
 # Embed the documents
 def vector_db():
   #Load the directory
+
+  # Determine file extension
+  file_extension = file.name.split(".")[-1].lower()
+  
+  for file in files:  
+  
+    # Load document based on its extension
+    if file_extension == "pdf":
+        loader = PyPDFLoader(path)
+    elif file_extension == "docx":
+        loader = Docx2txtLoader(path)
+    elif file_extension == "pptx":
+        loader = UnstructuredPowerPointLoader(path)
+            
+          
   loader = DirectoryLoader('PROMPT_ENGINEERING_AND_AI/Streamlining_Course_Information_Retrieval/INFO_7375_Materials')
   pages = loader.load_and_split()
   # Split documents into chunks and create indexes
