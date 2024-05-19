@@ -9,3 +9,4 @@ langchain-community
 docx2txt
 unstructured
 unstructured[pptx]
+unstructured[pdf]
