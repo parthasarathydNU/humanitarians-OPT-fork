@@ -8,3 +8,4 @@ pinecone-client
 langchain-community
 docx2txt
 unstructured
+unstructured[pptx]
