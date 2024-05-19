@@ -34,12 +34,12 @@ pc = Pinecone(pinecone_api_key=pinecone_api_key)
 embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
 
 # Name for the index
-index_name = "info_7375"
+index_name = "langchain-demo"
 
 # Embed the documents
 def vector_db():
   #Load the directory
-  loader = DirectoryLoader('/Users/anshaya/Downloads/Test_Case')
+  loader = DirectoryLoader('PROMPT_ENGINEERING_AND_AI/Streamlining_Course_Information_Retrieval/PPTX.pptx')
   pages = loader.load_and_split()
   # Split documents into chunks and create indexes
   text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=50)
