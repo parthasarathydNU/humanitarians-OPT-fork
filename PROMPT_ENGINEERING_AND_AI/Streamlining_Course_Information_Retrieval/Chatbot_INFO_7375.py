@@ -39,7 +39,7 @@ index_name = "info_7375"
 # Embed the documents
 def vector_db():
   #Load the directory
-  loader = DirectoryLoader('/Users/anshaya/Downloads/QA_System/Test_Case')
+  loader = DirectoryLoader('/Users/anshaya/Downloads/Test_Case')
   pages = loader.load_and_split()
   # Split documents into chunks and create indexes
   text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=50)
