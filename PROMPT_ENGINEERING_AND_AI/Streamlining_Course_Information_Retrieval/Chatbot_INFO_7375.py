@@ -39,7 +39,7 @@ index_name = "langchain-demo"
 # Embed the documents
 def vector_db():
   #Load the directory
-  loader = DirectoryLoader('PROMPT_ENGINEERING_AND_AI/Streamlining_Course_Information_Retrieval/PPTX.pptx')
+  loader = DirectoryLoader('PROMPT_ENGINEERING_AND_AI/Streamlining_Course_Information_Retrieval/INFO_7375_Materials')
   pages = loader.load_and_split()
   # Split documents into chunks and create indexes
   text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=50)
