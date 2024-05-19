@@ -10,7 +10,7 @@ import streamlit as st
 from langchain.text_splitter import Language, RecursiveCharacterTextSplitter
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.chains import ConversationalRetrievalChain, RetrievalQA
-from langchain_community.document_loaders import PyPDFLoader,Docx2txtLoader, UnstructuredPowerPointLoader
+from langchain_community.document_loaders import PyPDFLoader,Docx2txtLoader, UnstructuredPowerPointLoader, DirectoryLoader
 import os.path
 import pathlib
 import tempfile
