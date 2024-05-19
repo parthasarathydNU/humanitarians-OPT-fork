@@ -176,14 +176,3 @@ elif uploaded_files is None:
 # # Add a button at the bottom right corner
 # if st.button("Reset your Documents", help="Click to reset the documents", on_click=reset_session):
 #     pass
-
-# # Create a placeholder for the button
-# placeholder = st.empty()
-
-# # Move the placeholder to the bottom right corner
-# placeholder.markdown(
-#     '<div style="position: fixed; bottom: 10px; right: 10px;">'
-#     '<button onclick="window.location.reload()">Reset</button>'
-#     '</div>',
-#     unsafe_allow_html=True
-# )
