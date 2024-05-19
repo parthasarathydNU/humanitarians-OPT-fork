@@ -121,7 +121,7 @@ def get_answer(query):
 st.title("🦜🔗 QueryDoc")
 # File uploader for user to upload a document
 uploaded_files = st.file_uploader(
-    "Upload your document", type=["pdf", "docx"], accept_multiple_files=True
+    "Upload your document", type=["pdf", "docx","pptx"], accept_multiple_files=True
 )
 # Button to process uploaded file
 if st.button("Process your File",  help = "Click to process your file"):
