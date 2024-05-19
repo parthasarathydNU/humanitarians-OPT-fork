@@ -10,3 +10,4 @@ docx2txt
 unstructured
 unstructured[pptx]
 unstructured[pdf]
+unstructured[all-docs]
