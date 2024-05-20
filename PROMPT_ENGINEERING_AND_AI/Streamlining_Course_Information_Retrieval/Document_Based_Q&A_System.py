@@ -34,7 +34,7 @@ pc = Pinecone(pinecone_api_key=pinecone_api_key)
 embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
 
 # Name for the index
-index_name = "info-7375"
+index_name = "documents"
 
 # Embed the documents
 def vector_db():
