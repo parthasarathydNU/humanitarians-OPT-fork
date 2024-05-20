@@ -88,7 +88,6 @@ def get_answer(query):
 st.title("🦜🔗 QueryDoc for INFO 7375")
 
 
-
 if "vector_store" not in st.session_state:
   # Initialize vector store
   st.session_state.vector_store = vector_db()
