@@ -38,28 +38,7 @@ index_name = "langchain-demo"
 
 # Embed the documents
 def vector_db():
-  #Load the directory
-  path = "PROMPT_ENGINEERING_AND_AI/Streamlining_Course_Information_Retrieval/INFO_7375_Materials"
-  with open(path, "rb") as files:
-    for file in files: 
-      # Determine file extension
-      file_extension = file.name.split(".")[-1].lower()
-      
-      # Load document based on its extension
-      if file_extension == "pdf":
-          loader = PyPDFLoader(file)
-      elif file_extension == "docx":
-          loader = Docx2txtLoader(file)
-      elif file_extension == "pptx":
-          loader = UnstructuredPowerPointLoader(file)
-            
-          
-  # loader = DirectoryLoader('PROMPT_ENGINEERING_AND_AI/Streamlining_Course_Information_Retrieval/INFO_7375_Materials')
-  pages = loader.load_and_split()
-  # Split documents into chunks and create indexes
-  text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=50)
-  split_data = text_splitter.split_documents(pages)
-  indexes = PineconeVectorStore.from_documents(split_data, embeddings_model, index_name=index_name)
+  indexes = PineconeVectorStore(index_name=index_name, embedding=embeddings_model)
 
   return indexes
 
@@ -107,6 +86,8 @@ def get_answer(query):
 
 # Title for the web app
 st.title("🦜🔗 QueryDoc for INFO 7375")
+
+
 
 if "vector_store" not in st.session_state:
   # Initialize vector store
