@@ -88,7 +88,7 @@ def get_retrieval_chain(result):
         Context: {context}
         """
     )
-    system_prompt.format(context = "text", question = "query")
+    system_prompt.format(context = "result", question = "query")
     
     prompt = ChatPromptTemplate.from_messages(
         [("system", system_prompt), ("human", "{question}")]
