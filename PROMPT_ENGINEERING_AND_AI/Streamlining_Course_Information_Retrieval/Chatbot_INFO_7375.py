@@ -34,7 +34,7 @@ pc = Pinecone(pinecone_api_key=pinecone_api_key)
 embeddings_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
 
 # Name for the index
-index_name = "langchain-demo"
+index_name = "info-7375"
 
 # Embed the documents
 def vector_db():
@@ -49,7 +49,7 @@ def get_retrieval_chain(result):
         """ 
         You are a helpful assistant who helps users answer their {question}.
         Answer the question in your own words only from the context given to you.
-        If questions are asked where there is no relevant context available, please ask the user to upload relevant document.
+        If questions are asked where there is no relevant context available, please answer the user to ask relevant questions.
         
         
         Context: {context}
