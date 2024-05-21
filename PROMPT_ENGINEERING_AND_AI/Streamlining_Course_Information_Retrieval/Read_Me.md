@@ -2,11 +2,13 @@
 
 Thank you for joining us. Are you eager to enhance your understanding and address any queries using your own documents? Kindly, explore the link below to access and engage with this valuable resource:
 
-https://humanitarians-opt-fork-qbaiw5rhxyepqdije8tnh2.streamlit.app/
+https://humanitarians-opt-fork-document-based-q-a.streamlit.app
 
 This Application allows you to upload your own set of documents and and receive accurate responses to your inquiries through the advanced GPT-4 model. 
 
+Furthermore, provided below is the link to the specialized application designed for the INFO 7375 course. This application is engineered to generate informative responses and offer comprehensive insights pertaining to the course curriculum. It serves as an invaluable tool for clarifying doubts and facilitating a deeper understanding of the course material, thereby enhancing the learning experience for all participants.
 
+https://humanitarians-info-7375.streamlit.app
 
 
 # Introduction:
