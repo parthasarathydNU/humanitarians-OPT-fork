@@ -85,6 +85,27 @@ This project is dedicated to developing an educational suite focusing on the fun
 
 ## [Link to view Building a Closed-QA Bot with Falcon-7B and ChromaDB](https://docs.google.com/document/d/1C8DgfpX3fkvH0_j4j5KaQAL6-HXemzbyn9Sd49LXHPo/edit#heading=h.kqo58p010w3)
 
+### **5.Retrieval-Augmented Generation(RAG)**
+#### Slide Decks
+#### Topics topics covered 
+- Introduction to Retrieval Augmented Generation (RAG)
+- Evolution of Language Models to Retrieval-Augmented Approaches
+- The RAG Architecture: Combining Retrieval and Generation
+- Use Cases of RAG
+- Advantages of RAG
+- Disadvantages of RAG
+- Integrating with Existing Platforms
+- Designing Engaging UI for RAG Apps
+- Building a RAG application from scratch using Python, LangChain, and the OpenAI API
+
+
+## [Link to learn Retrieval-Augmented Generation(RAG)](https://northeastern-my.sharepoint.com/:p:/g/personal/kosuri_sa_northeastern_edu/EcxDe73fIQdGudnPLUYe9wgBGBRNKVZnUaXJmsH7VbPufQ?e=11lL7S)
+
+## [Link To View Quiz Questions On  Retrieval-Augmented Generation(RAG)](https://docs.google.com/document/d/1rKqjqh2svLgUyUHOSHJsH4Mt9sRJOVSeGyo1T8WNEkU/edit)
+
+## [Educational Video to learn about Retrieval-Augmented Generation(RAG)](https://youtu.be/T-D1OfcDW1M?si=J_bm6bjfv_ySpYBT)
+
+## [Link to view Building a RAG application from scratch using Python, LangChain, and the OpenAI API](https://youtu.be/BrsocJb-fAo?si=xlMGJTprRfAuIh0I)
 
 
 ### **References and Further Reading**
