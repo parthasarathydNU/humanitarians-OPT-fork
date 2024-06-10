@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------
+Test set: com.vehicle.VehicleRentalMgmtApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 2.43 s <<< FAILURE! - in com.vehicle.VehicleRentalMgmtApplicationTests
+contextLoads  Time elapsed: 0.041 s  <<< ERROR!
+java.lang.IllegalStateException: Failed to load ApplicationContext
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'DAO' defined in file [/Users/suprajakosuri/Desktop/VehicleRentalMgmt/target/classes/com/vehicle/dao/DAO.class]: Bean instantiation via constructor failed; nested exception is java.lang.ExceptionInInitializerError
+Caused by: java.lang.ExceptionInInitializerError
+Caused by: org.hibernate.internal.util.config.ConfigurationException: Could not locate cfg.xml resource [hibernate.cfg.xml]
+
