@@ -33,3 +33,13 @@ The project focuses on developing a user-friendly application tailored for stude
 # Conclusion:
 
 In conclusion, the project represents a significant step forward in improving the educational experience through technology. By leveraging semantic search and Large Language Models, we aim to empower students with a dynamic platform that simplifies information retrieval and fosters deeper understanding. The commitment to delivering a user-friendly, effective solution underscores the dedication to advancing education in the digital age.
+
+# Contact for support:
+
+Name: Ansh Aya
+Email: aya.a@northeastern.edu
+
+
+
+
+
