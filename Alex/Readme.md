@@ -188,7 +188,12 @@ Making the database to store the data for the app.
 
 **Research Update 3May2024 ()**
 
-Finishing the research about whole body disorders, and the database for the data. Code will be ready to be posted in 10-12 days with all the data. Educational video on that will be ready soon. 
+Finishing the research about whole body disorders, and the database for the data.  
+
+**Research Update 24May2024 ()**
+Finished with research and collecting articles for start. The GPT works properly. Now building an app to be able to publish the work. Buildint the back end. I am also finishing my certification for c++.
+
+**Research Update 5Jun2024 ()**
 
 
 
