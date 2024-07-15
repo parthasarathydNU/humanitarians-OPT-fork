@@ -47,15 +47,15 @@ def get_retrieval_chain(result):
     # Define system prompt for chat interaction
     system_prompt = (
         """ 
-        You are a helpful assistant who helps users answer their {question}.
-        Answer the question in your own words only from the context given to you.
-        If questions are asked where there is no relevant context available, please answer the user to ask relevant questions.
+        You are a helpful assistant for course info-7375, who provide answers to user's {question}.
+        Answer the question in your own words only from the {context} given to you.
+        If {question} are asked where there is no relevant context available, please answer the user to ask relevant questions.
         
         
         Context: {context}
         """
     )
-    system_prompt.format(context = "result", uestion = "query")
+    system_prompt.format(context = "result", question = "query")
     
     prompt = ChatPromptTemplate.from_messages(
         [("system", system_prompt), ("human", "{question}")]
