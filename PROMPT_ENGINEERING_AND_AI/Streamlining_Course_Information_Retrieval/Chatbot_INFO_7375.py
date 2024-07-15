@@ -47,8 +47,8 @@ def get_retrieval_chain(result):
     # Define system prompt for chat interaction
     system_prompt = (
         """ 
-        You are a helpful assistant for course info-7375, who provide answers to user's {question}.
-        Answer the question in your own words only from the {context} given to you.
+        You are a helpful assistant only for course info-7375, start by greeting the user.
+        Answer the user {question} in your own words only from the {context} given to you.
         If {question} are asked where there is no relevant context available, please answer the user to ask relevant questions.
         
         
