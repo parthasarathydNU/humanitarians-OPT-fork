@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+* {
+	font-family: Helvetica, sans-serif;
+}
+
+input[type=submit] {
+	background-color: grey;
+	/* background-color:navy; */ color : white;
+	/*   margin-top: 8px; */
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	color: white;
+	/*   float: right; */
+	height: 20px;
+	width: 70px;
+}
+
+/* ------------------- TABLE STYLE ------------------*/
+td {
+	font-size: 16px;
+}
+
+#tablestyle {
+	border-collapse: collapse;
+	width: 70%;
+}
+
+#tablestyle td, #tablestyle th {
+	border: 1px solid #ddd;
+	padding: 8px;
+	font-size: 12px
+}
+
+tablestyle tr:nth-child(even){background-color: #94ffe6;}
+
+
+
+tablestyle tr:hover {
+	background-color: #ddd;
+}
+
+#tablestyle th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;   
+	background-color: #544810;
+	color: white;
+}
+
+.button {
+	height: 30px;
+	padding: 0px;
+	line-heigh:1px;
+	}
