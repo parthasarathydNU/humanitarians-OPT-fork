@@ -1,0 +1,17 @@
+streamlit
+openai
+langchain
+langchain-openai
+langchain_community
+langchain_text_splitters
+langchain-chroma
+
+chromadb
+docx2txt
+PyPDF
+
+protobuf==3.20.1
+opentelemetry-api
+opentelemetry-sdk
+opentelemetry-exporter-otlp
+pysqlite3-binary
